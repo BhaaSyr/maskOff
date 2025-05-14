@@ -2,7 +2,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
-        android:label="testvid"
+        android:label="Mask Off"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
