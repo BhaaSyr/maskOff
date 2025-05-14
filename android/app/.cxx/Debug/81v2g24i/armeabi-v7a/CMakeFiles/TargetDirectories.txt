@@ -1,0 +1,2 @@
+C:/FlutterApps/testvid/android/app/.cxx/Debug/81v2g24i/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/FlutterApps/testvid/android/app/.cxx/Debug/81v2g24i/armeabi-v7a/CMakeFiles/rebuild_cache.dir
