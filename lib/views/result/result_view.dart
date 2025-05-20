@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testvid/views/home/widgets/black_area_painter.dart';
-import 'package:testvid/views/home/widgets/button.dart';
-import '../../controllers/result_controller.dart';
+import 'package:testvid/controllers/result_controller.dart';
+import 'package:testvid/controllers/theme_controller.dart';
 import 'widgets/result_card_widget.dart';
 
 class ResultView extends GetView<ResultController> {
@@ -10,65 +9,166 @@ class ResultView extends GetView<ResultController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Analiz Sonuçları'),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.back(),
-        ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 5,
-            child: Align(
-              alignment: Alignment(0, -0.7),
-              child: Obx(() => SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 16),
-                    // Sonuç Kartı
-                    child: ResultCardWidget(
-                      isDeepfake: controller.result.value.isDeepfake,
-                      confidenceScore: controller.result.value.confidenceScore,
-                      resultText: controller.getResultText(),
-                      resultColor: controller.getResultColor(),
-                    ),
-                  )),
+    final ThemeController themeController = Get.find<ThemeController>();
+    final screenSize = MediaQuery.of(context).size;
+
+    return Obx(() {
+      final isDark = themeController.isDarkMode;
+
+      return Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: isDark
+                  ? [
+                      const Color(0xFF1E1E2E),
+                      const Color(0xFF2D2D44),
+                    ]
+                  : [
+                      const Color(0xFFF5F5FA),
+                      const Color(0xFFE8E8F0),
+                    ],
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Stack(
+          child: SafeArea(
+            child: Column(
               children: [
-                // Siyah arka plan özel tasarım
-                CustomPaint(
-                  size: Size(MediaQuery.of(context).size.width,
-                      double.infinity as double),
-                  painter: BlackAreaPainter(),
+                // Header with back button
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => Get.back(),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? Colors.white.withOpacity(0.1)
+                                : const Color(0xFF6C63FF).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: isDark
+                                ? Colors.white70
+                                : const Color(0xFF6C63FF),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Text(
+                        "Analysis Results",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              isDark ? Colors.white : const Color(0xFF333333),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
-                // İçerik (butonlar)
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
-                  child: Center(
-                    child: Button(
-                      icon: Icons.arrow_back_ios,
-                      iconSize: 19,
-                      label: "Back to Homepage",
-                      //onPressed: controller.runDeepfakeCheck,7
-                      onPressed: () {
-                        Get.offNamed("/home");
-                      },
+                // Results Card
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Center(
+                      child: SingleChildScrollView(
+                        child: ResultCardWidget(
+                          isDeepfake: controller.result.value.isDeepfake,
+                          confidenceScore:
+                              controller.result.value.confidenceScore,
+                          resultText: controller.getResultText(),
+                          resultColor: controller.getResultColor(),
+                          isDarkMode: isDark,
+                        ),
+                      ),
                     ),
+                  ),
+                ),
+
+                // Bottom action button
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: _buildButton(
+                    icon: Icons.home,
+                    label: "Back to Homepage",
+                    onPressed: () => Get.offNamed("/home"),
+                    isPrimary: false,
+                    isDark: isDark,
                   ),
                 ),
               ],
             ),
           ),
+        ),
+      );
+    });
+  }
+
+  Widget _buildButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onPressed,
+    required bool isPrimary,
+    required bool isDark,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: isPrimary
+                ? const Color(0xFF6C63FF).withOpacity(0.3)
+                : Colors.black.withOpacity(isDark ? 0.1 : 0.05),
+            blurRadius: 15,
+            offset: const Offset(0, 5),
+          ),
         ],
+      ),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: isPrimary
+              ? const Color(0xFF6C63FF)
+              : (isDark ? Colors.white.withOpacity(0.08) : Colors.white),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: isPrimary
+                ? BorderSide.none
+                : BorderSide(
+                    color: isDark
+                        ? Colors.white.withOpacity(0.1)
+                        : const Color(0xFFEEEEF6),
+                    width: 1,
+                  ),
+          ),
+          elevation: 0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: isPrimary ? Colors.white : const Color(0xFF6C63FF),
+              size: 20,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: TextStyle(
+                color: isPrimary ? Colors.white : const Color(0xFF6C63FF),
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

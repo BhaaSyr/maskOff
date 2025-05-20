@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get.dart';
 import 'package:testvid/controllers/home_controller.dart';
+import 'package:testvid/controllers/theme_controller.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatelessWidget {
@@ -50,17 +52,18 @@ class VideoPlayerWidget extends StatelessWidget {
     const double maxHeight = 330;
     final Size videoSize = controller.value.size;
     final double videoAspectRatio = controller.value.aspectRatio;
+    print(videoAspectRatio);
 
     double width = videoSize.width;
+    print(width);
     double height = videoSize.height;
+    print(height);
 
-// Önce maksimum genişliği uygula
     if (width > maxWidth) {
       width = maxWidth;
       height = width / videoAspectRatio;
     }
 
-    // Sonra maksimum yüksekliği uygula
     if (height > maxHeight) {
       height = maxHeight;
       width = height * videoAspectRatio;
@@ -69,19 +72,27 @@ class VideoPlayerWidget extends StatelessWidget {
   }
 
   Widget _buildVideoBox(Size size) {
+    final ThemeController themeController = Get.find<ThemeController>();
+    final isDark = themeController.isDarkMode;
+
     return Container(
       width: size.width,
       height: size.height,
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey),
+        color: Colors.black,
+        border: Border.all(
+            color:
+                isDark ? Colors.white.withOpacity(0.1) : Colors.grey.shade200,
+            width: 1),
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 3,
-            blurRadius: 20,
-            offset: const Offset(2, 4),
+            color: isDark
+                ? Colors.black.withOpacity(0.3)
+                : Colors.black.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 15,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -99,9 +110,11 @@ class VideoPlayerWidget extends StatelessWidget {
                 controller,
                 allowScrubbing: true,
                 colors: VideoProgressColors(
-                  playedColor: Colors.blue,
-                  bufferedColor: Colors.blue.shade200,
-                  backgroundColor: Colors.grey.shade300,
+                  playedColor: const Color(0xFF6C63FF),
+                  bufferedColor: const Color(0xFF6C63FF).withOpacity(0.4),
+                  backgroundColor: isDark
+                      ? Colors.white.withOpacity(0.2)
+                      : Colors.grey.shade200,
                 ),
               ),
             ),
@@ -112,6 +125,9 @@ class VideoPlayerWidget extends StatelessWidget {
   }
 
   Widget _buildProgressIndicator(double width) {
+    final ThemeController themeController = Get.find<ThemeController>();
+    final isDark = themeController.isDarkMode;
+
     return Positioned(
       bottom: 0,
       child: ClipRRect(
@@ -123,9 +139,10 @@ class VideoPlayerWidget extends StatelessWidget {
             controller,
             allowScrubbing: true,
             colors: VideoProgressColors(
-              playedColor: Colors.blue,
-              bufferedColor: Colors.blue.shade200,
-              backgroundColor: Colors.grey.shade300,
+              playedColor: const Color(0xFF6C63FF),
+              bufferedColor: const Color(0xFF6C63FF).withOpacity(0.4),
+              backgroundColor:
+                  isDark ? Colors.white.withOpacity(0.2) : Colors.grey.shade200,
             ),
           ),
         ),
@@ -134,19 +151,28 @@ class VideoPlayerWidget extends StatelessWidget {
   }
 
   Widget _buildDurationDisplay() {
+    final ThemeController themeController = Get.find<ThemeController>();
+    final isDark = themeController.isDarkMode;
+
     return GetBuilder<VideoController>(
       builder: (_) => Positioned(
         bottom: 5,
-        right: 1,
+        right: 5,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.3),
+            color: isDark
+                ? Colors.black.withOpacity(0.6)
+                : Colors.black.withOpacity(0.5),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Text(
             "${_formatDuration(controller.value.position)} / ${_formatDuration(controller.value.duration)}",
-            style: const TextStyle(fontSize: 9, color: Colors.white),
+            style: TextStyle(
+              fontSize: 10,
+              color: Colors.white.withOpacity(0.9),
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),
@@ -157,6 +183,12 @@ class VideoPlayerWidget extends StatelessWidget {
     return GetBuilder<VideoController>(
       builder: (_) {
         final isPlaying = controller.value.isPlaying;
+        final ThemeController themeController = Get.find<ThemeController>();
+        final isDark = themeController.isDarkMode;
+
+        final Color iconColor = isDark
+            ? Colors.white.withOpacity(0.8)
+            : const Color.fromARGB(255, 82, 81, 92);
 
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +199,7 @@ class VideoPlayerWidget extends StatelessWidget {
                 final current = controller.value.position;
                 controller.seekTo(current - const Duration(seconds: 5));
               },
-              color: Colors.grey[800],
+              color: iconColor,
             ),
             IconButton(
               icon: Icon(
@@ -178,7 +210,7 @@ class VideoPlayerWidget extends StatelessWidget {
                 isPlaying ? controller.pause() : controller.play();
                 _.update(); // Update UI
               },
-              color: Colors.grey[800],
+              color: iconColor,
             ),
             IconButton(
               icon: const Icon(Icons.forward_5),
@@ -186,7 +218,7 @@ class VideoPlayerWidget extends StatelessWidget {
                 final current = controller.value.position;
                 controller.seekTo(current + const Duration(seconds: 5));
               },
-              color: Colors.grey[800],
+              color: iconColor,
             ),
             IconButton(
               icon: Icon(
@@ -198,7 +230,7 @@ class VideoPlayerWidget extends StatelessWidget {
                 controller.setVolume(controller.value.volume > 0 ? 0 : 1);
                 _.update(); // Update UI
               },
-              color: Colors.grey[800],
+              color: iconColor,
             ),
           ],
         );

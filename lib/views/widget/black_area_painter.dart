@@ -16,7 +16,7 @@ class BlackAreaPainter extends CustomPainter {
 
     // Gölge için ayrı bir boya
     final shadowPaint = Paint()
-      ..color = Colors.black.withOpacity(0.8)
+      ..color = Colors.black.withOpacity(0.4)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 20);
 
     // Gölgeyi biraz sağa ve aşağıya kaydır

@@ -54,4 +54,16 @@ class VideoController extends GetxController {
       colorText: Colors.white,
     );
   }
+
+  void clearVideo() async {
+    if (playerController.value != null) {
+      await playerController.value!.pause();
+      await playerController.value!.dispose();
+      playerController.value = null;
+    }
+
+    videoFile.value = null;
+    isInitialized.value = false;
+    update();
+  }
 }
