@@ -30,9 +30,9 @@ class SplashController extends GetxController {
 
       // Eğer başarılı bir yanıt alırsak (200 OK)
       if (response.statusCode == 200) {
-        // İnternet bağlantısı var, 3 saniye bekle ve ana sayfaya git
+        // İnternet bağlantısı var, 3 saniye bekle ve giriş sayfasına git
         Timer(const Duration(seconds: 3), () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.LOGIN);
         });
       } else {
         // İnternet bağlantısı var ama bir sorun olabilir

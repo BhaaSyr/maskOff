@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:testvid/controllers/home_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
 import 'package:testvid/views/home/widgets/video_player_widget.dart';
+import 'package:testvid/controllers/auth/auth_controller.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -11,6 +12,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final VideoController controller = Get.put(VideoController());
     final ThemeController themeController = Get.find<ThemeController>();
+    final AuthController authController = Get.find<AuthController>();
     final screenSize = MediaQuery.of(context).size;
 
     return Obx(() {
@@ -57,6 +59,87 @@ class HomeView extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          // Çıkış butonu
+                          GestureDetector(
+                            onTap: () {
+                              Get.dialog(
+                                AlertDialog(
+                                  title: Text(
+                                    'Çıkış Yap',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: isDark
+                                          ? Colors.white
+                                          : Colors.black87,
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Çıkış yapmak istediğinizden emin misiniz?',
+                                    style: TextStyle(
+                                      color: isDark
+                                          ? Colors.white70
+                                          : Colors.black54,
+                                    ),
+                                  ),
+                                  backgroundColor: isDark
+                                      ? const Color(0xFF2D2D44)
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Get.back(),
+                                      child: Text(
+                                        'İptal',
+                                        style: TextStyle(
+                                          color: isDark
+                                              ? Colors.white70
+                                              : Colors.black54,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Get.back();
+                                        authController.signOut();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xFF6C63FF),
+                                        foregroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 8,
+                                        ),
+                                      ),
+                                      child: const Text('Çıkış Yap'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: isDark
+                                    ? Colors.white.withOpacity(0.1)
+                                    : const Color(0xFF6C63FF).withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                Icons.logout,
+                                color: isDark
+                                    ? Colors.white70
+                                    : const Color(0xFF6C63FF),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
                           // Tema değiştirme butonu
                           GestureDetector(
                             onTap: () {

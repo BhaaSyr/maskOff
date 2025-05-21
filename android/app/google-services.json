@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "525388301988",
+    "project_id": "maskoff-7179e",
+    "storage_bucket": "maskoff-7179e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525388301988:android:d952209a7d4862ebe6c831",
+        "android_client_info": {
+          "package_name": "com.example.testvid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWHqI4MYtwVqBzm1MPJwTn0FGvVgZLNBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

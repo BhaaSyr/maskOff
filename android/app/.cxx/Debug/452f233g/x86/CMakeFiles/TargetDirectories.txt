@@ -1,0 +1,2 @@
+C:/FlutterApps/maskOff/android/app/.cxx/Debug/452f233g/x86/CMakeFiles/edit_cache.dir
+C:/FlutterApps/maskOff/android/app/.cxx/Debug/452f233g/x86/CMakeFiles/rebuild_cache.dir
