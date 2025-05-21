@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:testvid/controllers/auth/auth_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
 import 'package:testvid/routes/app_pages.dart';
+import 'package:testvid/views/auth/widgets/index.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -136,7 +137,7 @@ class _LoginViewState extends State<LoginView> {
                     const SizedBox(height: 40),
 
                     // Email/Username field
-                    Obx(() => _buildTextField(
+                    Obx(() => CustomTextField(
                           label: "E-posta",
                           hintText: "E-posta adresinizi girin",
                           controller: controller.emailController,
@@ -148,7 +149,7 @@ class _LoginViewState extends State<LoginView> {
                     const SizedBox(height: 20),
 
                     // Password field
-                    Obx(() => _buildTextField(
+                    Obx(() => CustomTextField(
                           label: "Şifre",
                           hintText: "Şifrenizi girin",
                           controller: controller.passwordController,
@@ -191,7 +192,7 @@ class _LoginViewState extends State<LoginView> {
                     const SizedBox(height: 30),
 
                     // Login button
-                    _buildButton(
+                    CustomButton(
                       label: "Giriş Yap",
                       onPressed: controller.login,
                       isPrimary: true,
@@ -248,7 +249,7 @@ class _LoginViewState extends State<LoginView> {
                     const SizedBox(height: 20),
 
                     // Google Sign-in button
-                    _buildSocialButton(
+                    SocialButton(
                       label: "Google ile Giriş Yap",
                       onPressed: controller.signInWithGoogle,
                       icon: "assets/images/google_icon.png",
@@ -292,205 +293,6 @@ class _LoginViewState extends State<LoginView> {
         ),
       );
     });
-  }
-
-  Widget _buildTextField({
-    required String label,
-    required String hintText,
-    required TextEditingController controller,
-    required bool obscureText,
-    required IconData prefixIcon,
-    Widget? suffixIcon,
-    String? errorText,
-    required bool isDark,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: isDark ? Colors.white70 : const Color(0xFF666666),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          decoration: BoxDecoration(
-            color: isDark ? Colors.white.withOpacity(0.06) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(isDark ? 0.05 : 0.03),
-                blurRadius: 10,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: TextField(
-            controller: controller,
-            obscureText: obscureText,
-            style: TextStyle(
-              color: isDark ? Colors.white : Colors.black87,
-            ),
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: TextStyle(
-                color: isDark ? Colors.white38 : Colors.black38,
-              ),
-              prefixIcon: Icon(
-                prefixIcon,
-                color: isDark ? Colors.white54 : Colors.grey,
-              ),
-              suffixIcon: suffixIcon,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 16),
-              errorText: errorText == '' ? null : '     ${errorText ?? ''}',
-              errorStyle: const TextStyle(color: Colors.red),
-              filled: true,
-              fillColor: isDark ? Colors.white.withOpacity(0.04) : Colors.white,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildButton({
-    required String label,
-    required VoidCallback onPressed,
-    required bool isPrimary,
-    required bool isDark,
-    bool isLoading = false,
-  }) {
-    return Container(
-      width: double.infinity,
-      height: 55,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: isPrimary
-                ? const Color(0xFF6C63FF).withOpacity(0.3)
-                : Colors.black.withOpacity(isDark ? 0.1 : 0.05),
-            blurRadius: 15,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-          foregroundColor: isPrimary ? Colors.white : const Color(0xFF6C63FF),
-          backgroundColor: isPrimary
-              ? const Color(0xFF6C63FF)
-              : (isDark ? Colors.white.withOpacity(0.08) : Colors.white),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-            side: isPrimary
-                ? BorderSide.none
-                : BorderSide(
-                    color: isDark
-                        ? Colors.white.withOpacity(0.1)
-                        : const Color(0xFFEEEEF6),
-                    width: 1,
-                  ),
-          ),
-          elevation: 0,
-        ),
-        child: isLoading
-            ? const SizedBox(
-                height: 24,
-                width: 24,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  strokeWidth: 2,
-                ),
-              )
-            : Text(
-                label,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.5,
-                ),
-              ),
-      ),
-    );
-  }
-
-  Widget _buildSocialButton({
-    required String label,
-    required VoidCallback onPressed,
-    required String icon,
-    required bool isDark,
-    bool isLoading = false,
-  }) {
-    return Container(
-      width: double.infinity,
-      height: 55,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.1 : 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-          foregroundColor: isDark ? Colors.white : Colors.black87,
-          backgroundColor:
-              isDark ? Colors.white.withOpacity(0.08) : Colors.white,
-          padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-            side: BorderSide(
-              color: isDark
-                  ? Colors.white.withOpacity(0.1)
-                  : const Color(0xFFEEEEF6),
-              width: 1,
-            ),
-          ),
-          elevation: 0,
-        ),
-        child: isLoading
-            ? const SizedBox(
-                height: 24,
-                width: 24,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  strokeWidth: 2,
-                ),
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    icon,
-                    width: 24,
-                    height: 24,
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-      ),
-    );
   }
 
   void _showForgotPasswordDialog(bool isDark) {
