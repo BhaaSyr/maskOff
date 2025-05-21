@@ -234,55 +234,55 @@ class _RegisterViewState extends State<RegisterView> {
                           isDark: isDark,
                         )),
 
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
 
                     // Terms and conditions checkbox
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: Checkbox(
-                            value: controller.acceptedTerms.value,
-                            onChanged: (value) {
-                              controller.toggleTermsAcceptance();
-                            },
-                            activeColor: const Color(0xFF6C63FF),
-                            checkColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: controller.viewTermsAndConditions,
-                            child: RichText(
-                              text: TextSpan(
-                                style: TextStyle(
-                                  color: isDark
-                                      ? Colors.white70
-                                      : const Color(0xFF666666),
-                                  fontSize: 13,
-                                ),
-                                children: const [
-                                  TextSpan(text: "Kayıt olarak "),
-                                  TextSpan(
-                                    text: "Şartlar ve Koşullar",
-                                    style: TextStyle(
-                                      color: Color(0xFF6C63FF),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  TextSpan(text: "'ı kabul etmiş olursunuz."),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     SizedBox(
+                    //       width: 24,
+                    //       height: 24,
+                    //       child: Checkbox(
+                    //         value: controller.acceptedTerms.value,
+                    //         onChanged: (value) {
+                    //           controller.toggleTermsAcceptance();
+                    //         },
+                    //         activeColor: const Color(0xFF6C63FF),
+                    //         checkColor: Colors.white,
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(4),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(width: 10),
+                    //     Expanded(
+                    //       child: GestureDetector(
+                    //         onTap: controller.viewTermsAndConditions,
+                    //         child: RichText(
+                    //           text: TextSpan(
+                    //             style: TextStyle(
+                    //               color: isDark
+                    //                   ? Colors.white70
+                    //                   : const Color(0xFF666666),
+                    //               fontSize: 13,
+                    //             ),
+                    //             children: const [
+                    //               TextSpan(text: "Kayıt olarak "),
+                    //               TextSpan(
+                    //                 text: "Şartlar ve Koşullar",
+                    //                 style: TextStyle(
+                    //                   color: Color(0xFF6C63FF),
+                    //                   fontWeight: FontWeight.bold,
+                    //                 ),
+                    //               ),
+                    //               TextSpan(text: "'ı kabul etmiş olursunuz."),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
 
                     // Terms error message
                     Obx(() => controller.termsError.value.isNotEmpty
@@ -298,7 +298,7 @@ class _RegisterViewState extends State<RegisterView> {
                           )
                         : const SizedBox.shrink()),
 
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 25),
 
                     // Register button
                     _buildButton(
@@ -402,7 +402,7 @@ class _RegisterViewState extends State<RegisterView> {
                 borderSide: BorderSide.none,
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 16),
-              errorText: errorText == '' ? null : errorText,
+              errorText: errorText == '' ? null : '     ${errorText ?? ''}',
               errorStyle: const TextStyle(color: Colors.red),
               filled: true,
               fillColor: isDark ? Colors.white.withOpacity(0.04) : Colors.white,

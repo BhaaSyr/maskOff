@@ -53,6 +53,9 @@ class AuthController extends GetxController {
   final isGoogleLoginLoading = false.obs;
   final isRegisterLoading = false.obs;
 
+  // Reset password functionality
+  final isResettingPassword = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -85,6 +88,86 @@ class AuthController extends GetxController {
 
   void toggleConfirmPasswordVisibility() {
     obscureConfirmPassword.value = !obscureConfirmPassword.value;
+  }
+
+  // Reset password functionality
+  Future<String?> resetPassword(String email) async {
+    if (email.isEmpty) {
+      return 'E-posta alanı boş bırakılamaz';
+    }
+
+    if (!GetUtils.isEmail(email)) {
+      return 'Geçerli bir e-posta adresi girin';
+    }
+
+    try {
+      isResettingPassword.value = true;
+
+      await _auth.sendPasswordResetEmail(email: email.trim());
+
+      // Close the dialog first
+      Get.back();
+
+      // Then show a more prominent notification
+      Get.dialog(
+        AlertDialog(
+          backgroundColor:
+              Get.isDarkMode ? const Color(0xFF2D2D44) : Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Text(
+            'Şifre Sıfırlama E-postası Gönderildi',
+            style: TextStyle(
+              color: Color(0xFF6C63FF),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            'Şifre sıfırlama bağlantısı $email adresine gönderildi.\n\nLütfen e-posta kutunuzu kontrol edin ve bağlantıya tıklayarak şifrenizi sıfırlayın.',
+            style: TextStyle(
+              fontSize: 16,
+              color: Get.isDarkMode ? Colors.white70 : const Color(0xFF666666),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(),
+              child: const Text(
+                'Tamam',
+                style: TextStyle(
+                  color: Color(0xFF6C63FF),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+      return null; // No error
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = 'Şifre sıfırlama işlemi sırasında bir hata oluştu';
+
+      switch (e.code) {
+        case 'invalid-email':
+          errorMessage = 'Geçersiz e-posta adresi';
+          break;
+        case 'user-not-found':
+          errorMessage = 'Bu e-posta ile kayıtlı kullanıcı bulunamadı';
+          break;
+        case 'too-many-requests':
+          errorMessage =
+              'Çok fazla istek yapıldı. Lütfen daha sonra tekrar deneyin';
+          break;
+      }
+
+      return errorMessage;
+    } catch (e) {
+      return 'Şifre sıfırlama işlemi sırasında bir hata oluştu: ${e.toString()}';
+    } finally {
+      isResettingPassword.value = false;
+    }
   }
 
   // Toggle terms and conditions acceptance
@@ -231,10 +314,10 @@ class AuthController extends GetxController {
     }
 
     // Terms validation
-    if (!acceptedTerms.value) {
-      termsError.value = 'Şartlar ve koşulları kabul etmelisiniz';
-      isValid = false;
-    }
+    // if (!acceptedTerms.value) {
+    //   termsError.value = 'Şartlar ve koşulları kabul etmelisiniz';
+    //   isValid = false;
+    // }
 
     return isValid;
   }

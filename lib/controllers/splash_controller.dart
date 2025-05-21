@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:testvid/routes/app_pages.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:http/http.dart' as http;
 
 class SplashController extends GetxController {
   bool isCheckingConnection = true;
   bool hasConnectionError = false;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void onInit() {
@@ -30,9 +32,16 @@ class SplashController extends GetxController {
 
       // Eğer başarılı bir yanıt alırsak (200 OK)
       if (response.statusCode == 200) {
-        // İnternet bağlantısı var, 3 saniye bekle ve giriş sayfasına git
+        // İnternet bağlantısı var, 3 saniye bekle ve kullanıcı durumuna göre yönlendir
         Timer(const Duration(seconds: 3), () {
-          Get.offAllNamed(Routes.LOGIN);
+          // Kullanıcı oturum durumunu kontrol et
+          if (_auth.currentUser != null) {
+            // Kullanıcı giriş yapmış, ana sayfaya yönlendir
+            Get.offAllNamed(Routes.HOME);
+          } else {
+            // Kullanıcı giriş yapmamış, login sayfasına yönlendir
+            Get.offAllNamed(Routes.LOGIN);
+          }
         });
       } else {
         // İnternet bağlantısı var ama bir sorun olabilir

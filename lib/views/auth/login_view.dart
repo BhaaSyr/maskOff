@@ -87,7 +87,7 @@ class _LoginViewState extends State<LoginView> {
                       ],
                     ),
 
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
 
                     // Logo or app icon
                     Center(
@@ -106,7 +106,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
                     // App name
                     Center(
@@ -127,13 +127,13 @@ class _LoginViewState extends State<LoginView> {
                       child: Text(
                         "Giriş Yap",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           color:
                               isDark ? Colors.white70 : const Color(0xFF666666),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 40),
 
                     // Email/Username field
                     Obx(() => _buildTextField(
@@ -172,7 +172,8 @@ class _LoginViewState extends State<LoginView> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
-                          // TODO: Redirect to forgot password page
+                          // Show password reset dialog
+                          _showForgotPasswordDialog(isDark);
                         },
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 8),
@@ -348,7 +349,7 @@ class _LoginViewState extends State<LoginView> {
                 borderSide: BorderSide.none,
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 16),
-              errorText: errorText == '' ? null : errorText,
+              errorText: errorText == '' ? null : '     ${errorText ?? ''}',
               errorStyle: const TextStyle(color: Colors.red),
               filled: true,
               fillColor: isDark ? Colors.white.withOpacity(0.04) : Colors.white,
@@ -488,6 +489,135 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ],
               ),
+      ),
+    );
+  }
+
+  void _showForgotPasswordDialog(bool isDark) {
+    final TextEditingController emailController = TextEditingController();
+    final RxString dialogError = ''.obs;
+
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: isDark ? const Color(0xFF2D2D44) : Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Text(
+          "Şifre Sıfırlama",
+          style: TextStyle(
+            color: isDark ? Colors.white : const Color(0xFF333333),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Şifre sıfırlama bağlantısı için e-posta adresinizi girin",
+              style: TextStyle(
+                color: isDark ? Colors.white70 : const Color(0xFF666666),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              decoration: BoxDecoration(
+                color: isDark ? Colors.white.withOpacity(0.06) : Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(isDark ? 0.05 : 0.03),
+                    blurRadius: 10,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: emailController,
+                style: TextStyle(
+                  color: isDark ? Colors.white : Colors.black87,
+                ),
+                decoration: InputDecoration(
+                  hintText: "E-posta adresinizi girin",
+                  hintStyle: TextStyle(
+                    color: isDark ? Colors.white38 : Colors.black38,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.email_outlined,
+                    color: isDark ? Colors.white54 : Colors.grey,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                  filled: true,
+                  fillColor:
+                      isDark ? Colors.white.withOpacity(0.04) : Colors.white,
+                ),
+              ),
+            ),
+            // Error message
+            Obx(() => dialogError.value.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Text(
+                      dialogError.value,
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 13,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                : const SizedBox.shrink()),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text(
+              "İptal",
+              style: TextStyle(
+                color: isDark ? Colors.white70 : const Color(0xFF666666),
+              ),
+            ),
+          ),
+          Obx(() => TextButton(
+                onPressed: controller.isResettingPassword.value
+                    ? null
+                    : () async {
+                        // Reset any previous error
+                        dialogError.value = '';
+
+                        // Call resetPassword and get potential error
+                        final error = await controller
+                            .resetPassword(emailController.text);
+
+                        // If there was an error, display it
+                        if (error != null) {
+                          dialogError.value = error;
+                        }
+                      },
+                child: controller.isResettingPassword.value
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Color(0xFF6C63FF)),
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Text(
+                        "Gönder",
+                        style: TextStyle(
+                          color: const Color(0xFF6C63FF),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+              )),
+        ],
       ),
     );
   }
