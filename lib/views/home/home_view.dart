@@ -4,6 +4,8 @@ import 'package:testvid/controllers/home_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
 import 'package:testvid/views/home/widgets/video_player_widget.dart';
 import 'package:testvid/controllers/auth/auth_controller.dart';
+import 'package:testvid/routes/app_pages.dart';
+import 'package:testvid/generated/l10n.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -48,7 +50,7 @@ class HomeView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Mask Off",
+                        S.of(context).appTitle,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -65,7 +67,7 @@ class HomeView extends StatelessWidget {
                               Get.dialog(
                                 AlertDialog(
                                   title: Text(
-                                    'Çıkış Yap',
+                                    S.of(context).logout,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: isDark
@@ -74,7 +76,7 @@ class HomeView extends StatelessWidget {
                                     ),
                                   ),
                                   content: Text(
-                                    'Çıkış yapmak istediğinizden emin misiniz?',
+                                    S.of(context).logoutConfirmation,
                                     style: TextStyle(
                                       color: isDark
                                           ? Colors.white70
@@ -91,7 +93,7 @@ class HomeView extends StatelessWidget {
                                     TextButton(
                                       onPressed: () => Get.back(),
                                       child: Text(
-                                        'İptal',
+                                        S.of(context).cancel,
                                         style: TextStyle(
                                           color: isDark
                                               ? Colors.white70
@@ -117,7 +119,7 @@ class HomeView extends StatelessWidget {
                                           vertical: 8,
                                         ),
                                       ),
-                                      child: const Text('Çıkış Yap'),
+                                      child: Text(S.of(context).logout),
                                     ),
                                   ],
                                 ),
@@ -167,19 +169,24 @@ class HomeView extends StatelessWidget {
                           ),
                           const SizedBox(width: 12),
                           // Bilgi butonu
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: isDark
-                                  ? Colors.white.withOpacity(0.1)
-                                  : const Color(0xFF6C63FF).withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Icon(
-                              Icons.info_outline_rounded,
-                              color: isDark
-                                  ? Colors.white70
-                                  : const Color(0xFF6C63FF),
+
+                          // Settings button
+                          GestureDetector(
+                            onTap: () => Get.toNamed(Routes.SETTINGS),
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: isDark
+                                    ? Colors.white.withOpacity(0.1)
+                                    : const Color(0xFF6C63FF).withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                Icons.settings,
+                                color: isDark
+                                    ? Colors.white70
+                                    : const Color(0xFF6C63FF),
+                              ),
                             ),
                           ),
                         ],
@@ -189,7 +196,7 @@ class HomeView extends StatelessWidget {
 
                   const SizedBox(height: 10),
                   Text(
-                    "Detect deepfake videos with advanced AI technology",
+                    S.of(context).detectDeepfake,
                     style: TextStyle(
                       fontSize: 14,
                       color: isDark
@@ -222,7 +229,7 @@ class HomeView extends StatelessWidget {
                       Expanded(
                         child: _buildButton(
                           icon: Icons.file_upload_outlined,
-                          label: "Upload Video",
+                          label: S.of(context).uploadVideo,
                           onPressed: controller.pickVideo,
                           isPrimary: true,
                           isDark: isDark,
@@ -232,14 +239,14 @@ class HomeView extends StatelessWidget {
                       Expanded(
                         child: _buildButton(
                           icon: Icons.search,
-                          label: "Analyze",
+                          label: S.of(context).analyze,
                           onPressed: () {
                             if (controller.isInitialized.value) {
                               Get.toNamed("/result");
                             } else {
                               Get.snackbar(
-                                "Upload Required",
-                                "Please upload a video first",
+                                S.of(context).uploadRequired,
+                                S.of(context).pleaseUploadFirst,
                                 backgroundColor: isDark
                                     ? Colors.white
                                     : const Color(0xFF333333),
@@ -301,7 +308,7 @@ class HomeView extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  "Your Video",
+                  S.current.yourVideo,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -371,7 +378,7 @@ class HomeView extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            "Upload a video to begin",
+            S.current.uploadToBegin,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -380,7 +387,7 @@ class HomeView extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            "Tap the Upload button below to select a video",
+            S.current.tapUploadButton,
             style: TextStyle(
               fontSize: 14,
               color: isDark

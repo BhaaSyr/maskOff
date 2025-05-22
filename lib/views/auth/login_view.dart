@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testvid/controllers/auth/auth_controller.dart';
+import 'package:testvid/controllers/language_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
+import 'package:testvid/generated/l10n.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:testvid/views/auth/widgets/index.dart';
 
@@ -15,12 +17,14 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late AuthController controller;
   late ThemeController themeController;
+  late LanguageController languageController;
 
   @override
   void initState() {
     super.initState();
     controller = Get.find<AuthController>();
     themeController = Get.find<ThemeController>();
+    languageController = Get.find<LanguageController>();
 
     // Mevcut ekranın Login ekranı olduğunu bildir
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -60,10 +64,32 @@ class _LoginViewState extends State<LoginView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 16),
-                    // Top bar with theme toggle
+                    // Top bar with theme toggle and language toggle
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        // Language switcher
+                        GestureDetector(
+                          onTap: () {
+                            _showLanguagePickerDialog(isDark);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? Colors.white.withOpacity(0.1)
+                                  : const Color(0xFF6C63FF).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Icon(
+                              Icons.language,
+                              color: isDark
+                                  ? Colors.white70
+                                  : const Color(0xFF6C63FF),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
                         // Theme toggle button
                         GestureDetector(
                           onTap: () {
@@ -112,7 +138,7 @@ class _LoginViewState extends State<LoginView> {
                     // App name
                     Center(
                       child: Text(
-                        "Mask Off",
+                        S.of(context).appTitle,
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
@@ -126,7 +152,7 @@ class _LoginViewState extends State<LoginView> {
                     // Login title
                     Center(
                       child: Text(
-                        "Giriş Yap",
+                        S.of(context).login,
                         style: TextStyle(
                           fontSize: 16,
                           color:
@@ -138,8 +164,8 @@ class _LoginViewState extends State<LoginView> {
 
                     // Email/Username field
                     Obx(() => CustomTextField(
-                          label: "E-posta",
-                          hintText: "E-posta adresinizi girin",
+                          label: S.of(context).email,
+                          hintText: S.of(context).emailHint,
                           controller: controller.emailController,
                           obscureText: false,
                           prefixIcon: Icons.email_outlined,
@@ -150,8 +176,8 @@ class _LoginViewState extends State<LoginView> {
 
                     // Password field
                     Obx(() => CustomTextField(
-                          label: "Şifre",
-                          hintText: "Şifrenizi girin",
+                          label: S.of(context).password,
+                          hintText: S.of(context).passwordHint,
                           controller: controller.passwordController,
                           obscureText: controller.obscurePassword.value,
                           prefixIcon: Icons.lock_outline,
@@ -180,7 +206,7 @@ class _LoginViewState extends State<LoginView> {
                           padding: const EdgeInsets.symmetric(vertical: 8),
                         ),
                         child: Text(
-                          "Şifremi Unuttum",
+                          S.of(context).forgotPassword,
                           style: TextStyle(
                             color: const Color(0xFF6C63FF),
                             fontWeight: FontWeight.w500,
@@ -193,7 +219,7 @@ class _LoginViewState extends State<LoginView> {
 
                     // Login button
                     CustomButton(
-                      label: "Giriş Yap",
+                      label: S.of(context).login,
                       onPressed: controller.login,
                       isPrimary: true,
                       isDark: isDark,
@@ -229,7 +255,7 @@ class _LoginViewState extends State<LoginView> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
-                            "VEYA",
+                            S.of(context).or,
                             style: TextStyle(
                               color: isDark ? Colors.white38 : Colors.black38,
                               fontSize: 12,
@@ -250,7 +276,7 @@ class _LoginViewState extends State<LoginView> {
 
                     // Google Sign-in button
                     SocialButton(
-                      label: "Google ile Giriş Yap",
+                      label: S.of(context).loginWithGoogle,
                       onPressed: controller.signInWithGoogle,
                       icon: "assets/images/google_icon.png",
                       isDark: isDark,
@@ -264,7 +290,7 @@ class _LoginViewState extends State<LoginView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Hesabınız yok mu?",
+                          S.of(context).noAccount,
                           style: TextStyle(
                             color: isDark
                                 ? Colors.white70
@@ -273,8 +299,8 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         TextButton(
                           onPressed: () => Get.toNamed(Routes.REGISTER),
-                          child: const Text(
-                            "Kayıt Ol",
+                          child: Text(
+                            S.of(context).signup,
                             style: TextStyle(
                               color: Color(0xFF6C63FF),
                               fontWeight: FontWeight.bold,
@@ -306,7 +332,7 @@ class _LoginViewState extends State<LoginView> {
           borderRadius: BorderRadius.circular(16),
         ),
         title: Text(
-          "Şifre Sıfırlama",
+          S.of(context).passwordReset,
           style: TextStyle(
             color: isDark ? Colors.white : const Color(0xFF333333),
             fontWeight: FontWeight.bold,
@@ -316,7 +342,7 @@ class _LoginViewState extends State<LoginView> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Şifre sıfırlama bağlantısı için e-posta adresinizi girin",
+              S.of(context).passwordResetInfo,
               style: TextStyle(
                 color: isDark ? Colors.white70 : const Color(0xFF666666),
               ),
@@ -340,7 +366,7 @@ class _LoginViewState extends State<LoginView> {
                   color: isDark ? Colors.white : Colors.black87,
                 ),
                 decoration: InputDecoration(
-                  hintText: "E-posta adresinizi girin",
+                  hintText: S.of(context).emailHint,
                   hintStyle: TextStyle(
                     color: isDark ? Colors.white38 : Colors.black38,
                   ),
@@ -379,7 +405,7 @@ class _LoginViewState extends State<LoginView> {
           TextButton(
             onPressed: () => Get.back(),
             child: Text(
-              "İptal",
+              S.of(context).cancel,
               style: TextStyle(
                 color: isDark ? Colors.white70 : const Color(0xFF666666),
               ),
@@ -412,7 +438,7 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       )
                     : Text(
-                        "Gönder",
+                        S.of(context).send,
                         style: TextStyle(
                           color: const Color(0xFF6C63FF),
                           fontWeight: FontWeight.bold,
@@ -421,6 +447,93 @@ class _LoginViewState extends State<LoginView> {
               )),
         ],
       ),
+    );
+  }
+
+  void _showLanguagePickerDialog(bool isDark) {
+    Get.dialog(
+      SimpleDialog(
+        backgroundColor: isDark ? const Color(0xFF2D2D44) : Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 8),
+        children: [
+          // English option
+          InkWell(
+            onTap: () {
+              languageController.changeLanguage('en');
+              Get.back();
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('🇬🇧', style: TextStyle(fontSize: 18)),
+                  SizedBox(width: 12),
+                  Text(
+                    'English',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDark ? Colors.white : const Color(0xFF333333),
+                      fontWeight: languageController.currentLanguage == 'en'
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
+                  ),
+                  Spacer(),
+                  if (languageController.currentLanguage == 'en')
+                    Icon(
+                      Icons.check,
+                      size: 16,
+                      color: const Color(0xFF6C63FF),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          Divider(
+              height: 1,
+              thickness: 1,
+              color: isDark ? Colors.white12 : Colors.black12),
+          // Turkish option
+          InkWell(
+            onTap: () {
+              languageController.changeLanguage('tr');
+              Get.back();
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('🇹🇷', style: TextStyle(fontSize: 18)),
+                  SizedBox(width: 12),
+                  Text(
+                    'Türkçe',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDark ? Colors.white : const Color(0xFF333333),
+                      fontWeight: languageController.currentLanguage == 'tr'
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
+                  ),
+                  Spacer(),
+                  if (languageController.currentLanguage == 'tr')
+                    Icon(
+                      Icons.check,
+                      size: 16,
+                      color: const Color(0xFF6C63FF),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      barrierColor: Colors.black54,
     );
   }
 }

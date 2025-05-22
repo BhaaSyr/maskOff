@@ -46,6 +46,11 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
+	<true/> 
+	<key>CFBundleLocalizations</key>
+	<array>
+    <string>en</string>
+    <string>tr</string>
+    </array>
 </dict>
 </plist>

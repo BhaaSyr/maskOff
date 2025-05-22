@@ -107,13 +107,14 @@ class ResultController extends GetxController {
   }
 
   String getResultText() {
+    final score = result.value.isDeepfake
+        ? (result.value.confidenceScore * 100).toStringAsFixed(1)
+        : ((1 - result.value.confidenceScore) * 100).toStringAsFixed(1);
+
     if (result.value.isDeepfake) {
-      final score = (result.value.confidenceScore * 100).toStringAsFixed(1);
-      return 'This video is likely a deepfake with a probability of %$score.';
+      return "Bu video %$score olasılıkla deepfake içeriyor.";
     } else {
-      final score =
-          ((1 - result.value.confidenceScore) * 100).toStringAsFixed(1);
-      return 'This video likely appears real with a probability of %$score.';
+      return "Bu video %$score olasılıkla gerçek görünüyor.";
     }
   }
 
@@ -129,7 +130,6 @@ class ResultController extends GetxController {
     }
   }
 }
-
 
 // class ResultController extends GetxController {
 //   late Rx<DeepfakeResult> result;

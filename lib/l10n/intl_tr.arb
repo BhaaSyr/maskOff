@@ -1,0 +1,214 @@
+{
+  "appTitle": "Mask Off",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "Hoş Geldiniz",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "login": "Giriş Yap",
+  "@login": {
+    "description": "Login button text"
+  },
+  "signup": "Kayıt Ol",
+  "@signup": {
+    "description": "Sign up button text"
+  },
+  "settings": "Ayarlar",
+  "@settings": {
+    "description": "Settings menu item"
+  },
+  "darkMode": "Karanlık Mod",
+  "@darkMode": {
+    "description": "Dark mode toggle"
+  },
+  "language": "Dil",
+  "@language": {
+    "description": "Language selection option"
+  },
+  "detectDeepfake": "Gelişmiş yapay zeka teknolojisiyle deepfake videolarını tespit edin",
+  "@detectDeepfake": {
+    "description": "Home page subtitle"
+  },
+  "uploadVideo": "Video Yükle",
+  "@uploadVideo": {
+    "description": "Upload video button text"
+  },
+  "analyze": "Analiz Et",
+  "@analyze": {
+    "description": "Analyze button text"
+  },
+  "uploadRequired": "Video Gerekli",
+  "@uploadRequired": {
+    "description": "Error message title when no video is uploaded"
+  },
+  "pleaseUploadFirst": "Lütfen önce bir video yükleyin",
+  "@pleaseUploadFirst": {
+    "description": "Error message content when no video is uploaded"
+  },
+  "yourVideo": "Videonuz",
+  "@yourVideo": {
+    "description": "Label for uploaded video"
+  },
+  "uploadToBegin": "Başlamak için bir video yükleyin",
+  "@uploadToBegin": {
+    "description": "Empty state title"
+  },
+  "tapUploadButton": "Video seçmek için aşağıdaki Yükle butonuna dokunun",
+  "@tapUploadButton": {
+    "description": "Empty state subtitle"
+  },
+  "analysisResults": "Analiz Sonuçları",
+  "@analysisResults": {
+    "description": "Title for the results page"
+  },
+  "backToHomepage": "Ana Sayfaya Dön",
+  "@backToHomepage": {
+    "description": "Button to return to homepage"
+  },
+  "logout": "Çıkış Yap",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "logoutConfirmation": "Çıkış yapmak istediğinizden emin misiniz?",
+  "@logoutConfirmation": {
+    "description": "Logout confirmation message"
+  },
+  "cancel": "İptal",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "email": "E-posta",
+  "@email": {
+    "description": "Email field label"
+  },
+  "emailHint": "E-posta adresinizi girin",
+  "@emailHint": {
+    "description": "Email field hint text"
+  },
+  "password": "Şifre",
+  "@password": {
+    "description": "Password field label"
+  },
+  "passwordHint": "Şifrenizi girin",
+  "@passwordHint": {
+    "description": "Password field hint text"
+  },
+  "forgotPassword": "Şifremi Unuttum",
+  "@forgotPassword": {
+    "description": "Forgot password button text"
+  },
+  "or": "VEYA",
+  "@or": {
+    "description": "Divider text between login options"
+  },
+  "loginWithGoogle": "Google ile Giriş Yap",
+  "@loginWithGoogle": {
+    "description": "Google login button text"
+  },
+  "noAccount": "Hesabınız yok mu?",
+  "@noAccount": {
+    "description": "Text for users without an account"
+  },
+  "passwordReset": "Şifre Sıfırlama",
+  "@passwordReset": {
+    "description": "Password reset dialog title"
+  },
+  "passwordResetInfo": "Şifre sıfırlama bağlantısı için e-posta adresinizi girin",
+  "@passwordResetInfo": {
+    "description": "Password reset dialog info"
+  },
+  "send": "Gönder",
+  "@send": {
+    "description": "Send button text for password reset"
+  },
+  "register": "Kayıt Ol",
+  "@register": {
+    "description": "Register page title"
+  },
+  "createAccount": "Hesap Oluştur",
+  "@createAccount": {
+    "description": "Create account heading"
+  },
+  "enterInfo": "Lütfen bilgilerinizi girin",
+  "@enterInfo": {
+    "description": "Registration form subtitle"
+  },
+  "fullName": "Adınız Soyadınız",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "fullNameHint": "Adınızı ve soyadınızı girin",
+  "@fullNameHint": {
+    "description": "Full name field hint"
+  },
+  "passwordHintRegister": "Şifrenizi girin (en az 6 karakter)",
+  "@passwordHintRegister": {
+    "description": "Password hint for registration"
+  },
+  "confirmPassword": "Şifre Tekrar",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "confirmPasswordHint": "Şifrenizi tekrar girin",
+  "@confirmPasswordHint": {
+    "description": "Confirm password field hint"
+  },
+  "haveAccount": "Zaten bir hesabınız var mı?",
+  "@haveAccount": {
+    "description": "Text for users with existing account"
+  },
+  "deepfakeResult": "Bu video %{score} olasılıkla deepfake içeriyor.",
+  "@deepfakeResult": {
+    "description": "Result message for deepfake video",
+    "placeholders": {
+      "score": {
+        "type": "String",
+        "example": "95.5"
+      }
+    }
+  },
+  "realVideoResult": "Bu video %{score} olasılıkla gerçek görünüyor.",
+  "@realVideoResult": {
+    "description": "Result message for real video",
+    "placeholders": {
+      "score": {
+        "type": "String",
+        "example": "95.5"
+      }
+    }
+  },
+  "deepfakeDetected": "Deepfake Tespit Edildi",
+  "@deepfakeDetected": {
+    "description": "Title for detected deepfake video"
+  },
+  "authenticVideo": "Gerçek Video",
+  "@authenticVideo": {
+    "description": "Title for authentic video"
+  },
+  "confidenceScore": "Güven Puanı",
+  "@confidenceScore": {
+    "description": "Label for AI's confidence score"
+  },
+  "about": "Hakkında",
+  "@about": {
+    "description": "About section title in settings"
+  },
+  "appearance": "Görünüm",
+  "@appearance": {
+    "description": "Appearance section title in settings"
+  },
+  "privacyPolicy": "Gizlilik Politikası",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  "termsOfService": "Kullanım Koşulları",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  "version": "Sürüm",
+  "@version": {
+    "description": "App version label"
+  }
+}

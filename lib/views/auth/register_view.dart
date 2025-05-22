@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testvid/controllers/auth/auth_controller.dart';
+import 'package:testvid/controllers/language_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
+import 'package:testvid/generated/l10n.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:testvid/views/auth/widgets/index.dart';
 
@@ -15,12 +17,14 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   late AuthController controller;
   late ThemeController themeController;
+  late LanguageController languageController;
 
   @override
   void initState() {
     super.initState();
     controller = Get.find<AuthController>();
     themeController = Get.find<ThemeController>();
+    languageController = Get.find<LanguageController>();
 
     // Mevcut ekranın Register ekranı olduğunu bildir
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -61,7 +65,7 @@ class _RegisterViewState extends State<RegisterView> {
                   children: [
                     const SizedBox(height: 16),
 
-                    // App bar with back button and theme toggle
+                    // App bar with back button, title and theme toggle
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -86,36 +90,65 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
 
                         // Title
-                        Text(
-                          "Kayıt Ol",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color:
-                                isDark ? Colors.white : const Color(0xFF333333),
-                          ),
-                        ),
+                        // Text(
+                        //   S.of(context).register,
+                        //   style: TextStyle(
+                        //     fontSize: 20,
+                        //     fontWeight: FontWeight.bold,
+                        //     color:
+                        //         isDark ? Colors.white : const Color(0xFF333333),
+                        //   ),
+                        // ),
 
-                        // Theme toggle
-                        GestureDetector(
-                          onTap: () {
-                            themeController.toggleTheme();
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: isDark
-                                  ? Colors.white.withOpacity(0.1)
-                                  : const Color(0xFF6C63FF).withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(12),
+                        // Controls row
+                        Row(
+                          children: [
+                            // Language toggle
+                            GestureDetector(
+                              onTap: () {
+                                _showLanguagePickerDialog(isDark);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: isDark
+                                      ? Colors.white.withOpacity(0.1)
+                                      : const Color(0xFF6C63FF)
+                                          .withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Icon(
+                                  Icons.language,
+                                  color: isDark
+                                      ? Colors.white70
+                                      : const Color(0xFF6C63FF),
+                                ),
+                              ),
                             ),
-                            child: Icon(
-                              isDark ? Icons.light_mode : Icons.dark_mode,
-                              color: isDark
-                                  ? Colors.white70
-                                  : const Color(0xFF6C63FF),
+                            const SizedBox(width: 8),
+                            // Theme toggle
+                            GestureDetector(
+                              onTap: () {
+                                themeController.toggleTheme();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: isDark
+                                      ? Colors.white.withOpacity(0.1)
+                                      : const Color(0xFF6C63FF)
+                                          .withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Icon(
+                                  isDark ? Icons.light_mode : Icons.dark_mode,
+                                  color: isDark
+                                      ? Colors.white70
+                                      : const Color(0xFF6C63FF),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),
@@ -144,7 +177,7 @@ class _RegisterViewState extends State<RegisterView> {
                     // Register form heading
                     Center(
                       child: Text(
-                        "Hesap Oluştur",
+                        S.of(context).createAccount,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -158,7 +191,7 @@ class _RegisterViewState extends State<RegisterView> {
 
                     Center(
                       child: Text(
-                        "Lütfen bilgilerinizi girin",
+                        S.of(context).enterInfo,
                         style: TextStyle(
                           fontSize: 16,
                           color:
@@ -171,8 +204,8 @@ class _RegisterViewState extends State<RegisterView> {
 
                     // Name field
                     Obx(() => CustomTextField(
-                          label: "Adınız Soyadınız",
-                          hintText: "Adınızı ve soyadınızı girin",
+                          label: S.of(context).fullName,
+                          hintText: S.of(context).fullNameHint,
                           controller: controller.nameController,
                           obscureText: false,
                           prefixIcon: Icons.person_outline,
@@ -183,8 +216,8 @@ class _RegisterViewState extends State<RegisterView> {
 
                     // Email field
                     Obx(() => CustomTextField(
-                          label: "E-posta",
-                          hintText: "E-posta adresinizi girin",
+                          label: S.of(context).email,
+                          hintText: S.of(context).emailHint,
                           controller: controller.emailController,
                           obscureText: false,
                           prefixIcon: Icons.email_outlined,
@@ -195,8 +228,8 @@ class _RegisterViewState extends State<RegisterView> {
 
                     // Password field
                     Obx(() => CustomTextField(
-                          label: "Şifre",
-                          hintText: "Şifrenizi girin (en az 6 karakter)",
+                          label: S.of(context).password,
+                          hintText: S.of(context).passwordHintRegister,
                           controller: controller.passwordController,
                           obscureText: controller.obscurePassword.value,
                           prefixIcon: Icons.lock_outline,
@@ -216,8 +249,8 @@ class _RegisterViewState extends State<RegisterView> {
 
                     // Confirm password field
                     Obx(() => CustomTextField(
-                          label: "Şifre Tekrar",
-                          hintText: "Şifrenizi tekrar girin",
+                          label: S.of(context).confirmPassword,
+                          hintText: S.of(context).confirmPasswordHint,
                           controller: controller.confirmPasswordController,
                           obscureText: controller.obscureConfirmPassword.value,
                           prefixIcon: Icons.lock_outline,
@@ -303,7 +336,7 @@ class _RegisterViewState extends State<RegisterView> {
 
                     // Register button
                     CustomButton(
-                      label: "Kayıt Ol",
+                      label: S.of(context).register,
                       onPressed: controller.register,
                       isPrimary: true,
                       isDark: isDark,
@@ -317,7 +350,7 @@ class _RegisterViewState extends State<RegisterView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Zaten bir hesabınız var mı?",
+                          S.of(context).haveAccount,
                           style: TextStyle(
                             color: isDark
                                 ? Colors.white70
@@ -326,8 +359,8 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         TextButton(
                           onPressed: () => Get.offNamed(Routes.LOGIN),
-                          child: const Text(
-                            "Giriş Yap",
+                          child: Text(
+                            S.of(context).login,
                             style: TextStyle(
                               color: Color(0xFF6C63FF),
                               fontWeight: FontWeight.bold,
@@ -346,5 +379,92 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       );
     });
+  }
+
+  void _showLanguagePickerDialog(bool isDark) {
+    Get.dialog(
+      SimpleDialog(
+        backgroundColor: isDark ? const Color(0xFF2D2D44) : Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 8),
+        children: [
+          // English option
+          InkWell(
+            onTap: () {
+              languageController.changeLanguage('en');
+              Get.back();
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('🇬🇧', style: TextStyle(fontSize: 18)),
+                  SizedBox(width: 12),
+                  Text(
+                    'English',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDark ? Colors.white : const Color(0xFF333333),
+                      fontWeight: languageController.currentLanguage == 'en'
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
+                  ),
+                  Spacer(),
+                  if (languageController.currentLanguage == 'en')
+                    Icon(
+                      Icons.check,
+                      size: 16,
+                      color: const Color(0xFF6C63FF),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          Divider(
+              height: 1,
+              thickness: 1,
+              color: isDark ? Colors.white12 : Colors.black12),
+          // Turkish option
+          InkWell(
+            onTap: () {
+              languageController.changeLanguage('tr');
+              Get.back();
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('🇹🇷', style: TextStyle(fontSize: 18)),
+                  SizedBox(width: 12),
+                  Text(
+                    'Türkçe',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDark ? Colors.white : const Color(0xFF333333),
+                      fontWeight: languageController.currentLanguage == 'tr'
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
+                  ),
+                  Spacer(),
+                  if (languageController.currentLanguage == 'tr')
+                    Icon(
+                      Icons.check,
+                      size: 16,
+                      color: const Color(0xFF6C63FF),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      barrierColor: Colors.black54,
+    );
   }
 }

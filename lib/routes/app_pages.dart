@@ -7,6 +7,7 @@ import 'package:testvid/views/auth/login_view.dart';
 import 'package:testvid/views/auth/register_view.dart';
 import 'package:testvid/views/home/home_view.dart';
 import 'package:testvid/views/result/result_view.dart';
+import 'package:testvid/views/settings_view.dart';
 import 'package:testvid/views/splash/splash_screen.dart';
 
 class AppPages {
@@ -38,6 +39,10 @@ class AppPages {
       page: () => const ResultView(),
       binding: ResultBinding(),
     ),
+    GetPage(
+      name: Routes.SETTINGS,
+      page: () => const SettingsView(),
+    ),
   ];
 }
 
@@ -48,4 +53,5 @@ abstract class Routes {
   static const REGISTER = '/register';
   static const HOME = '/home';
   static const RESULT = '/result';
+  static const SETTINGS = '/settings';
 }

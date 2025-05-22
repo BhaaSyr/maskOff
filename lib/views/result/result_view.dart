@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testvid/controllers/result_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
+import 'package:testvid/generated/l10n.dart';
 import 'widgets/result_card_widget.dart';
 
 class ResultView extends GetView<ResultController> {
@@ -60,7 +61,7 @@ class ResultView extends GetView<ResultController> {
                       ),
                       const SizedBox(width: 20),
                       Text(
-                        "Analysis Results",
+                        S.of(context).analysisResults,
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -82,7 +83,7 @@ class ResultView extends GetView<ResultController> {
                           isDeepfake: controller.result.value.isDeepfake,
                           confidenceScore:
                               controller.result.value.confidenceScore,
-                          resultText: controller.getResultText(),
+                          resultText: _getLocalizedResultText(context),
                           resultColor: controller.getResultColor(),
                           isDarkMode: isDark,
                         ),
@@ -96,7 +97,7 @@ class ResultView extends GetView<ResultController> {
                   padding: const EdgeInsets.all(20),
                   child: _buildButton(
                     icon: Icons.home,
-                    label: "Back to Homepage",
+                    label: S.of(context).backToHomepage,
                     onPressed: () => Get.offNamed("/home"),
                     isPrimary: false,
                     isDark: isDark,
@@ -108,6 +109,19 @@ class ResultView extends GetView<ResultController> {
         ),
       );
     });
+  }
+
+  String _getLocalizedResultText(BuildContext context) {
+    final score = controller.result.value.isDeepfake
+        ? (controller.result.value.confidenceScore * 100).toStringAsFixed(1)
+        : ((1 - controller.result.value.confidenceScore) * 100)
+            .toStringAsFixed(1);
+
+    if (controller.result.value.isDeepfake) {
+      return S.of(context).deepfakeResult(score);
+    } else {
+      return S.of(context).realVideoResult(score);
+    }
   }
 
   Widget _buildButton({

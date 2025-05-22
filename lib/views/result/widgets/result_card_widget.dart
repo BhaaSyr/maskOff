@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testvid/generated/l10n.dart';
 
 class ResultCardWidget extends StatelessWidget {
   final bool isDeepfake;
@@ -64,7 +65,9 @@ class ResultCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      isDeepfake ? 'Deepfake Detected' : 'Authentic Video',
+                      isDeepfake
+                          ? S.of(context).deepfakeDetected
+                          : S.of(context).authenticVideo,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -74,7 +77,7 @@ class ResultCardWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Confidence Score: ${(confidenceScore * 100).toStringAsFixed(1)}%',
+                      '${S.of(context).confidenceScore}: ${(confidenceScore * 100).toStringAsFixed(1)}%',
                       style: TextStyle(
                         fontSize: 14,
                         color: isDarkMode
@@ -118,30 +121,32 @@ class ResultCardWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Authentic',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: isDarkMode
-                    ? Colors.white.withOpacity(0.8)
-                    : const Color(0xFF555555),
+        Builder(
+          builder: (context) => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                S.of(context).authenticVideo,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: isDarkMode
+                      ? Colors.white.withOpacity(0.8)
+                      : const Color(0xFF555555),
+                ),
               ),
-            ),
-            Text(
-              'Deepfake',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: isDarkMode
-                    ? Colors.white.withOpacity(0.8)
-                    : const Color(0xFF555555),
+              Text(
+                S.of(context).deepfakeDetected,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: isDarkMode
+                      ? Colors.white.withOpacity(0.8)
+                      : const Color(0xFF555555),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 8),
         LayoutBuilder(

@@ -1,0 +1,214 @@
+{
+  "appTitle": "Mask Off",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "Welcome",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+  "signup": "Sign Up",
+  "@signup": {
+    "description": "Sign up button text"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings menu item"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode toggle"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language selection option"
+  },
+  "detectDeepfake": "Detect deepfake videos with advanced AI technology",
+  "@detectDeepfake": {
+    "description": "Home page subtitle"
+  },
+  "uploadVideo": "Upload Video",
+  "@uploadVideo": {
+    "description": "Upload video button text"
+  },
+  "analyze": "Analyze",
+  "@analyze": {
+    "description": "Analyze button text"
+  },
+  "uploadRequired": "Upload Required",
+  "@uploadRequired": {
+    "description": "Error message title when no video is uploaded"
+  },
+  "pleaseUploadFirst": "Please upload a video first",
+  "@pleaseUploadFirst": {
+    "description": "Error message content when no video is uploaded"
+  },
+  "yourVideo": "Your Video",
+  "@yourVideo": {
+    "description": "Label for uploaded video"
+  },
+  "uploadToBegin": "Upload a video to begin",
+  "@uploadToBegin": {
+    "description": "Empty state title"
+  },
+  "tapUploadButton": "Tap the Upload button below to select a video",
+  "@tapUploadButton": {
+    "description": "Empty state subtitle"
+  },
+  "analysisResults": "Analysis Results",
+  "@analysisResults": {
+    "description": "Title for the results page"
+  },
+  "backToHomepage": "Back to Homepage",
+  "@backToHomepage": {
+    "description": "Button to return to homepage"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "logoutConfirmation": "Are you sure you want to logout?",
+  "@logoutConfirmation": {
+    "description": "Logout confirmation message"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "emailHint": "Enter your email address",
+  "@emailHint": {
+    "description": "Email field hint text"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "passwordHint": "Enter your password",
+  "@passwordHint": {
+    "description": "Password field hint text"
+  },
+  "forgotPassword": "Forgot Password",
+  "@forgotPassword": {
+    "description": "Forgot password button text"
+  },
+  "or": "OR",
+  "@or": {
+    "description": "Divider text between login options"
+  },
+  "loginWithGoogle": "Sign in with Google",
+  "@loginWithGoogle": {
+    "description": "Google login button text"
+  },
+  "noAccount": "Don't have an account?",
+  "@noAccount": {
+    "description": "Text for users without an account"
+  },
+  "passwordReset": "Password Reset",
+  "@passwordReset": {
+    "description": "Password reset dialog title"
+  },
+  "passwordResetInfo": "Enter your email for a password reset link",
+  "@passwordResetInfo": {
+    "description": "Password reset dialog info"
+  },
+  "send": "Send",
+  "@send": {
+    "description": "Send button text for password reset"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Register page title"
+  },
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Create account heading"
+  },
+  "enterInfo": "Please enter your information",
+  "@enterInfo": {
+    "description": "Registration form subtitle"
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "fullNameHint": "Enter your full name",
+  "@fullNameHint": {
+    "description": "Full name field hint"
+  },
+  "passwordHintRegister": "Enter password (minimum 6 characters)",
+  "@passwordHintRegister": {
+    "description": "Password hint for registration"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "confirmPasswordHint": "Re-enter your password",
+  "@confirmPasswordHint": {
+    "description": "Confirm password field hint"
+  },
+  "haveAccount": "Already have an account?",
+  "@haveAccount": {
+    "description": "Text for users with existing account"
+  },
+  "deepfakeResult": "This video is likely a deepfake with a probability of %{score}.",
+  "@deepfakeResult": {
+    "description": "Result message for deepfake video",
+    "placeholders": {
+      "score": {
+        "type": "String",
+        "example": "95.5"
+      }
+    }
+  },
+  "realVideoResult": "This video likely appears real with a probability of %{score}.",
+  "@realVideoResult": {
+    "description": "Result message for real video",
+    "placeholders": {
+      "score": {
+        "type": "String",
+        "example": "95.5"
+      }
+    }
+  },
+  "deepfakeDetected": "Deepfake Detected",
+  "@deepfakeDetected": {
+    "description": "Title for detected deepfake video"
+  },
+  "authenticVideo": "Authentic Video",
+  "@authenticVideo": {
+    "description": "Title for authentic video"
+  },
+  "confidenceScore": "Confidence Score",
+  "@confidenceScore": {
+    "description": "Label for AI's confidence score"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About section title in settings"
+  },
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Appearance section title in settings"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "App version label"
+  }
+}
