@@ -29,9 +29,14 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(score) =>
       "This video likely appears real with a probability of %${score}.";
 
+  static String m3(name) => "Welcome back, ${name}!";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
+        "age": MessageLookupByLibrary.simpleMessage("Age"),
+        "ageHint":
+            MessageLookupByLibrary.simpleMessage("Enter your age (optional)"),
         "analysisResults":
             MessageLookupByLibrary.simpleMessage("Analysis Results"),
         "analyze": MessageLookupByLibrary.simpleMessage("Analyze"),
@@ -69,6 +74,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterInfo": MessageLookupByLibrary.simpleMessage(
             "Please enter your information"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
+        "firstNameHint":
+            MessageLookupByLibrary.simpleMessage("Enter your first name"),
+        "firstNameRequired":
+            MessageLookupByLibrary.simpleMessage("First name is required"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
@@ -80,9 +90,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Successfully signed in with Google account"),
         "haveAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
+        "invalidAge": MessageLookupByLibrary.simpleMessage(
+            "Please enter a valid age (1-150)"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage(
             "Please enter a valid email address"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
+        "lastNameHint":
+            MessageLookupByLibrary.simpleMessage("Enter your last name"),
+        "lastNameRequired":
+            MessageLookupByLibrary.simpleMessage("Last name is required"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginError": MessageLookupByLibrary.simpleMessage(
             "An error occurred during login"),
@@ -122,17 +139,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter your email for a password reset link"),
         "passwordsDoNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
+        "personalInformation":
+            MessageLookupByLibrary.simpleMessage("Personal Information"),
         "pleaseUploadFirst":
             MessageLookupByLibrary.simpleMessage("Please upload a video first"),
         "pleaseVerifyEmail": MessageLookupByLibrary.simpleMessage(
             "Please verify your email to access your account"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "profileUpdateSuccess": MessageLookupByLibrary.simpleMessage(
+            "Profile updated successfully"),
         "realVideoResult": m2,
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registrationError": MessageLookupByLibrary.simpleMessage(
             "An error occurred during registration"),
         "resendVerificationEmail":
             MessageLookupByLibrary.simpleMessage("Resend Verification Email"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signup": MessageLookupByLibrary.simpleMessage("Sign Up"),
@@ -160,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weakPassword":
             MessageLookupByLibrary.simpleMessage("Password is too weak"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "welcomeBack": m3,
         "wrongPassword":
             MessageLookupByLibrary.simpleMessage("Incorrect password"),
         "yourVideo": MessageLookupByLibrary.simpleMessage("Your Video")

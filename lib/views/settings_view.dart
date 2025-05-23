@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testvid/controllers/language_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
+import 'package:testvid/controllers/auth/auth_controller.dart';
 import 'package:testvid/generated/l10n.dart';
 
 class SettingsView extends StatelessWidget {
@@ -11,6 +12,7 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final languageController = Get.find<LanguageController>();
     final themeController = Get.find<ThemeController>();
+    final authController = Get.find<AuthController>();
 
     return Obx(() {
       final isDark = themeController.isDarkMode;
@@ -100,6 +102,25 @@ class SettingsView extends StatelessWidget {
 
                         const SizedBox(height: 24),
 
+                        // Profile section
+                        _buildSectionTitle(context, S.of(context).profile,
+                            Icons.person_outline, isDark),
+                        const SizedBox(height: 12),
+                        _buildSettingsCard(
+                          context,
+                          isDark: isDark,
+                          children: [
+                            _buildActionTile(
+                              icon: Icons.edit_outlined,
+                              title: 'Manage Profile',
+                              onTap: () => Get.toNamed('/profile'),
+                              isDark: isDark,
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 24),
+
                         // Language section
                         _buildSectionTitle(context, S.of(context).language,
                             Icons.language, isDark),
@@ -146,9 +167,88 @@ class SettingsView extends StatelessWidget {
                           ],
                         ),
 
+                        // About section
                         const SizedBox(height: 24),
 
-                        // About section
+                        // Logout section
+                        _buildSectionTitle(context, S.of(context).logout,
+                            Icons.logout, isDark),
+                        const SizedBox(height: 12),
+                        _buildSettingsCard(
+                          context,
+                          isDark: isDark,
+                          children: [
+                            _buildActionTile(
+                              icon: Icons.logout,
+                              title: S.of(context).logout,
+                              onTap: () {
+                                Get.dialog(
+                                  AlertDialog(
+                                    title: Text(
+                                      S.of(context).logout,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: isDark
+                                            ? Colors.white
+                                            : Colors.black87,
+                                      ),
+                                    ),
+                                    content: Text(
+                                      S.of(context).logoutConfirmation,
+                                      style: TextStyle(
+                                        color: isDark
+                                            ? Colors.white70
+                                            : Colors.black54,
+                                      ),
+                                    ),
+                                    backgroundColor: isDark
+                                        ? const Color(0xFF2D2D44)
+                                        : Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Get.back(),
+                                        child: Text(
+                                          S.of(context).cancel,
+                                          style: TextStyle(
+                                            color: isDark
+                                                ? Colors.white70
+                                                : Colors.black54,
+                                          ),
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Get.back();
+                                          authController.signOut();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFF6C63FF),
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 8,
+                                          ),
+                                        ),
+                                        child: Text(S.of(context).logout),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              isDark: isDark,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+
                         _buildSectionTitle(context, S.of(context).about,
                             Icons.info_outline, isDark),
                         const SizedBox(height: 12),
@@ -162,26 +262,6 @@ class SettingsView extends StatelessWidget {
                               subtitle: '${S.of(context).version} 1.0.0',
                               isDark: isDark,
                             ),
-                            // Divider(
-                            //   color: isDark ? Colors.white24 : Colors.black12,
-                            //   height: 1,
-                            // ),
-                            // _buildActionTile(
-                            //   icon: Icons.shield_outlined,
-                            //   title: S.of(context).privacyPolicy,
-                            //   onTap: () {},
-                            //   isDark: isDark,
-                            // ),
-                            // Divider(
-                            //   color: isDark ? Colors.white24 : Colors.black12,
-                            //   height: 1,
-                            // ),
-                            // _buildActionTile(
-                            //   icon: Icons.description_outlined,
-                            //   title: S.of(context).termsOfService,
-                            //   onTap: () {},
-                            //   isDark: isDark,
-                            // ),
                           ],
                         ),
                       ],

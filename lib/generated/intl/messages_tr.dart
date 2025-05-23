@@ -27,9 +27,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(score) => "Bu video %${score} olasılıkla gerçek görünüyor.";
 
+  static String m3(name) => "Tekrar hoş geldiniz, ${name}!";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Hakkında"),
+        "age": MessageLookupByLibrary.simpleMessage("Yaş"),
+        "ageHint": MessageLookupByLibrary.simpleMessage(
+            "Yaşınızı girin (isteğe bağlı)"),
         "analysisResults":
             MessageLookupByLibrary.simpleMessage("Analiz Sonuçları"),
         "analyze": MessageLookupByLibrary.simpleMessage("Analiz Et"),
@@ -64,6 +69,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterInfo":
             MessageLookupByLibrary.simpleMessage("Lütfen bilgilerinizi girin"),
         "error": MessageLookupByLibrary.simpleMessage("Hata"),
+        "firstName": MessageLookupByLibrary.simpleMessage("Ad"),
+        "firstNameHint": MessageLookupByLibrary.simpleMessage("Adınızı girin"),
+        "firstNameRequired":
+            MessageLookupByLibrary.simpleMessage("Ad alanı zorunludur"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Şifremi Unuttum"),
         "fullName": MessageLookupByLibrary.simpleMessage("Adınız Soyadınız"),
@@ -75,9 +84,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Google hesabınız ile giriş yapıldı"),
         "haveAccount":
             MessageLookupByLibrary.simpleMessage("Zaten bir hesabınız var mı?"),
+        "invalidAge": MessageLookupByLibrary.simpleMessage(
+            "Geçerli bir yaş girin (1-150)"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage(
             "Geçerli bir e-posta adresi girin"),
         "language": MessageLookupByLibrary.simpleMessage("Dil"),
+        "lastName": MessageLookupByLibrary.simpleMessage("Soyad"),
+        "lastNameHint":
+            MessageLookupByLibrary.simpleMessage("Soyadınızı girin"),
+        "lastNameRequired":
+            MessageLookupByLibrary.simpleMessage("Soyad alanı zorunludur"),
         "login": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
         "loginError": MessageLookupByLibrary.simpleMessage(
             "Giriş yapılırken bir hata oluştu"),
@@ -116,18 +132,24 @@ class MessageLookup extends MessageLookupByLibrary {
             "Şifre sıfırlama bağlantısı için e-posta adresinizi girin"),
         "passwordsDoNotMatch":
             MessageLookupByLibrary.simpleMessage("Şifreler eşleşmiyor"),
+        "personalInformation":
+            MessageLookupByLibrary.simpleMessage("Kişisel Bilgiler"),
         "pleaseUploadFirst": MessageLookupByLibrary.simpleMessage(
             "Lütfen önce bir video yükleyin"),
         "pleaseVerifyEmail": MessageLookupByLibrary.simpleMessage(
             "Hesabınıza erişmek için lütfen e-postanızı doğrulayın"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Gizlilik Politikası"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profil"),
+        "profileUpdateSuccess": MessageLookupByLibrary.simpleMessage(
+            "Profil başarıyla güncellendi"),
         "realVideoResult": m2,
         "register": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
         "registrationError": MessageLookupByLibrary.simpleMessage(
             "Kayıt olurken bir hata oluştu"),
         "resendVerificationEmail": MessageLookupByLibrary.simpleMessage(
             "Doğrulama E-postasını Tekrar Gönder"),
+        "save": MessageLookupByLibrary.simpleMessage("Kaydet"),
         "send": MessageLookupByLibrary.simpleMessage("Gönder"),
         "settings": MessageLookupByLibrary.simpleMessage("Ayarlar"),
         "signup": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
@@ -153,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "version": MessageLookupByLibrary.simpleMessage("Sürüm"),
         "weakPassword": MessageLookupByLibrary.simpleMessage("Şifre çok zayıf"),
         "welcome": MessageLookupByLibrary.simpleMessage("Hoş Geldiniz"),
+        "welcomeBack": m3,
         "wrongPassword": MessageLookupByLibrary.simpleMessage("Hatalı şifre"),
         "yourVideo": MessageLookupByLibrary.simpleMessage("Videonuz")
       };

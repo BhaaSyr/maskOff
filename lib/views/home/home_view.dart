@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testvid/controllers/home_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
+import 'package:testvid/controllers/profile/profile_controller.dart';
 import 'package:testvid/views/home/widgets/video_player_widget.dart';
 import 'package:testvid/controllers/auth/auth_controller.dart';
 import 'package:testvid/routes/app_pages.dart';
@@ -15,6 +16,7 @@ class HomeView extends StatelessWidget {
     final VideoController controller = Get.put(VideoController());
     final ThemeController themeController = Get.find<ThemeController>();
     final AuthController authController = Get.find<AuthController>();
+    final ProfileController profileController = Get.put(ProfileController());
     final screenSize = MediaQuery.of(context).size;
 
     return Obx(() {
@@ -61,88 +63,6 @@ class HomeView extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          // Çıkış butonu
-                          GestureDetector(
-                            onTap: () {
-                              Get.dialog(
-                                AlertDialog(
-                                  title: Text(
-                                    S.of(context).logout,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: isDark
-                                          ? Colors.white
-                                          : Colors.black87,
-                                    ),
-                                  ),
-                                  content: Text(
-                                    S.of(context).logoutConfirmation,
-                                    style: TextStyle(
-                                      color: isDark
-                                          ? Colors.white70
-                                          : Colors.black54,
-                                    ),
-                                  ),
-                                  backgroundColor: isDark
-                                      ? const Color(0xFF2D2D44)
-                                      : Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Get.back(),
-                                      child: Text(
-                                        S.of(context).cancel,
-                                        style: TextStyle(
-                                          color: isDark
-                                              ? Colors.white70
-                                              : Colors.black54,
-                                        ),
-                                      ),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Get.back();
-                                        authController.signOut();
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xFF6C63FF),
-                                        foregroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 16,
-                                          vertical: 8,
-                                        ),
-                                      ),
-                                      child: Text(S.of(context).logout),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: isDark
-                                    ? Colors.white.withOpacity(0.1)
-                                    : const Color(0xFF6C63FF).withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Icon(
-                                Icons.logout,
-                                color: isDark
-                                    ? Colors.white70
-                                    : const Color(0xFF6C63FF),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          // Tema değiştirme butonu
                           GestureDetector(
                             onTap: () {
                               print("Tema değiştirme butonu tıklandı");
@@ -168,6 +88,28 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 12),
+                          // Profile butonu
+                          GestureDetector(
+                            onTap: () => Get.toNamed('/profile'),
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: isDark
+                                    ? Colors.white.withOpacity(0.1)
+                                    : const Color(0xFF6C63FF).withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                Icons.person_outline,
+                                color: isDark
+                                    ? Colors.white70
+                                    : const Color(0xFF6C63FF),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          // Tema değiştirme butonu
+
                           // Bilgi butonu
 
                           // Settings button
@@ -193,7 +135,46 @@ class HomeView extends StatelessWidget {
                       ),
                     ],
                   ),
+// Welcome Message
+                  const SizedBox(height: 10),
+                  Obx(() {
+                    final user = authController.user.value;
+                    final profile = profileController.userModel.value;
 
+                    String welcomeText = S.of(context).detectDeepfake;
+
+                    if (user != null) {
+                      // Check if profile has first name
+                      if (profile?.firstName != null &&
+                          profile!.firstName!.isNotEmpty) {
+                        welcomeText =
+                            S.of(context).welcomeBack(profile.firstName!);
+                      }
+                      // Check if Firebase Auth has display name
+                      else if (user.displayName != null &&
+                          user.displayName!.isNotEmpty) {
+                        final firstName = user.displayName!.split(' ').first;
+                        welcomeText = S.of(context).welcomeBack(firstName);
+                      }
+                      // Use email as fallback
+                      else {
+                        final emailName =
+                            user.email?.split('@').first ?? 'User';
+                        welcomeText = S.of(context).welcomeBack(emailName);
+                      }
+                    }
+
+                    return Text(
+                      welcomeText,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: isDark
+                            ? Colors.white.withOpacity(0.8)
+                            : const Color(0xFF555555),
+                      ),
+                    );
+                  }),
                   const SizedBox(height: 10),
                   Text(
                     S.of(context).detectDeepfake,

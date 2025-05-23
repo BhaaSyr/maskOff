@@ -340,5 +340,67 @@
   "logoutError": "Çıkış yapılırken bir hata oluştu",
   "@logoutError": {
     "description": "Logout error message"
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Profile page title"
+  },
+  "firstName": "Ad",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  "lastName": "Soyad",
+  "@lastName": {
+    "description": "Last name field label"
+  },
+  "age": "Yaş",
+  "@age": {
+    "description": "Age field label"
+  },
+  "save": "Kaydet",
+  "@save": {
+    "description": "Save button text"
+  },
+  "firstNameRequired": "Ad alanı zorunludur",
+  "@firstNameRequired": {
+    "description": "First name required validation message"
+  },
+  "lastNameRequired": "Soyad alanı zorunludur",
+  "@lastNameRequired": {
+    "description": "Last name required validation message"
+  },
+  "invalidAge": "Geçerli bir yaş girin (1-150)",
+  "@invalidAge": {
+    "description": "Invalid age validation message"
+  },
+  "profileUpdateSuccess": "Profil başarıyla güncellendi",
+  "@profileUpdateSuccess": {
+    "description": "Profile update success message"
+  },
+  "welcomeBack": "Tekrar hoş geldiniz, {name}!",
+  "@welcomeBack": {
+    "description": "Welcome message with user's name",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Ahmet"
+      }
+    }
+  },
+  "personalInformation": "Kişisel Bilgiler",
+  "@personalInformation": {
+    "description": "Personal information section title"
+  },
+  "firstNameHint": "Adınızı girin",
+  "@firstNameHint": {
+    "description": "First name field hint"
+  },
+  "lastNameHint": "Soyadınızı girin",
+  "@lastNameHint": {
+    "description": "Last name field hint"
+  },
+  "ageHint": "Yaşınızı girin (isteğe bağlı)",
+  "@ageHint": {
+    "description": "Age field hint"
   }
 }

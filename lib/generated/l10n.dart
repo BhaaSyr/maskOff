@@ -859,6 +859,146 @@ class S {
       args: [],
     );
   }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: 'Profile page title',
+      args: [],
+    );
+  }
+
+  /// `First Name`
+  String get firstName {
+    return Intl.message(
+      'First Name',
+      name: 'firstName',
+      desc: 'First name field label',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get lastName {
+    return Intl.message(
+      'Last Name',
+      name: 'lastName',
+      desc: 'Last name field label',
+      args: [],
+    );
+  }
+
+  /// `Age`
+  String get age {
+    return Intl.message(
+      'Age',
+      name: 'age',
+      desc: 'Age field label',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: 'Save button text',
+      args: [],
+    );
+  }
+
+  /// `First name is required`
+  String get firstNameRequired {
+    return Intl.message(
+      'First name is required',
+      name: 'firstNameRequired',
+      desc: 'First name required validation message',
+      args: [],
+    );
+  }
+
+  /// `Last name is required`
+  String get lastNameRequired {
+    return Intl.message(
+      'Last name is required',
+      name: 'lastNameRequired',
+      desc: 'Last name required validation message',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid age (1-150)`
+  String get invalidAge {
+    return Intl.message(
+      'Please enter a valid age (1-150)',
+      name: 'invalidAge',
+      desc: 'Invalid age validation message',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get profileUpdateSuccess {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'profileUpdateSuccess',
+      desc: 'Profile update success message',
+      args: [],
+    );
+  }
+
+  /// `Welcome back, {name}!`
+  String welcomeBack(String name) {
+    return Intl.message(
+      'Welcome back, $name!',
+      name: 'welcomeBack',
+      desc: 'Welcome message with user\'s name',
+      args: [name],
+    );
+  }
+
+  /// `Personal Information`
+  String get personalInformation {
+    return Intl.message(
+      'Personal Information',
+      name: 'personalInformation',
+      desc: 'Personal information section title',
+      args: [],
+    );
+  }
+
+  /// `Enter your first name`
+  String get firstNameHint {
+    return Intl.message(
+      'Enter your first name',
+      name: 'firstNameHint',
+      desc: 'First name field hint',
+      args: [],
+    );
+  }
+
+  /// `Enter your last name`
+  String get lastNameHint {
+    return Intl.message(
+      'Enter your last name',
+      name: 'lastNameHint',
+      desc: 'Last name field hint',
+      args: [],
+    );
+  }
+
+  /// `Enter your age (optional)`
+  String get ageHint {
+    return Intl.message(
+      'Enter your age (optional)',
+      name: 'ageHint',
+      desc: 'Age field hint',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

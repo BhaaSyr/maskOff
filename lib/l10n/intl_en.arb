@@ -340,5 +340,67 @@
   "logoutError": "An error occurred during logout",
   "@logoutError": {
     "description": "Logout error message"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile page title"
+  },
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  "lastName": "Last Name",
+  "@lastName": {
+    "description": "Last name field label"
+  },
+  "age": "Age",
+  "@age": {
+    "description": "Age field label"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  "firstNameRequired": "First name is required",
+  "@firstNameRequired": {
+    "description": "First name required validation message"
+  },
+  "lastNameRequired": "Last name is required",
+  "@lastNameRequired": {
+    "description": "Last name required validation message"
+  },
+  "invalidAge": "Please enter a valid age (1-150)",
+  "@invalidAge": {
+    "description": "Invalid age validation message"
+  },
+  "profileUpdateSuccess": "Profile updated successfully",
+  "@profileUpdateSuccess": {
+    "description": "Profile update success message"
+  },
+  "welcomeBack": "Welcome back, {name}!",
+  "@welcomeBack": {
+    "description": "Welcome message with user's name",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "John"
+      }
+    }
+  },
+  "personalInformation": "Personal Information",
+  "@personalInformation": {
+    "description": "Personal information section title"
+  },
+  "firstNameHint": "Enter your first name",
+  "@firstNameHint": {
+    "description": "First name field hint"
+  },
+  "lastNameHint": "Enter your last name",
+  "@lastNameHint": {
+    "description": "Last name field hint"
+  },
+  "ageHint": "Enter your age (optional)",
+  "@ageHint": {
+    "description": "Age field hint"
   }
 }

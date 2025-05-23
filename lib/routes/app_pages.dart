@@ -6,6 +6,7 @@ import 'package:testvid/bindings/splash_binding.dart';
 import 'package:testvid/views/auth/login_view.dart';
 import 'package:testvid/views/auth/register_view.dart';
 import 'package:testvid/views/home/home_view.dart';
+import 'package:testvid/views/profile/profile_view.dart';
 import 'package:testvid/views/result/result_view.dart';
 import 'package:testvid/views/settings_view.dart';
 import 'package:testvid/views/splash/splash_screen.dart';
@@ -43,6 +44,10 @@ class AppPages {
       name: Routes.SETTINGS,
       page: () => const SettingsView(),
     ),
+    GetPage(
+      name: Routes.PROFILE,
+      page: () => const ProfileView(),
+    ),
   ];
 }
 
@@ -54,4 +59,5 @@ abstract class Routes {
   static const HOME = '/home';
   static const RESULT = '/result';
   static const SETTINGS = '/settings';
+  static const PROFILE = '/profile';
 }
