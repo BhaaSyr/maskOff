@@ -90,15 +90,15 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
 
                         // Title
-                        // Text(
-                        //   S.of(context).register,
-                        //   style: TextStyle(
-                        //     fontSize: 20,
-                        //     fontWeight: FontWeight.bold,
-                        //     color:
-                        //         isDark ? Colors.white : const Color(0xFF333333),
-                        //   ),
-                        // ),
+                        Text(
+                          S.of(context).register,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                isDark ? Colors.white : const Color(0xFF333333),
+                          ),
+                        ),
 
                         // Controls row
                         Row(

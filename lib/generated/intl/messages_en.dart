@@ -23,7 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(score) =>
       "This video is likely a deepfake with a probability of %${score}.";
 
-  static String m1(score) =>
+  static String m1(email) =>
+      "Password reset link has been sent to ${email}.\n\nPlease check your email and click the link to reset your password.";
+
+  static String m2(score) =>
       "This video likely appears real with a probability of %${score}.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -43,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confidence Score"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "confirmPasswordEmpty": MessageLookupByLibrary.simpleMessage(
+            "Confirm password field cannot be empty"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Re-enter your password"),
         "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
@@ -53,54 +58,110 @@ class MessageLookup extends MessageLookupByLibrary {
         "detectDeepfake": MessageLookupByLibrary.simpleMessage(
             "Detect deepfake videos with advanced AI technology"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "This email address is already in use"),
+        "emailFieldEmpty":
+            MessageLookupByLibrary.simpleMessage("Email field cannot be empty"),
         "emailHint":
             MessageLookupByLibrary.simpleMessage("Enter your email address"),
+        "emailVerificationRequired":
+            MessageLookupByLibrary.simpleMessage("Email Verification Required"),
         "enterInfo": MessageLookupByLibrary.simpleMessage(
             "Please enter your information"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "fullNameHint":
             MessageLookupByLibrary.simpleMessage("Enter your full name"),
+        "googleLoginError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while signing in with Google"),
+        "googleLoginSuccess": MessageLookupByLibrary.simpleMessage(
+            "Successfully signed in with Google account"),
         "haveAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
+        "invalidEmail": MessageLookupByLibrary.simpleMessage(
+            "Please enter a valid email address"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred during login"),
+        "loginSuccessful":
+            MessageLookupByLibrary.simpleMessage("Login successful"),
         "loginWithGoogle":
             MessageLookupByLibrary.simpleMessage("Sign in with Google"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to logout?"),
+        "logoutError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred during logout"),
+        "nameFieldEmpty": MessageLookupByLibrary.simpleMessage(
+            "Full name field cannot be empty"),
         "noAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "operationNotAllowed": MessageLookupByLibrary.simpleMessage(
+            "Email/password registration is not enabled"),
         "or": MessageLookupByLibrary.simpleMessage("OR"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordFieldEmpty": MessageLookupByLibrary.simpleMessage(
+            "Password field cannot be empty"),
         "passwordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "passwordHintRegister": MessageLookupByLibrary.simpleMessage(
             "Enter password (minimum 6 characters)"),
+        "passwordMinLength": MessageLookupByLibrary.simpleMessage(
+            "Password must be at least 6 characters"),
         "passwordReset": MessageLookupByLibrary.simpleMessage("Password Reset"),
+        "passwordResetEmailSent":
+            MessageLookupByLibrary.simpleMessage("Password Reset Email Sent"),
+        "passwordResetEmailSentMessage": m1,
+        "passwordResetError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred during password reset"),
         "passwordResetInfo": MessageLookupByLibrary.simpleMessage(
             "Enter your email for a password reset link"),
+        "passwordsDoNotMatch":
+            MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "pleaseUploadFirst":
             MessageLookupByLibrary.simpleMessage("Please upload a video first"),
+        "pleaseVerifyEmail": MessageLookupByLibrary.simpleMessage(
+            "Please verify your email to access your account"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
-        "realVideoResult": m1,
+        "realVideoResult": m2,
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "registrationError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred during registration"),
+        "resendVerificationEmail":
+            MessageLookupByLibrary.simpleMessage("Resend Verification Email"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signup": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "success": MessageLookupByLibrary.simpleMessage("Success"),
         "tapUploadButton": MessageLookupByLibrary.simpleMessage(
             "Tap the Upload button below to select a video"),
         "termsOfService":
             MessageLookupByLibrary.simpleMessage("Terms of Service"),
+        "tooManyRequests": MessageLookupByLibrary.simpleMessage(
+            "Too many requests. Please try again later"),
         "uploadRequired":
             MessageLookupByLibrary.simpleMessage("Upload Required"),
         "uploadToBegin":
             MessageLookupByLibrary.simpleMessage("Upload a video to begin"),
         "uploadVideo": MessageLookupByLibrary.simpleMessage("Upload Video"),
+        "userDisabled":
+            MessageLookupByLibrary.simpleMessage("This user has been disabled"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage(
+            "No user found with this email"),
+        "verificationEmailSent":
+            MessageLookupByLibrary.simpleMessage("Email Verification Sent"),
+        "verificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
+            "We have sent a verification link to your email. Please check your inbox."),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "weakPassword":
+            MessageLookupByLibrary.simpleMessage("Password is too weak"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "wrongPassword":
+            MessageLookupByLibrary.simpleMessage("Incorrect password"),
         "yourVideo": MessageLookupByLibrary.simpleMessage("Your Video")
       };
 }

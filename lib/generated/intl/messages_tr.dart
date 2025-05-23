@@ -22,7 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(score) => "Bu video %${score} olasılıkla deepfake içeriyor.";
 
-  static String m1(score) => "Bu video %${score} olasılıkla gerçek görünüyor.";
+  static String m1(email) =>
+      "Şifre sıfırlama bağlantısı ${email} adresine gönderildi.\n\nLütfen e-posta kutunuzu kontrol edin ve bağlantıya tıklayarak şifrenizi sıfırlayın.";
+
+  static String m2(score) => "Bu video %${score} olasılıkla gerçek görünüyor.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
         "confidenceScore": MessageLookupByLibrary.simpleMessage("Güven Puanı"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("Şifre Tekrar"),
+        "confirmPasswordEmpty": MessageLookupByLibrary.simpleMessage(
+            "Şifre tekrar alanı boş bırakılamaz"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Şifrenizi tekrar girin"),
         "createAccount": MessageLookupByLibrary.simpleMessage("Hesap Oluştur"),
@@ -48,53 +53,107 @@ class MessageLookup extends MessageLookupByLibrary {
         "detectDeepfake": MessageLookupByLibrary.simpleMessage(
             "Gelişmiş yapay zeka teknolojisiyle deepfake videolarını tespit edin"),
         "email": MessageLookupByLibrary.simpleMessage("E-posta"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Bu e-posta adresi zaten kullanımda"),
+        "emailFieldEmpty": MessageLookupByLibrary.simpleMessage(
+            "E-posta alanı boş bırakılamaz"),
         "emailHint":
             MessageLookupByLibrary.simpleMessage("E-posta adresinizi girin"),
+        "emailVerificationRequired":
+            MessageLookupByLibrary.simpleMessage("E-posta Doğrulaması Gerekli"),
         "enterInfo":
             MessageLookupByLibrary.simpleMessage("Lütfen bilgilerinizi girin"),
+        "error": MessageLookupByLibrary.simpleMessage("Hata"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Şifremi Unuttum"),
         "fullName": MessageLookupByLibrary.simpleMessage("Adınız Soyadınız"),
         "fullNameHint":
             MessageLookupByLibrary.simpleMessage("Adınızı ve soyadınızı girin"),
+        "googleLoginError": MessageLookupByLibrary.simpleMessage(
+            "Google ile giriş yapılırken bir hata oluştu"),
+        "googleLoginSuccess": MessageLookupByLibrary.simpleMessage(
+            "Google hesabınız ile giriş yapıldı"),
         "haveAccount":
             MessageLookupByLibrary.simpleMessage("Zaten bir hesabınız var mı?"),
+        "invalidEmail": MessageLookupByLibrary.simpleMessage(
+            "Geçerli bir e-posta adresi girin"),
         "language": MessageLookupByLibrary.simpleMessage("Dil"),
         "login": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
+        "loginError": MessageLookupByLibrary.simpleMessage(
+            "Giriş yapılırken bir hata oluştu"),
+        "loginSuccessful": MessageLookupByLibrary.simpleMessage(
+            "Giriş başarıyla gerçekleştirildi"),
         "loginWithGoogle":
             MessageLookupByLibrary.simpleMessage("Google ile Giriş Yap"),
         "logout": MessageLookupByLibrary.simpleMessage("Çıkış Yap"),
         "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Çıkış yapmak istediğinizden emin misiniz?"),
+        "logoutError": MessageLookupByLibrary.simpleMessage(
+            "Çıkış yapılırken bir hata oluştu"),
+        "nameFieldEmpty": MessageLookupByLibrary.simpleMessage(
+            "Ad Soyad alanı boş bırakılamaz"),
         "noAccount": MessageLookupByLibrary.simpleMessage("Hesabınız yok mu?"),
+        "ok": MessageLookupByLibrary.simpleMessage("Tamam"),
+        "operationNotAllowed": MessageLookupByLibrary.simpleMessage(
+            "E-posta/şifre ile kayıt etkinleştirilmemiş"),
         "or": MessageLookupByLibrary.simpleMessage("VEYA"),
         "password": MessageLookupByLibrary.simpleMessage("Şifre"),
+        "passwordFieldEmpty":
+            MessageLookupByLibrary.simpleMessage("Şifre alanı boş bırakılamaz"),
         "passwordHint": MessageLookupByLibrary.simpleMessage("Şifrenizi girin"),
         "passwordHintRegister": MessageLookupByLibrary.simpleMessage(
             "Şifrenizi girin (en az 6 karakter)"),
+        "passwordMinLength": MessageLookupByLibrary.simpleMessage(
+            "Şifre en az 6 karakter olmalıdır"),
         "passwordReset":
             MessageLookupByLibrary.simpleMessage("Şifre Sıfırlama"),
+        "passwordResetEmailSent": MessageLookupByLibrary.simpleMessage(
+            "Şifre Sıfırlama E-postası Gönderildi"),
+        "passwordResetEmailSentMessage": m1,
+        "passwordResetError": MessageLookupByLibrary.simpleMessage(
+            "Şifre sıfırlama işlemi sırasında bir hata oluştu"),
         "passwordResetInfo": MessageLookupByLibrary.simpleMessage(
             "Şifre sıfırlama bağlantısı için e-posta adresinizi girin"),
+        "passwordsDoNotMatch":
+            MessageLookupByLibrary.simpleMessage("Şifreler eşleşmiyor"),
         "pleaseUploadFirst": MessageLookupByLibrary.simpleMessage(
             "Lütfen önce bir video yükleyin"),
+        "pleaseVerifyEmail": MessageLookupByLibrary.simpleMessage(
+            "Hesabınıza erişmek için lütfen e-postanızı doğrulayın"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Gizlilik Politikası"),
-        "realVideoResult": m1,
+        "realVideoResult": m2,
         "register": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
+        "registrationError": MessageLookupByLibrary.simpleMessage(
+            "Kayıt olurken bir hata oluştu"),
+        "resendVerificationEmail": MessageLookupByLibrary.simpleMessage(
+            "Doğrulama E-postasını Tekrar Gönder"),
         "send": MessageLookupByLibrary.simpleMessage("Gönder"),
         "settings": MessageLookupByLibrary.simpleMessage("Ayarlar"),
         "signup": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
+        "success": MessageLookupByLibrary.simpleMessage("Başarılı"),
         "tapUploadButton": MessageLookupByLibrary.simpleMessage(
             "Video seçmek için aşağıdaki Yükle butonuna dokunun"),
         "termsOfService":
             MessageLookupByLibrary.simpleMessage("Kullanım Koşulları"),
+        "tooManyRequests": MessageLookupByLibrary.simpleMessage(
+            "Çok fazla istek yapıldı. Lütfen daha sonra tekrar deneyin"),
         "uploadRequired": MessageLookupByLibrary.simpleMessage("Video Gerekli"),
         "uploadToBegin": MessageLookupByLibrary.simpleMessage(
             "Başlamak için bir video yükleyin"),
         "uploadVideo": MessageLookupByLibrary.simpleMessage("Video Yükle"),
+        "userDisabled": MessageLookupByLibrary.simpleMessage(
+            "Bu kullanıcı devre dışı bırakılmış"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage(
+            "Bu e-posta ile kayıtlı kullanıcı bulunamadı"),
+        "verificationEmailSent": MessageLookupByLibrary.simpleMessage(
+            "Doğrulama E-postası Gönderildi"),
+        "verificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
+            "E-posta adresinize doğrulama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin."),
         "version": MessageLookupByLibrary.simpleMessage("Sürüm"),
+        "weakPassword": MessageLookupByLibrary.simpleMessage("Şifre çok zayıf"),
         "welcome": MessageLookupByLibrary.simpleMessage("Hoş Geldiniz"),
+        "wrongPassword": MessageLookupByLibrary.simpleMessage("Hatalı şifre"),
         "yourVideo": MessageLookupByLibrary.simpleMessage("Videonuz")
       };
 }

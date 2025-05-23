@@ -210,5 +210,135 @@
   "version": "Sürüm",
   "@version": {
     "description": "App version label"
+  },
+  "emailVerificationRequired": "E-posta Doğrulaması Gerekli",
+  "@emailVerificationRequired": {
+    "description": "Email verification required title"
+  },
+  "pleaseVerifyEmail": "Hesabınıza erişmek için lütfen e-postanızı doğrulayın",
+  "@pleaseVerifyEmail": {
+    "description": "Email verification message"
+  },
+  "resendVerificationEmail": "Doğrulama E-postasını Tekrar Gönder",
+  "@resendVerificationEmail": {
+    "description": "Button to resend verification email"
+  },
+  "verificationEmailSent": "Doğrulama E-postası Gönderildi",
+  "@verificationEmailSent": {
+    "description": "Verification email sent title"
+  },
+  "verificationEmailSentMessage": "E-posta adresinize doğrulama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin.",
+  "@verificationEmailSentMessage": {
+    "description": "Verification email sent message"
+  },
+  "emailFieldEmpty": "E-posta alanı boş bırakılamaz",
+  "@emailFieldEmpty": {
+    "description": "Email field empty validation message"
+  },
+  "invalidEmail": "Geçerli bir e-posta adresi girin",
+  "@invalidEmail": {
+    "description": "Invalid email validation message"
+  },
+  "passwordFieldEmpty": "Şifre alanı boş bırakılamaz",
+  "@passwordFieldEmpty": {
+    "description": "Password field empty validation message"
+  },
+  "passwordMinLength": "Şifre en az 6 karakter olmalıdır",
+  "@passwordMinLength": {
+    "description": "Password minimum length validation message"
+  },
+  "nameFieldEmpty": "Ad Soyad alanı boş bırakılamaz",
+  "@nameFieldEmpty": {
+    "description": "Name field empty validation message"
+  },
+  "confirmPasswordEmpty": "Şifre tekrar alanı boş bırakılamaz",
+  "@confirmPasswordEmpty": {
+    "description": "Confirm password field empty validation message"
+  },
+  "passwordsDoNotMatch": "Şifreler eşleşmiyor",
+  "@passwordsDoNotMatch": {
+    "description": "Passwords mismatch validation message"
+  },
+  "success": "Başarılı",
+  "@success": {
+    "description": "Success message title"
+  },
+  "error": "Hata",
+  "@error": {
+    "description": "Error message title"
+  },
+  "loginSuccessful": "Giriş başarıyla gerçekleştirildi",
+  "@loginSuccessful": {
+    "description": "Login successful message"
+  },
+  "registrationError": "Kayıt olurken bir hata oluştu",
+  "@registrationError": {
+    "description": "Registration error message"
+  },
+  "loginError": "Giriş yapılırken bir hata oluştu",
+  "@loginError": {
+    "description": "Login error message"
+  },
+  "emailAlreadyInUse": "Bu e-posta adresi zaten kullanımda",
+  "@emailAlreadyInUse": {
+    "description": "Email already in use error message"
+  },
+  "weakPassword": "Şifre çok zayıf",
+  "@weakPassword": {
+    "description": "Weak password error message"
+  },
+  "operationNotAllowed": "E-posta/şifre ile kayıt etkinleştirilmemiş",
+  "@operationNotAllowed": {
+    "description": "Operation not allowed error message"
+  },
+  "userNotFound": "Bu e-posta ile kayıtlı kullanıcı bulunamadı",
+  "@userNotFound": {
+    "description": "User not found error message"
+  },
+  "wrongPassword": "Hatalı şifre",
+  "@wrongPassword": {
+    "description": "Wrong password error message"
+  },
+  "userDisabled": "Bu kullanıcı devre dışı bırakılmış",
+  "@userDisabled": {
+    "description": "User disabled error message"
+  },
+  "passwordResetEmailSent": "Şifre Sıfırlama E-postası Gönderildi",
+  "@passwordResetEmailSent": {
+    "description": "Password reset email sent title"
+  },
+  "passwordResetEmailSentMessage": "Şifre sıfırlama bağlantısı {email} adresine gönderildi.\n\nLütfen e-posta kutunuzu kontrol edin ve bağlantıya tıklayarak şifrenizi sıfırlayın.",
+  "@passwordResetEmailSentMessage": {
+    "description": "Password reset email sent message",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "user@example.com"
+      }
+    }
+  },
+  "ok": "Tamam",
+  "@ok": {
+    "description": "OK button text"
+  },
+  "passwordResetError": "Şifre sıfırlama işlemi sırasında bir hata oluştu",
+  "@passwordResetError": {
+    "description": "Password reset error message"
+  },
+  "tooManyRequests": "Çok fazla istek yapıldı. Lütfen daha sonra tekrar deneyin",
+  "@tooManyRequests": {
+    "description": "Too many requests error message"
+  },
+  "googleLoginSuccess": "Google hesabınız ile giriş yapıldı",
+  "@googleLoginSuccess": {
+    "description": "Google login success message"
+  },
+  "googleLoginError": "Google ile giriş yapılırken bir hata oluştu",
+  "@googleLoginError": {
+    "description": "Google login error message"
+  },
+  "logoutError": "Çıkış yapılırken bir hata oluştu",
+  "@logoutError": {
+    "description": "Logout error message"
   }
 }

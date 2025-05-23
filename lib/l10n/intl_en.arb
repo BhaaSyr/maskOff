@@ -210,5 +210,135 @@
   "version": "Version",
   "@version": {
     "description": "App version label"
+  },
+  "emailVerificationRequired": "Email Verification Required",
+  "@emailVerificationRequired": {
+    "description": "Email verification required title"
+  },
+  "pleaseVerifyEmail": "Please verify your email to access your account",
+  "@pleaseVerifyEmail": {
+    "description": "Email verification message"
+  },
+  "resendVerificationEmail": "Resend Verification Email",
+  "@resendVerificationEmail": {
+    "description": "Button to resend verification email"
+  },
+  "verificationEmailSent": "Email Verification Sent",
+  "@verificationEmailSent": {
+    "description": "Verification email sent title"
+  },
+  "verificationEmailSentMessage": "We have sent a verification link to your email. Please check your inbox.",
+  "@verificationEmailSentMessage": {
+    "description": "Verification email sent message"
+  },
+  "emailFieldEmpty": "Email field cannot be empty",
+  "@emailFieldEmpty": {
+    "description": "Email field empty validation message"
+  },
+  "invalidEmail": "Please enter a valid email address",
+  "@invalidEmail": {
+    "description": "Invalid email validation message"
+  },
+  "passwordFieldEmpty": "Password field cannot be empty",
+  "@passwordFieldEmpty": {
+    "description": "Password field empty validation message"
+  },
+  "passwordMinLength": "Password must be at least 6 characters",
+  "@passwordMinLength": {
+    "description": "Password minimum length validation message"
+  },
+  "nameFieldEmpty": "Full name field cannot be empty",
+  "@nameFieldEmpty": {
+    "description": "Name field empty validation message"
+  },
+  "confirmPasswordEmpty": "Confirm password field cannot be empty",
+  "@confirmPasswordEmpty": {
+    "description": "Confirm password field empty validation message"
+  },
+  "passwordsDoNotMatch": "Passwords do not match",
+  "@passwordsDoNotMatch": {
+    "description": "Passwords mismatch validation message"
+  },
+  "success": "Success",
+  "@success": {
+    "description": "Success message title"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error message title"
+  },
+  "loginSuccessful": "Login successful",
+  "@loginSuccessful": {
+    "description": "Login successful message"
+  },
+  "registrationError": "An error occurred during registration",
+  "@registrationError": {
+    "description": "Registration error message"
+  },
+  "loginError": "An error occurred during login",
+  "@loginError": {
+    "description": "Login error message"
+  },
+  "emailAlreadyInUse": "This email address is already in use",
+  "@emailAlreadyInUse": {
+    "description": "Email already in use error message"
+  },
+  "weakPassword": "Password is too weak",
+  "@weakPassword": {
+    "description": "Weak password error message"
+  },
+  "operationNotAllowed": "Email/password registration is not enabled",
+  "@operationNotAllowed": {
+    "description": "Operation not allowed error message"
+  },
+  "userNotFound": "No user found with this email",
+  "@userNotFound": {
+    "description": "User not found error message"
+  },
+  "wrongPassword": "Incorrect password",
+  "@wrongPassword": {
+    "description": "Wrong password error message"
+  },
+  "userDisabled": "This user has been disabled",
+  "@userDisabled": {
+    "description": "User disabled error message"
+  },
+  "passwordResetEmailSent": "Password Reset Email Sent",
+  "@passwordResetEmailSent": {
+    "description": "Password reset email sent title"
+  },
+  "passwordResetEmailSentMessage": "Password reset link has been sent to {email}.\n\nPlease check your email and click the link to reset your password.",
+  "@passwordResetEmailSentMessage": {
+    "description": "Password reset email sent message",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "user@example.com"
+      }
+    }
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  "passwordResetError": "An error occurred during password reset",
+  "@passwordResetError": {
+    "description": "Password reset error message"
+  },
+  "tooManyRequests": "Too many requests. Please try again later",
+  "@tooManyRequests": {
+    "description": "Too many requests error message"
+  },
+  "googleLoginSuccess": "Successfully signed in with Google account",
+  "@googleLoginSuccess": {
+    "description": "Google login success message"
+  },
+  "googleLoginError": "An error occurred while signing in with Google",
+  "@googleLoginError": {
+    "description": "Google login error message"
+  },
+  "logoutError": "An error occurred during logout",
+  "@logoutError": {
+    "description": "Logout error message"
   }
 }

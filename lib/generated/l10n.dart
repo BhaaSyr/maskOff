@@ -549,6 +549,316 @@ class S {
       args: [],
     );
   }
+
+  /// `Email Verification Required`
+  String get emailVerificationRequired {
+    return Intl.message(
+      'Email Verification Required',
+      name: 'emailVerificationRequired',
+      desc: 'Email verification required title',
+      args: [],
+    );
+  }
+
+  /// `Please verify your email to access your account`
+  String get pleaseVerifyEmail {
+    return Intl.message(
+      'Please verify your email to access your account',
+      name: 'pleaseVerifyEmail',
+      desc: 'Email verification message',
+      args: [],
+    );
+  }
+
+  /// `Resend Verification Email`
+  String get resendVerificationEmail {
+    return Intl.message(
+      'Resend Verification Email',
+      name: 'resendVerificationEmail',
+      desc: 'Button to resend verification email',
+      args: [],
+    );
+  }
+
+  /// `Email Verification Sent`
+  String get verificationEmailSent {
+    return Intl.message(
+      'Email Verification Sent',
+      name: 'verificationEmailSent',
+      desc: 'Verification email sent title',
+      args: [],
+    );
+  }
+
+  /// `We have sent a verification link to your email. Please check your inbox.`
+  String get verificationEmailSentMessage {
+    return Intl.message(
+      'We have sent a verification link to your email. Please check your inbox.',
+      name: 'verificationEmailSentMessage',
+      desc: 'Verification email sent message',
+      args: [],
+    );
+  }
+
+  /// `Email field cannot be empty`
+  String get emailFieldEmpty {
+    return Intl.message(
+      'Email field cannot be empty',
+      name: 'emailFieldEmpty',
+      desc: 'Email field empty validation message',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid email address`
+  String get invalidEmail {
+    return Intl.message(
+      'Please enter a valid email address',
+      name: 'invalidEmail',
+      desc: 'Invalid email validation message',
+      args: [],
+    );
+  }
+
+  /// `Password field cannot be empty`
+  String get passwordFieldEmpty {
+    return Intl.message(
+      'Password field cannot be empty',
+      name: 'passwordFieldEmpty',
+      desc: 'Password field empty validation message',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 6 characters`
+  String get passwordMinLength {
+    return Intl.message(
+      'Password must be at least 6 characters',
+      name: 'passwordMinLength',
+      desc: 'Password minimum length validation message',
+      args: [],
+    );
+  }
+
+  /// `Full name field cannot be empty`
+  String get nameFieldEmpty {
+    return Intl.message(
+      'Full name field cannot be empty',
+      name: 'nameFieldEmpty',
+      desc: 'Name field empty validation message',
+      args: [],
+    );
+  }
+
+  /// `Confirm password field cannot be empty`
+  String get confirmPasswordEmpty {
+    return Intl.message(
+      'Confirm password field cannot be empty',
+      name: 'confirmPasswordEmpty',
+      desc: 'Confirm password field empty validation message',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get passwordsDoNotMatch {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'passwordsDoNotMatch',
+      desc: 'Passwords mismatch validation message',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message(
+      'Success',
+      name: 'success',
+      desc: 'Success message title',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message(
+      'Error',
+      name: 'error',
+      desc: 'Error message title',
+      args: [],
+    );
+  }
+
+  /// `Login successful`
+  String get loginSuccessful {
+    return Intl.message(
+      'Login successful',
+      name: 'loginSuccessful',
+      desc: 'Login successful message',
+      args: [],
+    );
+  }
+
+  /// `An error occurred during registration`
+  String get registrationError {
+    return Intl.message(
+      'An error occurred during registration',
+      name: 'registrationError',
+      desc: 'Registration error message',
+      args: [],
+    );
+  }
+
+  /// `An error occurred during login`
+  String get loginError {
+    return Intl.message(
+      'An error occurred during login',
+      name: 'loginError',
+      desc: 'Login error message',
+      args: [],
+    );
+  }
+
+  /// `This email address is already in use`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'This email address is already in use',
+      name: 'emailAlreadyInUse',
+      desc: 'Email already in use error message',
+      args: [],
+    );
+  }
+
+  /// `Password is too weak`
+  String get weakPassword {
+    return Intl.message(
+      'Password is too weak',
+      name: 'weakPassword',
+      desc: 'Weak password error message',
+      args: [],
+    );
+  }
+
+  /// `Email/password registration is not enabled`
+  String get operationNotAllowed {
+    return Intl.message(
+      'Email/password registration is not enabled',
+      name: 'operationNotAllowed',
+      desc: 'Operation not allowed error message',
+      args: [],
+    );
+  }
+
+  /// `No user found with this email`
+  String get userNotFound {
+    return Intl.message(
+      'No user found with this email',
+      name: 'userNotFound',
+      desc: 'User not found error message',
+      args: [],
+    );
+  }
+
+  /// `Incorrect password`
+  String get wrongPassword {
+    return Intl.message(
+      'Incorrect password',
+      name: 'wrongPassword',
+      desc: 'Wrong password error message',
+      args: [],
+    );
+  }
+
+  /// `This user has been disabled`
+  String get userDisabled {
+    return Intl.message(
+      'This user has been disabled',
+      name: 'userDisabled',
+      desc: 'User disabled error message',
+      args: [],
+    );
+  }
+
+  /// `Password Reset Email Sent`
+  String get passwordResetEmailSent {
+    return Intl.message(
+      'Password Reset Email Sent',
+      name: 'passwordResetEmailSent',
+      desc: 'Password reset email sent title',
+      args: [],
+    );
+  }
+
+  /// `Password reset link has been sent to {email}.\n\nPlease check your email and click the link to reset your password.`
+  String passwordResetEmailSentMessage(String email) {
+    return Intl.message(
+      'Password reset link has been sent to $email.\n\nPlease check your email and click the link to reset your password.',
+      name: 'passwordResetEmailSentMessage',
+      desc: 'Password reset email sent message',
+      args: [email],
+    );
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: 'OK button text',
+      args: [],
+    );
+  }
+
+  /// `An error occurred during password reset`
+  String get passwordResetError {
+    return Intl.message(
+      'An error occurred during password reset',
+      name: 'passwordResetError',
+      desc: 'Password reset error message',
+      args: [],
+    );
+  }
+
+  /// `Too many requests. Please try again later`
+  String get tooManyRequests {
+    return Intl.message(
+      'Too many requests. Please try again later',
+      name: 'tooManyRequests',
+      desc: 'Too many requests error message',
+      args: [],
+    );
+  }
+
+  /// `Successfully signed in with Google account`
+  String get googleLoginSuccess {
+    return Intl.message(
+      'Successfully signed in with Google account',
+      name: 'googleLoginSuccess',
+      desc: 'Google login success message',
+      args: [],
+    );
+  }
+
+  /// `An error occurred while signing in with Google`
+  String get googleLoginError {
+    return Intl.message(
+      'An error occurred while signing in with Google',
+      name: 'googleLoginError',
+      desc: 'Google login error message',
+      args: [],
+    );
+  }
+
+  /// `An error occurred during logout`
+  String get logoutError {
+    return Intl.message(
+      'An error occurred during logout',
+      name: 'logoutError',
+      desc: 'Logout error message',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

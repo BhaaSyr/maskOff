@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:testvid/generated/l10n.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -92,12 +93,16 @@ class AuthController extends GetxController {
 
   // Reset password functionality
   Future<String?> resetPassword(String email) async {
+    // Get localization context
+    final context = Get.context;
+    if (context == null) return 'Context not available';
+
     if (email.isEmpty) {
-      return 'E-posta alanı boş bırakılamaz';
+      return S.of(context).emailFieldEmpty;
     }
 
     if (!GetUtils.isEmail(email)) {
-      return 'Geçerli bir e-posta adresi girin';
+      return S.of(context).invalidEmail;
     }
 
     try {
@@ -116,15 +121,15 @@ class AuthController extends GetxController {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          title: const Text(
-            'Şifre Sıfırlama E-postası Gönderildi',
-            style: TextStyle(
+          title: Text(
+            S.of(context).passwordResetEmailSent,
+            style: const TextStyle(
               color: Color(0xFF6C63FF),
               fontWeight: FontWeight.bold,
             ),
           ),
           content: Text(
-            'Şifre sıfırlama bağlantısı $email adresine gönderildi.\n\nLütfen e-posta kutunuzu kontrol edin ve bağlantıya tıklayarak şifrenizi sıfırlayın.',
+            S.of(context).passwordResetEmailSentMessage(email),
             style: TextStyle(
               fontSize: 16,
               color: Get.isDarkMode ? Colors.white70 : const Color(0xFF666666),
@@ -133,9 +138,9 @@ class AuthController extends GetxController {
           actions: [
             TextButton(
               onPressed: () => Get.back(),
-              child: const Text(
-                'Tamam',
-                style: TextStyle(
+              child: Text(
+                S.of(context).ok,
+                style: const TextStyle(
                   color: Color(0xFF6C63FF),
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -147,24 +152,23 @@ class AuthController extends GetxController {
       );
       return null; // No error
     } on FirebaseAuthException catch (e) {
-      String errorMessage = 'Şifre sıfırlama işlemi sırasında bir hata oluştu';
+      String errorMessage = S.of(context).passwordResetError;
 
       switch (e.code) {
         case 'invalid-email':
-          errorMessage = 'Geçersiz e-posta adresi';
+          errorMessage = S.of(context).invalidEmail;
           break;
         case 'user-not-found':
-          errorMessage = 'Bu e-posta ile kayıtlı kullanıcı bulunamadı';
+          errorMessage = S.of(context).userNotFound;
           break;
         case 'too-many-requests':
-          errorMessage =
-              'Çok fazla istek yapıldı. Lütfen daha sonra tekrar deneyin';
+          errorMessage = S.of(context).tooManyRequests;
           break;
       }
 
       return errorMessage;
     } catch (e) {
-      return 'Şifre sıfırlama işlemi sırasında bir hata oluştu: ${e.toString()}';
+      return '${S.of(context).passwordResetError}: ${e.toString()}';
     } finally {
       isResettingPassword.value = false;
     }
@@ -256,21 +260,25 @@ class AuthController extends GetxController {
   bool _validateLoginForm() {
     bool isValid = true;
 
+    // Get localization context
+    final context = Get.context;
+    if (context == null) return false;
+
     // Email validation
     if (emailController.text.isEmpty) {
-      emailError.value = 'E-posta alanı boş bırakılamaz';
+      emailError.value = S.of(context).emailFieldEmpty;
       isValid = false;
     } else if (!GetUtils.isEmail(emailController.text)) {
-      emailError.value = 'Geçerli bir e-posta adresi girin';
+      emailError.value = S.of(context).invalidEmail;
       isValid = false;
     }
 
     // Password validation
     if (passwordController.text.isEmpty) {
-      passwordError.value = 'Şifre alanı boş bırakılamaz';
+      passwordError.value = S.of(context).passwordFieldEmpty;
       isValid = false;
     } else if (passwordController.text.length < 6) {
-      passwordError.value = 'Şifre en az 6 karakter olmalıdır';
+      passwordError.value = S.of(context).passwordMinLength;
       isValid = false;
     }
 
@@ -280,36 +288,40 @@ class AuthController extends GetxController {
   bool _validateRegisterForm() {
     bool isValid = true;
 
+    // Get localization context
+    final context = Get.context;
+    if (context == null) return false;
+
     // Name validation
     if (nameController.text.isEmpty) {
-      nameError.value = 'Ad Soyad alanı boş bırakılamaz';
+      nameError.value = S.of(context).nameFieldEmpty;
       isValid = false;
     }
 
     // Email validation
     if (emailController.text.isEmpty) {
-      emailError.value = 'E-posta alanı boş bırakılamaz';
+      emailError.value = S.of(context).emailFieldEmpty;
       isValid = false;
     } else if (!GetUtils.isEmail(emailController.text)) {
-      emailError.value = 'Geçerli bir e-posta adresi girin';
+      emailError.value = S.of(context).invalidEmail;
       isValid = false;
     }
 
     // Password validation
     if (passwordController.text.isEmpty) {
-      passwordError.value = 'Şifre alanı boş bırakılamaz';
+      passwordError.value = S.of(context).passwordFieldEmpty;
       isValid = false;
     } else if (passwordController.text.length < 6) {
-      passwordError.value = 'Şifre en az 6 karakter olmalıdır';
+      passwordError.value = S.of(context).passwordMinLength;
       isValid = false;
     }
 
     // Confirm password validation
     if (confirmPasswordController.text.isEmpty) {
-      confirmPasswordError.value = 'Şifre tekrar alanı boş bırakılamaz';
+      confirmPasswordError.value = S.of(context).confirmPasswordEmpty;
       isValid = false;
     } else if (confirmPasswordController.text != passwordController.text) {
-      confirmPasswordError.value = 'Şifreler eşleşmiyor';
+      confirmPasswordError.value = S.of(context).passwordsDoNotMatch;
       isValid = false;
     }
 
@@ -329,49 +341,124 @@ class AuthController extends GetxController {
 
     if (!_validateLoginForm()) return;
 
+    // Get localization context
+    final context = Get.context;
+    if (context == null) return;
+
     try {
       isEmailLoginLoading.value = true;
 
       // Use Firebase Auth to sign in
-      await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+
+      // Check if email is verified
+      if (userCredential.user != null && !userCredential.user!.emailVerified) {
+        // Sign out the user since email isn't verified
+        await _auth.signOut();
+
+        // Show error message
+        _showErrorSnackbar(S.of(context).emailVerificationRequired,
+            S.of(context).pleaseVerifyEmail);
+
+        // Show dialog to resend verification email
+        Get.dialog(
+          AlertDialog(
+            backgroundColor:
+                Get.isDarkMode ? const Color(0xFF2D2D44) : Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            title: Text(
+              S.of(context).emailVerificationRequired,
+              style: const TextStyle(
+                color: Color(0xFF6C63FF),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: Text(
+              S.of(context).pleaseVerifyEmail,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Get.back(),
+                child: Text(
+                  S.of(context).cancel,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Get.back();
+                  try {
+                    // Re-authenticate to get fresh user
+                    UserCredential userCred =
+                        await _auth.signInWithEmailAndPassword(
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                    );
+                    await userCred.user?.sendEmailVerification();
+                    _showSuccessSnackbar(S.of(context).verificationEmailSent,
+                        S.of(context).verificationEmailSentMessage);
+                    await _auth.signOut();
+                  } catch (e) {
+                    _showErrorSnackbar(S.of(context).error,
+                        '${S.of(context).emailVerificationRequired}: ${e.toString()}');
+                  }
+                },
+                child: Text(
+                  S.of(context).resendVerificationEmail,
+                  style: const TextStyle(
+                    color: Color(0xFF6C63FF),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+        return;
+      }
 
       // Clear text fields
       clearFormData();
 
       // Show success message
-      _showSuccessSnackbar('Başarılı', 'Giriş başarıyla gerçekleştirildi');
+      _showSuccessSnackbar(
+          S.of(context).success, S.of(context).loginSuccessful);
 
       // Navigate to home screen
       Get.offAllNamed(Routes.HOME);
     } on FirebaseAuthException catch (e) {
-      String errorMessage = 'Giriş yapılırken bir hata oluştu';
+      String errorMessage = S.of(context).loginError;
 
       switch (e.code) {
         case 'user-not-found':
-          errorMessage = 'Bu e-posta ile kayıtlı kullanıcı bulunamadı';
+          errorMessage = S.of(context).userNotFound;
           break;
         case 'wrong-password':
-          errorMessage = 'Hatalı şifre';
+          errorMessage = S.of(context).wrongPassword;
           break;
         case 'invalid-email':
-          errorMessage = 'Geçersiz e-posta adresi';
+          errorMessage = S.of(context).invalidEmail;
           break;
         case 'user-disabled':
-          errorMessage = 'Bu kullanıcı devre dışı bırakılmış';
+          errorMessage = S.of(context).userDisabled;
           break;
       }
 
       authError.value = errorMessage;
 
-      _showErrorSnackbar('Hata', errorMessage);
+      _showErrorSnackbar(S.of(context).error, errorMessage);
     } catch (e) {
-      authError.value = 'Giriş yapılırken bir hata oluştu: ${e.toString()}';
+      authError.value = '${S.of(context).loginError}: ${e.toString()}';
 
       _showErrorSnackbar(
-          'Hata', 'Giriş yapılırken bir hata oluştu: ${e.toString()}');
+          S.of(context).error, '${S.of(context).loginError}: ${e.toString()}');
     } finally {
       isEmailLoginLoading.value = false;
     }
@@ -383,6 +470,10 @@ class AuthController extends GetxController {
     authError.value = '';
 
     if (!_validateRegisterForm()) return;
+
+    // Get localization context
+    final context = Get.context;
+    if (context == null) return;
 
     try {
       isRegisterLoading.value = true;
@@ -397,41 +488,45 @@ class AuthController extends GetxController {
       // Update display name
       await userCredential.user?.updateDisplayName(nameController.text.trim());
 
+      // Send email verification
+      await userCredential.user?.sendEmailVerification();
+
       // Clear form data
       clearFormData();
       acceptedTerms.value = true;
 
-      // Show success message
-      _showSuccessSnackbar('Başarılı', 'Kayıt işlemi başarıyla tamamlandı');
+      // Show success message with email verification info
+      _showSuccessSnackbar(S.of(context).verificationEmailSent,
+          S.of(context).verificationEmailSentMessage);
 
-      // Navigate to home screen (or login if needed)
-      Get.offAllNamed(Routes.HOME);
+      // Navigate to login screen instead of home
+      Get.offAllNamed(Routes.LOGIN);
     } on FirebaseAuthException catch (e) {
-      String errorMessage = 'Kayıt olurken bir hata oluştu';
+      String errorMessage = S.of(context).registrationError;
 
       switch (e.code) {
         case 'email-already-in-use':
-          errorMessage = 'Bu e-posta adresi zaten kullanımda';
+          errorMessage = S.of(context).emailAlreadyInUse;
           break;
         case 'invalid-email':
-          errorMessage = 'Geçersiz e-posta adresi';
+          errorMessage = S.of(context).invalidEmail;
           break;
         case 'weak-password':
-          errorMessage = 'Şifre çok zayıf';
+          errorMessage = S.of(context).weakPassword;
           break;
         case 'operation-not-allowed':
-          errorMessage = 'E-posta/şifre ile kayıt etkinleştirilmemiş';
+          errorMessage = S.of(context).operationNotAllowed;
           break;
       }
 
       authError.value = errorMessage;
 
-      _showErrorSnackbar('Hata', errorMessage);
+      _showErrorSnackbar(S.of(context).error, errorMessage);
     } catch (e) {
-      authError.value = 'Kayıt olurken bir hata oluştu: ${e.toString()}';
+      authError.value = '${S.of(context).registrationError}: ${e.toString()}';
 
-      _showErrorSnackbar(
-          'Hata', 'Kayıt olurken bir hata oluştu: ${e.toString()}');
+      _showErrorSnackbar(S.of(context).error,
+          '${S.of(context).registrationError}: ${e.toString()}');
     } finally {
       isRegisterLoading.value = false;
     }
@@ -439,6 +534,10 @@ class AuthController extends GetxController {
 
   // Google Sign In
   Future<void> signInWithGoogle() async {
+    // Get localization context
+    final context = Get.context;
+    if (context == null) return;
+
     try {
       isGoogleLoginLoading.value = true;
 
@@ -465,16 +564,16 @@ class AuthController extends GetxController {
       await _auth.signInWithCredential(credential);
 
       // Show success message
-      _showSuccessSnackbar('Başarılı', 'Google hesabınız ile giriş yapıldı');
+      _showSuccessSnackbar(
+          S.of(context).success, S.of(context).googleLoginSuccess);
 
       // Navigate to home screen
       Get.offAllNamed(Routes.HOME);
     } catch (e) {
-      authError.value =
-          'Google ile giriş yapılırken bir hata oluştu: ${e.toString()}';
+      authError.value = '${S.of(context).googleLoginError}: ${e.toString()}';
 
-      _showErrorSnackbar('Hata',
-          'Google ile giriş yapılırken bir hata oluştu: ${e.toString()}');
+      _showErrorSnackbar(S.of(context).error,
+          '${S.of(context).googleLoginError}: ${e.toString()}');
     } finally {
       isGoogleLoginLoading.value = false;
     }
@@ -487,8 +586,12 @@ class AuthController extends GetxController {
       await _auth.signOut();
       Get.offAllNamed(Routes.LOGIN);
     } catch (e) {
-      _showErrorSnackbar(
-          'Hata', 'Çıkış yapılırken bir hata oluştu: ${e.toString()}');
+      // Get localization context
+      final context = Get.context;
+      if (context != null) {
+        _showErrorSnackbar(S.of(context).error,
+            '${S.of(context).logoutError}: ${e.toString()}');
+      }
     }
   }
 
