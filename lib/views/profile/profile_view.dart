@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testvid/controllers/profile/profile_controller.dart';
 import 'package:testvid/controllers/theme_controller.dart';
+import 'package:testvid/data/models/history_record_model.dart';
 import 'package:testvid/generated/l10n.dart';
 
 class ProfileView extends StatelessWidget {
@@ -54,7 +55,7 @@ class ProfileView extends StatelessWidget {
                                     context, controller, isDark),
                               ),
 
-                              const SizedBox(height: 32),
+                              const SizedBox(height: 30),
 
                               // Personal Information section
                               _buildSectionTitle(
@@ -65,6 +66,17 @@ class ProfileView extends StatelessWidget {
                               const SizedBox(height: 12),
                               _buildPersonalInfoCard(
                                   context, controller, isDark),
+
+                              const SizedBox(height: 24),
+
+                              // History Records section
+                              _buildSectionTitle(
+                                  context,
+                                  S.of(context).analysisHistory,
+                                  Icons.history,
+                                  isDark),
+                              const SizedBox(height: 12),
+                              _buildHistorySection(context, controller, isDark),
 
                               const SizedBox(height: 24),
                             ],
@@ -120,8 +132,8 @@ class ProfileView extends StatelessWidget {
       children: [
         // Profile Avatar
         Container(
-          width: 100,
-          height: 100,
+          width: 90,
+          height: 90,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: const LinearGradient(
@@ -147,7 +159,7 @@ class ProfileView extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 20),
+        const SizedBox(height: 15),
 
         // User Info
         Obx(() {
@@ -166,7 +178,7 @@ class ProfileView extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 2),
               ],
               Text(
                 user?.email ?? '',
@@ -325,7 +337,7 @@ class ProfileView extends StatelessWidget {
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 16,
+                  vertical: 2,
                 ),
               ),
             ),
@@ -527,6 +539,337 @@ class ProfileView extends StatelessWidget {
               fontSize: 16,
               color: isDark ? Colors.white70 : Colors.grey[600],
               fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // History Section Methods
+
+  Widget _buildHistorySection(
+      BuildContext context, ProfileController controller, bool isDark) {
+    return _buildSettingsCard(
+      context,
+      isDark: isDark,
+      children: [
+        // History Header with refresh button
+        _buildHistoryHeader(context, controller, isDark),
+
+        // History Content
+        Obx(() {
+          if (controller.isLoadingHistory.value) {
+            return _buildHistoryLoadingState(context, isDark);
+          }
+
+          if (controller.historyRecords.isEmpty) {
+            return _buildEmptyHistoryState(context, isDark);
+          }
+
+          return _buildHistoryList(
+              context, controller, controller.historyRecords, isDark);
+        }),
+      ],
+    );
+  }
+
+  Widget _buildHistoryHeader(
+      BuildContext context, ProfileController controller, bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              S.of(context).analysisHistory,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: isDark ? Colors.white : const Color(0xFF333333),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => controller.refreshHistoryRecords(),
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: isDark
+                    ? Colors.white.withOpacity(0.1)
+                    : const Color(0xFF6C63FF).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.refresh,
+                size: 18,
+                color: isDark ? Colors.white70 : const Color(0xFF6C63FF),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHistoryLoadingState(BuildContext context, bool isDark) {
+    return Container(
+      height: 200,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                isDark ? Colors.white70 : const Color(0xFF6C63FF),
+              ),
+              strokeWidth: 2,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              S.of(context).loadingHistory,
+              style: TextStyle(
+                fontSize: 14,
+                color: isDark ? Colors.white60 : Colors.grey[600],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmptyHistoryState(BuildContext context, bool isDark) {
+    return Container(
+      height: 200,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.history,
+              size: 48,
+              color: isDark ? Colors.white.withOpacity(0.3) : Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              S.of(context).noAnalysisHistoryYet,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: isDark ? Colors.white60 : Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              S.of(context).analyzeVideoToSeeResults,
+              style: TextStyle(
+                fontSize: 12,
+                color:
+                    isDark ? Colors.white.withOpacity(0.4) : Colors.grey[500],
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHistoryList(BuildContext context, ProfileController controller,
+      List<HistoryRecordModel> records, bool isDark) {
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      itemCount: records.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 12),
+      itemBuilder: (context, index) {
+        final record = records[index];
+        return _buildHistoryRecordCard(context, controller, record, isDark);
+      },
+    );
+  }
+
+  Widget _buildHistoryRecordCard(BuildContext context,
+      ProfileController controller, HistoryRecordModel record, bool isDark) {
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? Colors.white.withOpacity(0.05) : Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isDark ? Colors.white.withOpacity(0.1) : Colors.grey[200]!,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header with title and status
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    record.title,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? Colors.white : const Color(0xFF333333),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => _showDeleteDialog(context, controller, record),
+                  child: Icon(
+                    Icons.delete_outline,
+                    size: 18,
+                    color: isDark
+                        ? Colors.white.withOpacity(0.4)
+                        : Colors.grey[500],
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 8),
+
+            // Description
+            Text(
+              record.description,
+              style: TextStyle(
+                fontSize: 12,
+                color: isDark ? Colors.white60 : Colors.grey[600],
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+
+            const SizedBox(height: 12),
+
+            // Bottom info
+            Row(
+              children: [
+                Icon(
+                  Icons.access_time,
+                  size: 12,
+                  color:
+                      isDark ? Colors.white.withOpacity(0.4) : Colors.grey[500],
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  '${record.formattedDate} ${record.formattedTime}',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: isDark
+                        ? Colors.white.withOpacity(0.4)
+                        : Colors.grey[500],
+                  ),
+                ),
+                const Spacer(),
+                if (record.result != null) ...[
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: _getResultColor(record.resultColor, isDark),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      record.result!,
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                        color: _getResultTextColor(record.resultColor),
+                      ),
+                    ),
+                  ),
+                  if (record.confidence != null) ...[
+                    const SizedBox(width: 8),
+                    Text(
+                      record.formattedConfidence,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color:
+                            isDark ? Colors.white70 : const Color(0xFF6C63FF),
+                      ),
+                    ),
+                  ],
+                ],
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Color _getResultColor(String resultType, bool isDark) {
+    switch (resultType) {
+      case 'real':
+        return Colors.green.withOpacity(isDark ? 0.3 : 0.1);
+      case 'fake':
+        return Colors.red.withOpacity(isDark ? 0.3 : 0.1);
+      default:
+        return Colors.grey.withOpacity(isDark ? 0.3 : 0.1);
+    }
+  }
+
+  Color _getResultTextColor(String resultType) {
+    switch (resultType) {
+      case 'real':
+        return Colors.green;
+      case 'fake':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  void _showDeleteDialog(BuildContext context, ProfileController controller,
+      HistoryRecordModel record) {
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: Get.find<ThemeController>().isDarkMode
+            ? const Color(0xFF2D2D44)
+            : Colors.white,
+        title: Text(
+          S.of(context).deleteRecord,
+          style: TextStyle(
+            color: Get.find<ThemeController>().isDarkMode
+                ? Colors.white
+                : const Color(0xFF333333),
+          ),
+        ),
+        content: Text(
+          S.of(context).deleteRecordConfirmation(record.title),
+          style: TextStyle(
+            color: Get.find<ThemeController>().isDarkMode
+                ? Colors.white70
+                : Colors.grey[600],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text(
+              S.of(context).cancel,
+              style: TextStyle(
+                color: Get.find<ThemeController>().isDarkMode
+                    ? Colors.white70
+                    : Colors.grey[600],
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.back();
+              controller.deleteHistoryRecord(record.id);
+            },
+            child: Text(
+              S.of(context).delete,
+              style: const TextStyle(color: Colors.red),
             ),
           ),
         ],

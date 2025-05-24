@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:testvid/controllers/home_controller.dart';
+import 'package:testvid/controllers/profile/profile_controller.dart';
 import 'package:testvid/data/result_model.dart';
+import 'package:testvid/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 
 class ResultController extends GetxController {
@@ -42,6 +44,9 @@ class ResultController extends GetxController {
       ).obs;
 
       _initializeVideoPlayerFromFile(videoCtrl.videoFile.value!);
+
+      // Analiz sonucunu Firestore'a kaydet
+      _saveAnalysisToHistory();
     } else {
       // Hiç video yoksa
       result = DeepfakeResult(
@@ -127,6 +132,59 @@ class ResultController extends GetxController {
       }
     } else {
       return 'low';
+    }
+  }
+
+  void _saveAnalysisToHistory() {
+    try {
+      // ProfileController'ı al - yoksa oluştur
+      ProfileController profileController;
+      try {
+        profileController = Get.find<ProfileController>();
+      } catch (e) {
+        profileController = Get.put(ProfileController());
+      }
+
+      // Get localization context
+      final context = Get.context;
+      if (context == null) return;
+
+      // Video dosyasının adını al
+      String videoFileName = 'Unknown Video';
+      if (videoCtrl.videoFile.value != null) {
+        videoFileName = videoCtrl.videoFile.value!.path.split('/').last;
+      }
+
+      // Analiz sonucuna göre title ve description oluştur
+      String title = S.of(context).videoAnalysis(videoFileName);
+      String description = result.value.isDeepfake
+          ? S.of(context).deepfakeDetectionCompleted
+          : S.of(context).authenticVideoVerificationCompleted;
+
+      // Result text oluştur
+      String resultText = result.value.isDeepfake
+          ? S.of(context).deepfakeDetected
+          : S.of(context).realVideo;
+
+      // Firestore'a kaydet
+      profileController
+          .addHistoryRecord(
+        title: title,
+        description: description,
+      )
+          .then((_) {
+        // Kaydedildikten sonra result ve confidence güncellemesi yap
+        if (profileController.historyRecords.isNotEmpty) {
+          final latestRecordId = profileController.historyRecords.first.id;
+          profileController.updateHistoryRecord(
+            recordId: latestRecordId,
+            result: resultText,
+            confidence: result.value.confidenceScore,
+          );
+        }
+      });
+    } catch (e) {
+      print('History kaydedilirken hata: $e');
     }
   }
 }

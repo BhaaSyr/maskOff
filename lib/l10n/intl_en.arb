@@ -402,5 +402,75 @@
   "ageHint": "Enter your age (optional)",
   "@ageHint": {
     "description": "Age field hint"
+  },
+  "analysisHistory": "Analysis History",
+  "@analysisHistory": {
+    "description": "Analysis history section title"
+  },
+  "loadingHistory": "Loading history...",
+  "@loadingHistory": {
+    "description": "Loading history message"
+  },
+  "noAnalysisHistoryYet": "No analysis history yet",
+  "@noAnalysisHistoryYet": {
+    "description": "Empty history state title"
+  },
+  "analyzeVideoToSeeResults": "Analyze a video to see your results here",
+  "@analyzeVideoToSeeResults": {
+    "description": "Empty history state message"
+  },
+  "deleteRecord": "Delete Record",
+  "@deleteRecord": {
+    "description": "Delete record dialog title"
+  },
+  "deleteRecordConfirmation": "Are you sure you want to delete \"{title}\"? This action cannot be undone.",
+  "@deleteRecordConfirmation": {
+    "description": "Delete record confirmation message",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Video Analysis #1"
+      }
+    }
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  "recordDeletedSuccessfully": "Record deleted successfully",
+  "@recordDeletedSuccessfully": {
+    "description": "Record deleted success message"
+  },
+  "failedToDeleteRecord": "Failed to delete record: {error}",
+  "@failedToDeleteRecord": {
+    "description": "Failed to delete record error message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "videoAnalysis": "Video Analysis - {filename}",
+  "@videoAnalysis": {
+    "description": "Video analysis title with filename",
+    "placeholders": {
+      "filename": {
+        "type": "String",
+        "example": "video.mp4"
+      }
+    }
+  },
+  "deepfakeDetectionCompleted": "Deepfake detection analysis completed",
+  "@deepfakeDetectionCompleted": {
+    "description": "Deepfake detection completed message"
+  },
+  "authenticVideoVerificationCompleted": "Authentic video verification completed",
+  "@authenticVideoVerificationCompleted": {
+    "description": "Authentic video verification completed message"
+  },
+  "realVideo": "Real Video",
+  "@realVideo": {
+    "description": "Real video result"
   }
 }

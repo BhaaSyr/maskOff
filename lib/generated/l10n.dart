@@ -999,6 +999,136 @@ class S {
       args: [],
     );
   }
+
+  /// `Analysis History`
+  String get analysisHistory {
+    return Intl.message(
+      'Analysis History',
+      name: 'analysisHistory',
+      desc: 'Analysis history section title',
+      args: [],
+    );
+  }
+
+  /// `Loading history...`
+  String get loadingHistory {
+    return Intl.message(
+      'Loading history...',
+      name: 'loadingHistory',
+      desc: 'Loading history message',
+      args: [],
+    );
+  }
+
+  /// `No analysis history yet`
+  String get noAnalysisHistoryYet {
+    return Intl.message(
+      'No analysis history yet',
+      name: 'noAnalysisHistoryYet',
+      desc: 'Empty history state title',
+      args: [],
+    );
+  }
+
+  /// `Analyze a video to see your results here`
+  String get analyzeVideoToSeeResults {
+    return Intl.message(
+      'Analyze a video to see your results here',
+      name: 'analyzeVideoToSeeResults',
+      desc: 'Empty history state message',
+      args: [],
+    );
+  }
+
+  /// `Delete Record`
+  String get deleteRecord {
+    return Intl.message(
+      'Delete Record',
+      name: 'deleteRecord',
+      desc: 'Delete record dialog title',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete "{title}"? This action cannot be undone.`
+  String deleteRecordConfirmation(String title) {
+    return Intl.message(
+      'Are you sure you want to delete "$title"? This action cannot be undone.',
+      name: 'deleteRecordConfirmation',
+      desc: 'Delete record confirmation message',
+      args: [title],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: 'Delete button text',
+      args: [],
+    );
+  }
+
+  /// `Record deleted successfully`
+  String get recordDeletedSuccessfully {
+    return Intl.message(
+      'Record deleted successfully',
+      name: 'recordDeletedSuccessfully',
+      desc: 'Record deleted success message',
+      args: [],
+    );
+  }
+
+  /// `Failed to delete record: {error}`
+  String failedToDeleteRecord(String error) {
+    return Intl.message(
+      'Failed to delete record: $error',
+      name: 'failedToDeleteRecord',
+      desc: 'Failed to delete record error message',
+      args: [error],
+    );
+  }
+
+  /// `Video Analysis - {filename}`
+  String videoAnalysis(String filename) {
+    return Intl.message(
+      'Video Analysis - $filename',
+      name: 'videoAnalysis',
+      desc: 'Video analysis title with filename',
+      args: [filename],
+    );
+  }
+
+  /// `Deepfake detection analysis completed`
+  String get deepfakeDetectionCompleted {
+    return Intl.message(
+      'Deepfake detection analysis completed',
+      name: 'deepfakeDetectionCompleted',
+      desc: 'Deepfake detection completed message',
+      args: [],
+    );
+  }
+
+  /// `Authentic video verification completed`
+  String get authenticVideoVerificationCompleted {
+    return Intl.message(
+      'Authentic video verification completed',
+      name: 'authenticVideoVerificationCompleted',
+      desc: 'Authentic video verification completed message',
+      args: [],
+    );
+  }
+
+  /// `Real Video`
+  String get realVideo {
+    return Intl.message(
+      'Real Video',
+      name: 'realVideo',
+      desc: 'Real video result',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

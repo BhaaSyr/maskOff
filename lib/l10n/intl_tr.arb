@@ -402,5 +402,75 @@
   "ageHint": "Yaşınızı girin (isteğe bağlı)",
   "@ageHint": {
     "description": "Age field hint"
+  },
+  "analysisHistory": "Analiz Geçmişi",
+  "@analysisHistory": {
+    "description": "Analysis history section title"
+  },
+  "loadingHistory": "Geçmiş yükleniyor...",
+  "@loadingHistory": {
+    "description": "Loading history message"
+  },
+  "noAnalysisHistoryYet": "Henüz analiz geçmişi yok",
+  "@noAnalysisHistoryYet": {
+    "description": "Empty history state title"
+  },
+  "analyzeVideoToSeeResults": "Sonuçlarınızı görmek için bir video analiz edin",
+  "@analyzeVideoToSeeResults": {
+    "description": "Empty history state message"
+  },
+  "deleteRecord": "Kaydı Sil",
+  "@deleteRecord": {
+    "description": "Delete record dialog title"
+  },
+  "deleteRecordConfirmation": "\"{title}\" kaydını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+  "@deleteRecordConfirmation": {
+    "description": "Delete record confirmation message",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "example": "Video Analizi #1"
+      }
+    }
+  },
+  "delete": "Sil",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  "recordDeletedSuccessfully": "Kayıt başarıyla silindi",
+  "@recordDeletedSuccessfully": {
+    "description": "Record deleted success message"
+  },
+  "failedToDeleteRecord": "Kayıt silinemedi: {error}",
+  "@failedToDeleteRecord": {
+    "description": "Failed to delete record error message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Ağ hatası"
+      }
+    }
+  },
+  "videoAnalysis": "Video Analizi - {filename}",
+  "@videoAnalysis": {
+    "description": "Video analysis title with filename",
+    "placeholders": {
+      "filename": {
+        "type": "String",
+        "example": "video.mp4"
+      }
+    }
+  },
+  "deepfakeDetectionCompleted": "Deepfake tespit analizi tamamlandı",
+  "@deepfakeDetectionCompleted": {
+    "description": "Deepfake detection completed message"
+  },
+  "authenticVideoVerificationCompleted": "Gerçek video doğrulaması tamamlandı",
+  "@authenticVideoVerificationCompleted": {
+    "description": "Authentic video verification completed message"
+  },
+  "realVideo": "Gerçek Video",
+  "@realVideo": {
+    "description": "Real video result"
   }
 }

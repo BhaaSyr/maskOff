@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testvid/data/models/user_model.dart';
+import 'package:testvid/data/models/history_record_model.dart';
 import 'package:testvid/generated/l10n.dart';
 
 class ProfileController extends GetxController {
@@ -19,6 +20,10 @@ class ProfileController extends GetxController {
   final isLoading = false.obs;
   final isSaving = false.obs;
 
+  // History records variables
+  final historyRecords = <HistoryRecordModel>[].obs;
+  final isLoadingHistory = false.obs;
+
   // Form errors
   final firstNameError = ''.obs;
   final lastNameError = ''.obs;
@@ -28,6 +33,7 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
     loadUserProfile();
+    loadHistoryRecords();
     _setupErrorClearingListeners();
   }
 
@@ -246,5 +252,135 @@ class ProfileController extends GetxController {
       margin: const EdgeInsets.all(16),
       borderRadius: 8,
     );
+  }
+
+  // History Records Management Methods
+
+  // Load user's history records from Firestore
+  Future<void> loadHistoryRecords() async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    try {
+      isLoadingHistory.value = true;
+
+      // Simplified query without orderBy to avoid index requirement
+      final querySnapshot = await _firestore
+          .collection('history_records')
+          .where('userId', isEqualTo: user.uid)
+          .get();
+
+      final records = querySnapshot.docs
+          .map((doc) => HistoryRecordModel.fromMap(doc.data()))
+          .toList();
+
+      // Sort on client side
+      records.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+      historyRecords.value = records;
+    } catch (e) {
+      final context = Get.context;
+      if (context != null) {
+        _showErrorSnackbar('Error', 'Failed to load history: ${e.toString()}');
+      }
+    } finally {
+      isLoadingHistory.value = false;
+    }
+  }
+
+  // Add a new history record
+  Future<void> addHistoryRecord({
+    required String title,
+    required String description,
+  }) async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    try {
+      final now = DateTime.now();
+      final recordId = _firestore.collection('history_records').doc().id;
+
+      final newRecord = HistoryRecordModel(
+        id: recordId,
+        userId: user.uid,
+        title: title,
+        description: description,
+        createdAt: now,
+      );
+
+      // Save to Firestore
+      await _firestore
+          .collection('history_records')
+          .doc(recordId)
+          .set(newRecord.toMap());
+
+      // Add to local list
+      historyRecords.insert(0, newRecord);
+    } catch (e) {
+      final context = Get.context;
+      if (context != null) {
+        _showErrorSnackbar('Error', 'Failed to add record: ${e.toString()}');
+      }
+    }
+  }
+
+  // Update history record status and result
+  Future<void> updateHistoryRecord({
+    required String recordId,
+    String? result,
+    double? confidence,
+  }) async {
+    try {
+      final recordIndex =
+          historyRecords.indexWhere((record) => record.id == recordId);
+      if (recordIndex == -1) return;
+
+      final updatedRecord = historyRecords[recordIndex].copyWith(
+        result: result,
+        confidence: confidence,
+      );
+
+      // Update Firestore
+      await _firestore
+          .collection('history_records')
+          .doc(recordId)
+          .update(updatedRecord.toMap());
+
+      // Update local list
+      historyRecords[recordIndex] = updatedRecord;
+    } catch (e) {
+      final context = Get.context;
+      if (context != null) {
+        _showErrorSnackbar('Error', 'Failed to update record: ${e.toString()}');
+      }
+    }
+  }
+
+  // Delete history record
+  Future<void> deleteHistoryRecord(String recordId) async {
+    try {
+      // Delete from Firestore
+      await _firestore.collection('history_records').doc(recordId).delete();
+
+      // Remove from local list
+      historyRecords.removeWhere((record) => record.id == recordId);
+
+      final context = Get.context;
+      if (context != null) {
+        _showSuccessSnackbar(
+            S.of(context).success, S.of(context).recordDeletedSuccessfully);
+      }
+    } catch (e) {
+      final context = Get.context;
+      if (context != null) {
+        _showErrorSnackbar(S.of(context).error,
+            S.of(context).failedToDeleteRecord(e.toString()));
+      }
+    }
+  }
+
+  // Refresh history records
+  Future<void> refreshHistoryRecords() async {
+    await loadHistoryRecords();
   }
 }

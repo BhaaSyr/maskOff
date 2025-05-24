@@ -22,12 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(score) => "Bu video %${score} olasılıkla deepfake içeriyor.";
 
-  static String m1(email) =>
+  static String m1(title) =>
+      "\"${title}\" kaydını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.";
+
+  static String m2(error) => "Kayıt silinemedi: ${error}";
+
+  static String m3(email) =>
       "Şifre sıfırlama bağlantısı ${email} adresine gönderildi.\n\nLütfen e-posta kutunuzu kontrol edin ve bağlantıya tıklayarak şifrenizi sıfırlayın.";
 
-  static String m2(score) => "Bu video %${score} olasılıkla gerçek görünüyor.";
+  static String m4(score) => "Bu video %${score} olasılıkla gerçek görünüyor.";
 
-  static String m3(name) => "Tekrar hoş geldiniz, ${name}!";
+  static String m5(filename) => "Video Analizi - ${filename}";
+
+  static String m6(name) => "Tekrar hoş geldiniz, ${name}!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -35,12 +42,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "age": MessageLookupByLibrary.simpleMessage("Yaş"),
         "ageHint": MessageLookupByLibrary.simpleMessage(
             "Yaşınızı girin (isteğe bağlı)"),
+        "analysisHistory":
+            MessageLookupByLibrary.simpleMessage("Analiz Geçmişi"),
         "analysisResults":
             MessageLookupByLibrary.simpleMessage("Analiz Sonuçları"),
         "analyze": MessageLookupByLibrary.simpleMessage("Analiz Et"),
+        "analyzeVideoToSeeResults": MessageLookupByLibrary.simpleMessage(
+            "Sonuçlarınızı görmek için bir video analiz edin"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Mask Off"),
         "appearance": MessageLookupByLibrary.simpleMessage("Görünüm"),
         "authenticVideo": MessageLookupByLibrary.simpleMessage("Gerçek Video"),
+        "authenticVideoVerificationCompleted":
+            MessageLookupByLibrary.simpleMessage(
+                "Gerçek video doğrulaması tamamlandı"),
         "backToHomepage":
             MessageLookupByLibrary.simpleMessage("Ana Sayfaya Dön"),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
@@ -54,7 +68,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "darkMode": MessageLookupByLibrary.simpleMessage("Karanlık Mod"),
         "deepfakeDetected":
             MessageLookupByLibrary.simpleMessage("Deepfake Tespit Edildi"),
+        "deepfakeDetectionCompleted": MessageLookupByLibrary.simpleMessage(
+            "Deepfake tespit analizi tamamlandı"),
         "deepfakeResult": m0,
+        "delete": MessageLookupByLibrary.simpleMessage("Sil"),
+        "deleteRecord": MessageLookupByLibrary.simpleMessage("Kaydı Sil"),
+        "deleteRecordConfirmation": m1,
         "detectDeepfake": MessageLookupByLibrary.simpleMessage(
             "Gelişmiş yapay zeka teknolojisiyle deepfake videolarını tespit edin"),
         "email": MessageLookupByLibrary.simpleMessage("E-posta"),
@@ -69,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterInfo":
             MessageLookupByLibrary.simpleMessage("Lütfen bilgilerinizi girin"),
         "error": MessageLookupByLibrary.simpleMessage("Hata"),
+        "failedToDeleteRecord": m2,
         "firstName": MessageLookupByLibrary.simpleMessage("Ad"),
         "firstNameHint": MessageLookupByLibrary.simpleMessage("Adınızı girin"),
         "firstNameRequired":
@@ -94,6 +114,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Soyadınızı girin"),
         "lastNameRequired":
             MessageLookupByLibrary.simpleMessage("Soyad alanı zorunludur"),
+        "loadingHistory":
+            MessageLookupByLibrary.simpleMessage("Geçmiş yükleniyor..."),
         "login": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
         "loginError": MessageLookupByLibrary.simpleMessage(
             "Giriş yapılırken bir hata oluştu"),
@@ -109,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameFieldEmpty": MessageLookupByLibrary.simpleMessage(
             "Ad Soyad alanı boş bırakılamaz"),
         "noAccount": MessageLookupByLibrary.simpleMessage("Hesabınız yok mu?"),
+        "noAnalysisHistoryYet":
+            MessageLookupByLibrary.simpleMessage("Henüz analiz geçmişi yok"),
         "ok": MessageLookupByLibrary.simpleMessage("Tamam"),
         "operationNotAllowed": MessageLookupByLibrary.simpleMessage(
             "E-posta/şifre ile kayıt etkinleştirilmemiş"),
@@ -125,7 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Şifre Sıfırlama"),
         "passwordResetEmailSent": MessageLookupByLibrary.simpleMessage(
             "Şifre Sıfırlama E-postası Gönderildi"),
-        "passwordResetEmailSentMessage": m1,
+        "passwordResetEmailSentMessage": m3,
         "passwordResetError": MessageLookupByLibrary.simpleMessage(
             "Şifre sıfırlama işlemi sırasında bir hata oluştu"),
         "passwordResetInfo": MessageLookupByLibrary.simpleMessage(
@@ -143,7 +167,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
         "profileUpdateSuccess": MessageLookupByLibrary.simpleMessage(
             "Profil başarıyla güncellendi"),
-        "realVideoResult": m2,
+        "realVideo": MessageLookupByLibrary.simpleMessage("Gerçek Video"),
+        "realVideoResult": m4,
+        "recordDeletedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Kayıt başarıyla silindi"),
         "register": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
         "registrationError": MessageLookupByLibrary.simpleMessage(
             "Kayıt olurken bir hata oluştu"),
@@ -173,9 +200,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
             "E-posta adresinize doğrulama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin."),
         "version": MessageLookupByLibrary.simpleMessage("Sürüm"),
+        "videoAnalysis": m5,
         "weakPassword": MessageLookupByLibrary.simpleMessage("Şifre çok zayıf"),
         "welcome": MessageLookupByLibrary.simpleMessage("Hoş Geldiniz"),
-        "welcomeBack": m3,
+        "welcomeBack": m6,
         "wrongPassword": MessageLookupByLibrary.simpleMessage("Hatalı şifre"),
         "yourVideo": MessageLookupByLibrary.simpleMessage("Videonuz")
       };

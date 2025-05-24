@@ -175,7 +175,7 @@ class HomeView extends StatelessWidget {
                       ),
                     );
                   }),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
                   Text(
                     S.of(context).detectDeepfake,
                     style: TextStyle(
