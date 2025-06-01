@@ -18,8 +18,10 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(_current != null,
-        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(
+      _current != null,
+      'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.',
+    );
     return _current!;
   }
 
@@ -41,8 +43,10 @@ class S {
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(instance != null,
-        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -802,12 +806,7 @@ class S {
 
   /// `OK`
   String get ok {
-    return Intl.message(
-      'OK',
-      name: 'ok',
-      desc: 'OK button text',
-      args: [],
-    );
+    return Intl.message('OK', name: 'ok', desc: 'OK button text', args: []);
   }
 
   /// `An error occurred during password reset`
@@ -892,12 +891,7 @@ class S {
 
   /// `Age`
   String get age {
-    return Intl.message(
-      'Age',
-      name: 'age',
-      desc: 'Age field label',
-      args: [],
-    );
+    return Intl.message('Age', name: 'age', desc: 'Age field label', args: []);
   }
 
   /// `Save`
@@ -1126,6 +1120,36 @@ class S {
       'Real Video',
       name: 'realVideo',
       desc: 'Real video result',
+      args: [],
+    );
+  }
+
+  /// `View Full History`
+  String get viewFullHistory {
+    return Intl.message(
+      'View Full History',
+      name: 'viewFullHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Analyzing Video`
+  String get analyzingVideo {
+    return Intl.message(
+      'Analyzing Video',
+      name: 'analyzingVideo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please wait while we analyze your video...`
+  String get pleaseWait {
+    return Intl.message(
+      'Please wait while we analyze your video...',
+      name: 'pleaseWait',
+      desc: '',
       args: [],
     );
   }

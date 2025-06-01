@@ -76,9 +76,8 @@ class ProfileView extends StatelessWidget {
                                   Icons.history,
                                   isDark),
                               const SizedBox(height: 12),
-                              _buildHistorySection(context, controller, isDark),
-
-                              const SizedBox(height: 24),
+                              _buildHistoryButton(context, isDark),
+                              const SizedBox(height: 12),
                             ],
                           ),
                         ),
@@ -202,7 +201,7 @@ class ProfileView extends StatelessWidget {
       isDark: isDark,
       children: [
         Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(18),
           child: Column(
             children: [
               // First Name Field
@@ -218,7 +217,7 @@ class ProfileView extends StatelessWidget {
                 isDark: isDark,
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
 
               // Last Name Field
               _buildInputField(
@@ -233,7 +232,7 @@ class ProfileView extends StatelessWidget {
                 isDark: isDark,
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
 
               // Age Field
               _buildInputField(
@@ -248,7 +247,7 @@ class ProfileView extends StatelessWidget {
                 isDark: isDark,
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
 
               // Save Button
               _buildSaveButton(context, controller, isDark),
@@ -279,7 +278,7 @@ class ProfileView extends StatelessWidget {
         children: [
           // Label
           Padding(
-            padding: const EdgeInsets.only(left: 4, bottom: 8),
+            padding: const EdgeInsets.only(left: 4, bottom: 5),
             child: Row(
               children: [
                 Icon(
@@ -337,7 +336,7 @@ class ProfileView extends StatelessWidget {
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 2,
+                  vertical: 0,
                 ),
               ),
             ),
@@ -873,6 +872,32 @@ class ProfileView extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHistoryButton(BuildContext context, bool isDark) {
+    return Container(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+        onPressed: () => Get.toNamed('/history'),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF6C63FF),
+          foregroundColor: Colors.white,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        icon: const Icon(Icons.history, size: 20),
+        label: Text(
+          S.of(context).viewFullHistory,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }

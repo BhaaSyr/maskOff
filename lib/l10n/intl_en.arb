@@ -472,5 +472,8 @@
   "realVideo": "Real Video",
   "@realVideo": {
     "description": "Real video result"
-  }
+  },
+  "viewFullHistory": "View Full History",
+  "analyzingVideo": "Analyzing Video",
+  "pleaseWait": "Please wait while we analyze your video..."
 }

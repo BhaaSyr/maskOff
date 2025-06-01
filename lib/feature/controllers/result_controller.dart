@@ -172,7 +172,10 @@ class ResultController extends GetxController {
         profileController = Get.put(ProfileController());
       }
 
-      final title = S.of(context).videoAnalysis('Analyzed Video');
+      final videoController = Get.find<VideoController>();
+      final videoName = videoController.videoFile.value?.path.split('/').last ??
+          'Unknown Video';
+      final title = S.of(context).videoAnalysis(videoName);
       final description = result.value!.isDeepfake
           ? S.of(context).deepfakeDetectionCompleted
           : S.of(context).authenticVideoVerificationCompleted;

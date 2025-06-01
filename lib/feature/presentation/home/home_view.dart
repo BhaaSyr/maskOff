@@ -231,8 +231,90 @@ class HomeView extends StatelessWidget {
 
                               final resultController =
                                   Get.find<ResultController>();
+
+                              // Show loading dialog
+                              Get.dialog(
+                                WillPopScope(
+                                  onWillPop: () async => false,
+                                  child: Material(
+                                    type: MaterialType.transparency,
+                                    child: Center(
+                                      child: Container(
+                                        padding: const EdgeInsets.all(24),
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 32),
+                                        decoration: BoxDecoration(
+                                          color: isDark
+                                              ? const Color(0xFF2D2D44)
+                                              : Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.1),
+                                              blurRadius: 20,
+                                              offset: const Offset(0, 10),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.all(16),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFF6C63FF)
+                                                    .withOpacity(0.1),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child:
+                                                  const CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                            Color>(
+                                                        Color(0xFF6C63FF)),
+                                                strokeWidth: 3,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 24),
+                                            Text(
+                                              S.of(context).analyzingVideo,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                                color: isDark
+                                                    ? Colors.white
+                                                    : const Color(0xFF333333),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              S.of(context).pleaseWait,
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: isDark
+                                                    ? Colors.white70
+                                                    : Colors.grey[600],
+                                                height: 1.5,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                barrierColor: Colors.black.withOpacity(0.5),
+                              );
+
                               await resultController
                                   .analyzeVideo(controller.videoFile.value!);
+
+                              // Close loading dialog
+                              Get.back();
+
                               Get.toNamed("/result");
                             } else {
                               Get.snackbar(

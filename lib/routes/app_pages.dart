@@ -3,6 +3,7 @@ import 'package:testvid/feature/presentation/auth/login_view.dart';
 import 'package:testvid/feature/presentation/auth/register_view.dart';
 import 'package:testvid/feature/presentation/bindings/auth_binding.dart';
 import 'package:testvid/feature/presentation/bindings/home_binding.dart';
+import 'package:testvid/feature/presentation/bindings/profile_binding.dart';
 import 'package:testvid/feature/presentation/bindings/result_binding.dart';
 import 'package:testvid/feature/presentation/bindings/splash_binding.dart';
 import 'package:testvid/feature/presentation/home/home_view.dart';
@@ -10,6 +11,7 @@ import 'package:testvid/feature/presentation/profile/profile_view.dart';
 import 'package:testvid/feature/presentation/result/result_view.dart';
 import 'package:testvid/feature/presentation/settings_view.dart';
 import 'package:testvid/feature/presentation/splash/splash_screen.dart';
+import 'package:testvid/feature/presentation/history/history_view.dart';
 
 class AppPages {
   static const INITIAL = Routes.SPLASH; // Başlangıç rotasını değiştirdik
@@ -47,6 +49,12 @@ class AppPages {
     GetPage(
       name: Routes.PROFILE,
       page: () => const ProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: Routes.HISTORY,
+      page: () => const HistoryView(),
+      binding: ProfileBinding(),
     ),
   ];
 }
@@ -60,4 +68,5 @@ abstract class Routes {
   static const RESULT = '/result';
   static const SETTINGS = '/settings';
   static const PROFILE = '/profile';
+  static const HISTORY = '/history';
 }

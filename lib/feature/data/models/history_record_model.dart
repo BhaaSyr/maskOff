@@ -83,7 +83,8 @@ class HistoryRecordModel {
   // Get result color based on result type
   String get resultColor {
     if (result == null) return 'unknown';
-    if (result!.toLowerCase().contains('real')) return 'real';
+    if (result!.toLowerCase().contains('real') ||
+        result!.toLowerCase().contains('gerçek')) return 'real';
     if (result!.toLowerCase().contains('fake') ||
         result!.toLowerCase().contains('deepfake')) return 'fake';
     return 'unknown';
