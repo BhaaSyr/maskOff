@@ -1,15 +1,15 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:testvid/bindings/auth_binding.dart';
-import 'package:testvid/bindings/home_binding.dart';
-import 'package:testvid/bindings/result_binding.dart';
-import 'package:testvid/bindings/splash_binding.dart';
-import 'package:testvid/views/auth/login_view.dart';
-import 'package:testvid/views/auth/register_view.dart';
-import 'package:testvid/views/home/home_view.dart';
-import 'package:testvid/views/profile/profile_view.dart';
-import 'package:testvid/views/result/result_view.dart';
-import 'package:testvid/views/settings_view.dart';
-import 'package:testvid/views/splash/splash_screen.dart';
+import 'package:testvid/feature/presentation/auth/login_view.dart';
+import 'package:testvid/feature/presentation/auth/register_view.dart';
+import 'package:testvid/feature/presentation/bindings/auth_binding.dart';
+import 'package:testvid/feature/presentation/bindings/home_binding.dart';
+import 'package:testvid/feature/presentation/bindings/result_binding.dart';
+import 'package:testvid/feature/presentation/bindings/splash_binding.dart';
+import 'package:testvid/feature/presentation/home/home_view.dart';
+import 'package:testvid/feature/presentation/profile/profile_view.dart';
+import 'package:testvid/feature/presentation/result/result_view.dart';
+import 'package:testvid/feature/presentation/settings_view.dart';
+import 'package:testvid/feature/presentation/splash/splash_screen.dart';
 
 class AppPages {
   static const INITIAL = Routes.SPLASH; // Başlangıç rotasını değiştirdik
