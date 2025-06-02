@@ -8,13 +8,13 @@ class CustomButton extends StatelessWidget {
   final bool isLoading;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     required this.isPrimary,
     required this.isDark,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,8 @@ class CustomButton extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: isPrimary
-                ? const Color(0xFF6C63FF).withOpacity(0.3)
-                : Colors.black.withOpacity(isDark ? 0.1 : 0.05),
+                ? const Color(0xFF6C63FF).withValues(alpha: 0.3)
+                : Colors.black.withValues(alpha: isDark ? 0.1 : 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -39,7 +39,7 @@ class CustomButton extends StatelessWidget {
           foregroundColor: isPrimary ? Colors.white : const Color(0xFF6C63FF),
           backgroundColor: isPrimary
               ? const Color(0xFF6C63FF)
-              : (isDark ? Colors.white.withOpacity(0.08) : Colors.white),
+              : (isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white),
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -47,7 +47,7 @@ class CustomButton extends StatelessWidget {
                 ? BorderSide.none
                 : BorderSide(
                     color: isDark
-                        ? Colors.white.withOpacity(0.1)
+                        ? Colors.white.withValues(alpha: 0.1)
                         : const Color(0xFFEEEEF6),
                     width: 1,
                   ),
@@ -65,7 +65,7 @@ class CustomButton extends StatelessWidget {
               )
             : Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.5,

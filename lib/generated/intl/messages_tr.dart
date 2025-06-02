@@ -25,16 +25,29 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(title) =>
       "\"${title}\" kaydını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.";
 
-  static String m2(error) => "Kayıt silinemedi: ${error}";
+  static String m2(error) => "Kayıt eklenirken hata oluştu: ${error}";
 
-  static String m3(email) =>
+  static String m3(error) =>
+      "Kullanıcı profili oluşturulurken hata oluştu: ${error}";
+
+  static String m4(error) => "Kayıt silinemedi: ${error}";
+
+  static String m5(error) => "Geçmiş yüklenirken hata oluştu: ${error}";
+
+  static String m6(error) => "Profil yüklenirken hata oluştu: ${error}";
+
+  static String m7(error) => "Profil kaydedilirken hata oluştu: ${error}";
+
+  static String m8(error) => "Kayıt güncellenirken hata oluştu: ${error}";
+
+  static String m9(email) =>
       "Şifre sıfırlama bağlantısı ${email} adresine gönderildi.\n\nLütfen e-posta kutunuzu kontrol edin ve bağlantıya tıklayarak şifrenizi sıfırlayın.";
 
-  static String m4(score) => "Bu video %${score} olasılıkla gerçek görünüyor.";
+  static String m10(score) => "Bu video %${score} olasılıkla gerçek görünüyor.";
 
-  static String m5(filename) => "Video Analizi - ${filename}";
+  static String m11(filename) => "Video Analizi - ${filename}";
 
-  static String m6(name) => "Tekrar hoş geldiniz, ${name}!";
+  static String m12(name) => "Tekrar hoş geldiniz, ${name}!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -90,7 +103,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterInfo":
             MessageLookupByLibrary.simpleMessage("Lütfen bilgilerinizi girin"),
         "error": MessageLookupByLibrary.simpleMessage("Hata"),
-        "failedToDeleteRecord": m2,
+        "failedToAddRecord": m2,
+        "failedToCreateProfile": m3,
+        "failedToDeleteRecord": m4,
+        "failedToLoadHistory": m5,
+        "failedToLoadProfile": m6,
+        "failedToSaveProfile": m7,
+        "failedToUpdateRecord": m8,
         "firstName": MessageLookupByLibrary.simpleMessage("Ad"),
         "firstNameHint": MessageLookupByLibrary.simpleMessage("Adınızı girin"),
         "firstNameRequired":
@@ -151,7 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Şifre Sıfırlama"),
         "passwordResetEmailSent": MessageLookupByLibrary.simpleMessage(
             "Şifre Sıfırlama E-postası Gönderildi"),
-        "passwordResetEmailSentMessage": m3,
+        "passwordResetEmailSentMessage": m9,
         "passwordResetError": MessageLookupByLibrary.simpleMessage(
             "Şifre sıfırlama işlemi sırasında bir hata oluştu"),
         "passwordResetInfo": MessageLookupByLibrary.simpleMessage(
@@ -172,7 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileUpdateSuccess": MessageLookupByLibrary.simpleMessage(
             "Profil başarıyla güncellendi"),
         "realVideo": MessageLookupByLibrary.simpleMessage("Gerçek Video"),
-        "realVideoResult": m4,
+        "realVideoResult": m10,
         "recordDeletedSuccessfully":
             MessageLookupByLibrary.simpleMessage("Kayıt başarıyla silindi"),
         "register": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
@@ -197,6 +216,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadVideo": MessageLookupByLibrary.simpleMessage("Video Yükle"),
         "userDisabled": MessageLookupByLibrary.simpleMessage(
             "Bu kullanıcı devre dışı bırakılmış"),
+        "userNotAuthenticated":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı girişi yapılmamış"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "Bu e-posta ile kayıtlı kullanıcı bulunamadı"),
         "verificationEmailSent": MessageLookupByLibrary.simpleMessage(
@@ -204,12 +225,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
             "E-posta adresinize doğrulama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin."),
         "version": MessageLookupByLibrary.simpleMessage("Sürüm"),
-        "videoAnalysis": m5,
+        "videoAnalysis": m11,
         "viewFullHistory": MessageLookupByLibrary.simpleMessage(
             "Tüm Analiz Geçmişini Görüntüle"),
         "weakPassword": MessageLookupByLibrary.simpleMessage("Şifre çok zayıf"),
         "welcome": MessageLookupByLibrary.simpleMessage("Hoş Geldiniz"),
-        "welcomeBack": m6,
+        "welcomeBack": m12,
         "wrongPassword": MessageLookupByLibrary.simpleMessage("Hatalı şifre"),
         "yourVideo": MessageLookupByLibrary.simpleMessage("Videonuz")
       };

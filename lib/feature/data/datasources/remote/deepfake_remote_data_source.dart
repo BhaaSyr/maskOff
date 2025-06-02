@@ -2,8 +2,8 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import '../../../domain/entities/deepfake_result_entity.dart';
-import '../../models/deepfake_result_model.dart';
+import 'package:testvid/feature/data/models/deepfake_result_model.dart';
+import 'package:testvid/core/services/app_logger.dart';
 
 abstract class DeepfakeRemoteDataSource {
   Future<DeepfakeResultModel> analyzeVideo(File videoFile);
@@ -17,7 +17,7 @@ class DeepfakeRemoteDataSourceImpl implements DeepfakeRemoteDataSource {
     try {
       // Create multipart request
       final uri = Uri.parse('$baseUrl/predict');
-      print('Sending request to: $uri');
+      AppLogger().info('Sending request to: $uri');
 
       var request = http.MultipartRequest('POST', uri);
 
@@ -25,7 +25,7 @@ class DeepfakeRemoteDataSourceImpl implements DeepfakeRemoteDataSource {
       var stream = http.ByteStream(videoFile.openRead());
       var length = await videoFile.length();
 
-      print('Uploading file: ${videoFile.path} (${length} bytes)');
+      AppLogger().info('Uploading file: ${videoFile.path} ($length bytes)');
 
       var multipartFile = http.MultipartFile(
         'video',
@@ -36,26 +36,26 @@ class DeepfakeRemoteDataSourceImpl implements DeepfakeRemoteDataSource {
       request.files.add(multipartFile);
 
       // Send request and monitor progress
-      print('Sending request to server...');
+      AppLogger().info('Sending request to server...');
       var streamedResponse = await request.send();
-      print('Response status code: ${streamedResponse.statusCode}');
+      AppLogger().info('Response status code: ${streamedResponse.statusCode}');
 
       var response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
-        print('Response received successfully');
-        print('Response body: ${response.body}');
+        AppLogger().info('Response received successfully');
+        AppLogger().info('Response body: ${response.body}');
 
         final Map<String, dynamic> data = json.decode(response.body);
 
         return DeepfakeResultModel.fromJson(data);
       } else {
-        print('Server error: ${response.statusCode}');
-        print('Error body: ${response.body}');
+        AppLogger().error('Server error: ${response.statusCode}');
+        AppLogger().error('Error body: ${response.body}');
         throw Exception('Failed to analyze video: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error during API call: $e');
+      AppLogger().error('Error during API call: $e');
       // Show error message to user
       Get.snackbar(
         'Error',

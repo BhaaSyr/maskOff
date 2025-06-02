@@ -7,6 +7,7 @@ import 'package:testvid/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 import '../domain/entities/deepfake_result_entity.dart';
 import '../domain/usecases/analyze_video_usecase.dart';
+import 'package:testvid/core/services/app_logger.dart';
 
 class ResultController extends GetxController {
   final AnalyzeVideoUseCase analyzeVideoUseCase;
@@ -22,21 +23,22 @@ class ResultController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    print('ResultController: onInit called');
+    AppLogger().info('ResultController: onInit called');
     if (Get.arguments != null) {
-      print('ResultController: Arguments received: ${Get.arguments}');
+      AppLogger()
+          .info('ResultController: Arguments received: ${Get.arguments}');
       if (Get.arguments is DeepfakeResultEntity) {
-        print('ResultController: Arguments is DeepfakeResultEntity');
+        AppLogger().info('ResultController: Arguments is DeepfakeResultEntity');
         result.value = Get.arguments as DeepfakeResultEntity;
-        print(
+        AppLogger().info(
             'ResultController: Result set from arguments: ${result.value?.result}, confidence: ${result.value?.confidence}');
         _initializeVideoPlayerFromFile(File(Get.arguments.toString()));
       } else {
-        print(
+        AppLogger().warning(
             'ResultController: Arguments is not DeepfakeResultEntity: ${Get.arguments.runtimeType}');
       }
     } else {
-      print('ResultController: No arguments received');
+      AppLogger().warning('ResultController: No arguments received');
     }
   }
 
@@ -48,44 +50,44 @@ class ResultController extends GetxController {
 
   Future<void> analyzeVideo(File videoFile) async {
     try {
-      print(
+      AppLogger().info(
           'ResultController: Starting video analysis for file: ${videoFile.path}');
       isAnalyzing.value = true;
 
-      print('ResultController: Calling analyzeVideoUseCase.execute');
+      AppLogger().info('ResultController: Calling analyzeVideoUseCase.execute');
       final resultEntity = await analyzeVideoUseCase.execute(videoFile);
-      print(
+      AppLogger().info(
           'ResultController: Analysis complete. Result: ${resultEntity.result}, Confidence: ${resultEntity.confidence}');
 
       result.value = resultEntity;
-      print(
+      AppLogger().info(
           'ResultController: Result updated in controller: ${result.value?.result}, confidence: ${result.value?.confidence}');
 
       await _initializeVideoPlayerFromFile(videoFile);
-      print('ResultController: Video player initialized');
+      AppLogger().info('ResultController: Video player initialized');
 
       await _saveAnalysisToHistory();
-      print('ResultController: Analysis saved to history');
+      AppLogger().info('ResultController: Analysis saved to history');
     } catch (e) {
-      print('ResultController: Error during analysis: $e');
+      AppLogger().error('ResultController: Error during analysis: $e');
       Get.snackbar(
         'Error',
         'Failed to analyze video: ${e.toString()}',
         snackPosition: SnackPosition.BOTTOM,
         duration: const Duration(seconds: 5),
-        backgroundColor: Get.theme.colorScheme.error.withOpacity(0.8),
+        backgroundColor: Get.theme.colorScheme.error.withValues(alpha: 0.8),
         colorText: Get.theme.colorScheme.onError,
       );
     } finally {
       isAnalyzing.value = false;
-      print(
+      AppLogger().info(
           'ResultController: Analysis process completed. isAnalyzing: ${isAnalyzing.value}');
     }
   }
 
   Future<void> _initializeVideoPlayerFromFile(File videoFile) async {
     try {
-      print(
+      AppLogger().info(
           'ResultController: Initializing video player for file: ${videoFile.path}');
       isVideoLoading.value = true;
       videoController.value?.dispose();
@@ -94,7 +96,8 @@ class ResultController extends GetxController {
         ..initialize().then((_) {
           videoController.value!.setLooping(true);
           isVideoLoading.value = false;
-          print('ResultController: Video player initialized successfully');
+          AppLogger()
+              .info('ResultController: Video player initialized successfully');
         });
 
       videoController.value!.addListener(() {
@@ -102,7 +105,8 @@ class ResultController extends GetxController {
       });
     } catch (e) {
       isVideoLoading.value = false;
-      print('ResultController: Failed to initialize video player: $e');
+      AppLogger()
+          .error('ResultController: Failed to initialize video player: $e');
     }
   }
 
@@ -118,12 +122,13 @@ class ResultController extends GetxController {
 
   String getResultText() {
     if (result.value == null) {
-      print('ResultController: getResultText called but result is null');
+      AppLogger()
+          .warning('ResultController: getResultText called but result is null');
       return '';
     }
 
     final score = result.value!.confidence.toStringAsFixed(1);
-    print(
+    AppLogger().info(
         'ResultController: getResultText - score: $score, isDeepfake: ${result.value!.isDeepfake}');
 
     if (result.value!.isDeepfake) {
@@ -135,11 +140,12 @@ class ResultController extends GetxController {
 
   String getResultColor() {
     if (result.value == null) {
-      print('ResultController: getResultColor called but result is null');
+      AppLogger().warning(
+          'ResultController: getResultColor called but result is null');
       return 'low';
     }
 
-    print(
+    AppLogger().info(
         'ResultController: getResultColor - confidence: ${result.value!.confidence}, isDeepfake: ${result.value!.isDeepfake}');
 
     if (result.value!.isDeepfake) {
@@ -155,19 +161,21 @@ class ResultController extends GetxController {
 
   Future<void> _saveAnalysisToHistory() async {
     try {
+      AppLogger().info('ResultController: Saving analysis to history');
+
       final context = Get.context;
       if (context == null || result.value == null) {
-        print(
+        AppLogger().warning(
             'ResultController: Cannot save to history - context or result is null');
         return;
       }
 
-      print('ResultController: Saving analysis to history');
+      AppLogger().info('ResultController: Saving analysis to history');
       ProfileController profileController;
       try {
         profileController = Get.find<ProfileController>();
       } catch (e) {
-        print(
+        AppLogger().info(
             'ResultController: ProfileController not found, creating new instance');
         profileController = Get.put(ProfileController());
       }
@@ -183,7 +191,7 @@ class ResultController extends GetxController {
           ? S.of(context).deepfakeDetected
           : S.of(context).realVideo;
 
-      print(
+      AppLogger().info(
           'ResultController: Adding history record - title: $title, description: $description');
       await profileController.addHistoryRecord(
         title: title,
@@ -192,7 +200,7 @@ class ResultController extends GetxController {
 
       if (profileController.historyRecords.isNotEmpty) {
         final latestRecordId = profileController.historyRecords.first.id;
-        print(
+        AppLogger().info(
             'ResultController: Updating history record - id: $latestRecordId, result: $resultText, confidence: ${result.value!.confidence}');
         await profileController.updateHistoryRecord(
           recordId: latestRecordId,
@@ -200,9 +208,11 @@ class ResultController extends GetxController {
           confidence: result.value!.confidence,
         );
       }
-      print('ResultController: Analysis saved to history successfully');
+      AppLogger()
+          .info('ResultController: Analysis saved to history successfully');
     } catch (e) {
-      print('ResultController: Failed to save analysis to history: $e');
+      AppLogger()
+          .error('ResultController: Failed to save analysis to history: $e');
     }
   }
 }

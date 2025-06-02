@@ -8,13 +8,13 @@ class SocialButton extends StatelessWidget {
   final bool isLoading;
 
   const SocialButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     required this.icon,
     required this.isDark,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class SocialButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.1 : 0.05),
+            color: Colors.black.withValues(alpha: isDark ? 0.1 : 0.05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -36,13 +36,13 @@ class SocialButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           foregroundColor: isDark ? Colors.white : Colors.black87,
           backgroundColor:
-              isDark ? Colors.white.withOpacity(0.08) : Colors.white,
+              isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
           padding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
             side: BorderSide(
               color: isDark
-                  ? Colors.white.withOpacity(0.1)
+                  ? Colors.white.withValues(alpha: 0.1)
                   : const Color(0xFFEEEEF6),
               width: 1,
             ),
@@ -69,7 +69,7 @@ class SocialButton extends StatelessWidget {
                   const SizedBox(width: 12),
                   Text(
                     label,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),

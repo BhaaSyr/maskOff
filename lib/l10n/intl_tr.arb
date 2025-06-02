@@ -475,5 +475,33 @@
   },
   "viewFullHistory": "Tüm Analiz Geçmişini Görüntüle",
   "analyzingVideo": "Video Analiz Ediliyor",
-  "pleaseWait": "Lütfen videonuz analiz edilirken bekleyin..."
+  "pleaseWait": "Lütfen videonuz analiz edilirken bekleyin...",
+  "userNotAuthenticated": "Kullanıcı girişi yapılmamış",
+  "@userNotAuthenticated": {
+    "description": "profile_controller.dart"
+  },
+  "failedToLoadProfile": "Profil yüklenirken hata oluştu: {error}",
+  "@failedToLoadProfile": {
+    "description": "profile_controller.dart"
+  },
+  "failedToCreateProfile": "Kullanıcı profili oluşturulurken hata oluştu: {error}",
+  "@failedToCreateProfile": {
+    "description": "profile_controller.dart"
+  },
+  "failedToSaveProfile": "Profil kaydedilirken hata oluştu: {error}",
+  "@failedToSaveProfile": {
+    "description": "profile_controller.dart"
+  },
+  "failedToLoadHistory": "Geçmiş yüklenirken hata oluştu: {error}",
+  "@failedToLoadHistory": {
+    "description": "profile_controller.dart"
+  },
+  "failedToAddRecord": "Kayıt eklenirken hata oluştu: {error}",
+  "@failedToAddRecord": {
+    "description": "profile_controller.dart"
+  },
+  "failedToUpdateRecord": "Kayıt güncellenirken hata oluştu: {error}",
+  "@failedToUpdateRecord": {
+    "description": "profile_controller.dart"
+  }
 }

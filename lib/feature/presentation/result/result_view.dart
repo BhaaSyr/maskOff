@@ -11,7 +11,6 @@ class ResultView extends GetView<ResultController> {
   @override
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.find<ThemeController>();
-    final screenSize = MediaQuery.of(context).size;
 
     return Obx(() {
       final isDark = themeController.isDarkMode;
@@ -47,8 +46,9 @@ class ResultView extends GetView<ResultController> {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: isDark
-                                ? Colors.white.withOpacity(0.1)
-                                : const Color(0xFF6C63FF).withOpacity(0.1),
+                                ? Colors.white.withValues(alpha: 0.1)
+                                : const Color(0xFF6C63FF)
+                                    .withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(
@@ -189,8 +189,8 @@ class ResultView extends GetView<ResultController> {
         boxShadow: [
           BoxShadow(
             color: isPrimary
-                ? const Color(0xFF6C63FF).withOpacity(0.3)
-                : Colors.black.withOpacity(isDark ? 0.1 : 0.05),
+                ? const Color(0xFF6C63FF).withValues(alpha: 0.3)
+                : Colors.black.withValues(alpha: isDark ? 0.1 : 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -201,7 +201,7 @@ class ResultView extends GetView<ResultController> {
         style: ElevatedButton.styleFrom(
           backgroundColor: isPrimary
               ? const Color(0xFF6C63FF)
-              : (isDark ? Colors.white.withOpacity(0.08) : Colors.white),
+              : (isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white),
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -209,7 +209,7 @@ class ResultView extends GetView<ResultController> {
                 ? BorderSide.none
                 : BorderSide(
                     color: isDark
-                        ? Colors.white.withOpacity(0.1)
+                        ? Colors.white.withValues(alpha: 0.1)
                         : const Color(0xFFEEEEF6),
                     width: 1,
                   ),

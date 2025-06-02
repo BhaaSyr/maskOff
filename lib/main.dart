@@ -17,11 +17,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Tema kontrolcüsünü bağla - SharedPreferences içeride başlatılacak
-  final themeController = Get.put(ThemeController(), permanent: true);
-
-  // Initialize language controller
-  final languageController = Get.put(LanguageController(), permanent: true);
+  Get.put(ThemeController(), permanent: true);
+  Get.put(LanguageController(), permanent: true);
 
   // Yalnızca dikey mod
   await SystemChrome.setPreferredOrientations([
@@ -40,7 +37,7 @@ class MyApp extends GetView<ThemeController> {
     final languageController = Get.find<LanguageController>();
 
     return Obx(() => GetMaterialApp(
-          localizationsDelegates: [
+          localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

@@ -8,7 +8,7 @@ import 'package:testvid/routes/app_pages.dart';
 import 'package:testvid/feature/presentation/auth/widgets/index.dart';
 
 class RegisterView extends StatefulWidget {
-  const RegisterView({Key? key}) : super(key: key);
+  const RegisterView({super.key});
 
   @override
   State<RegisterView> createState() => _RegisterViewState();
@@ -28,14 +28,12 @@ class _RegisterViewState extends State<RegisterView> {
 
     // Mevcut ekranın Register ekranı olduğunu bildir
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.setCurrentScreen(Routes.REGISTER);
+      controller.setCurrentScreen(Routes.register);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
     return Obx(() {
       final isDark = themeController.isDarkMode;
 
@@ -76,8 +74,9 @@ class _RegisterViewState extends State<RegisterView> {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: isDark
-                                  ? Colors.white.withOpacity(0.1)
-                                  : const Color(0xFF6C63FF).withOpacity(0.1),
+                                  ? Colors.white.withValues(alpha: 0.1)
+                                  : const Color(0xFF6C63FF)
+                                      .withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Icon(
@@ -112,9 +111,9 @@ class _RegisterViewState extends State<RegisterView> {
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: isDark
-                                      ? Colors.white.withOpacity(0.1)
+                                      ? Colors.white.withValues(alpha: 0.1)
                                       : const Color(0xFF6C63FF)
-                                          .withOpacity(0.1),
+                                          .withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Icon(
@@ -135,9 +134,9 @@ class _RegisterViewState extends State<RegisterView> {
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: isDark
-                                      ? Colors.white.withOpacity(0.1)
+                                      ? Colors.white.withValues(alpha: 0.1)
                                       : const Color(0xFF6C63FF)
-                                          .withOpacity(0.1),
+                                          .withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Icon(
@@ -161,13 +160,13 @@ class _RegisterViewState extends State<RegisterView> {
                         width: 80,
                         height: 80,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6C63FF).withOpacity(0.1),
+                          color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.app_registration,
                           size: 45,
-                          color: const Color(0xFF6C63FF),
+                          color: Color(0xFF6C63FF),
                         ),
                       ),
                     ),
@@ -358,10 +357,10 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () => Get.offNamed(Routes.LOGIN),
+                          onPressed: () => Get.offNamed(Routes.login),
                           child: Text(
                             S.of(context).login,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF6C63FF),
                               fontWeight: FontWeight.bold,
                             ),
@@ -388,7 +387,7 @@ class _RegisterViewState extends State<RegisterView> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        contentPadding: EdgeInsets.symmetric(vertical: 8),
+        contentPadding: const EdgeInsets.symmetric(vertical: 8),
         children: [
           // English option
           InkWell(
@@ -397,12 +396,12 @@ class _RegisterViewState extends State<RegisterView> {
               Get.back();
             },
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('🇬🇧', style: TextStyle(fontSize: 18)),
-                  SizedBox(width: 12),
+                  const Text('🇬🇧', style: TextStyle(fontSize: 18)),
+                  const SizedBox(width: 12),
                   Text(
                     'English',
                     style: TextStyle(
@@ -413,12 +412,12 @@ class _RegisterViewState extends State<RegisterView> {
                           : FontWeight.normal,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   if (languageController.currentLanguage == 'en')
-                    Icon(
+                    const Icon(
                       Icons.check,
                       size: 16,
-                      color: const Color(0xFF6C63FF),
+                      color: Color(0xFF6C63FF),
                     ),
                 ],
               ),
@@ -435,12 +434,12 @@ class _RegisterViewState extends State<RegisterView> {
               Get.back();
             },
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('🇹🇷', style: TextStyle(fontSize: 18)),
-                  SizedBox(width: 12),
+                  const Text('🇹🇷', style: TextStyle(fontSize: 18)),
+                  const SizedBox(width: 12),
                   Text(
                     'Türkçe',
                     style: TextStyle(
@@ -451,12 +450,12 @@ class _RegisterViewState extends State<RegisterView> {
                           : FontWeight.normal,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   if (languageController.currentLanguage == 'tr')
-                    Icon(
+                    const Icon(
                       Icons.check,
                       size: 16,
-                      color: const Color(0xFF6C63FF),
+                      color: Color(0xFF6C63FF),
                     ),
                 ],
               ),

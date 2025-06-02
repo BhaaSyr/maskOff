@@ -9,6 +9,7 @@ import 'package:testvid/feature/controllers/result_controller.dart';
 import 'package:testvid/feature/presentation/bindings/result_binding.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:testvid/generated/l10n.dart';
+import 'package:testvid/core/services/app_logger.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -19,7 +20,6 @@ class HomeView extends StatelessWidget {
     final ThemeController themeController = Get.find<ThemeController>();
     final AuthController authController = Get.find<AuthController>();
     final ProfileController profileController = Get.put(ProfileController());
-    final screenSize = MediaQuery.of(context).size;
 
     return Obx(() {
       final isDark = themeController.isDarkMode;
@@ -67,18 +67,21 @@ class HomeView extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              print("Tema değiştirme butonu tıklandı");
-                              print("Mevcut tema: ${isDark ? 'Koyu' : 'Açık'}");
+                              AppLogger()
+                                  .info("Tema değiştirme butonu tıklandı");
+                              AppLogger().info(
+                                  "Mevcut tema: ${isDark ? 'Koyu' : 'Açık'}");
                               themeController.toggleTheme();
-                              print(
+                              AppLogger().info(
                                   "Yeni tema: ${themeController.isDarkMode ? 'Koyu' : 'Açık'}");
                             },
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 color: isDark
-                                    ? Colors.white.withOpacity(0.1)
-                                    : const Color(0xFF6C63FF).withOpacity(0.1),
+                                    ? Colors.white.withValues(alpha: 0.1)
+                                    : const Color(0xFF6C63FF)
+                                        .withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Icon(
@@ -97,8 +100,9 @@ class HomeView extends StatelessWidget {
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 color: isDark
-                                    ? Colors.white.withOpacity(0.1)
-                                    : const Color(0xFF6C63FF).withOpacity(0.1),
+                                    ? Colors.white.withValues(alpha: 0.1)
+                                    : const Color(0xFF6C63FF)
+                                        .withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Icon(
@@ -110,19 +114,16 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 12),
-                          // Tema değiştirme butonu
-
-                          // Bilgi butonu
-
                           // Settings button
                           GestureDetector(
-                            onTap: () => Get.toNamed(Routes.SETTINGS),
+                            onTap: () => Get.toNamed(Routes.settings),
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 color: isDark
-                                    ? Colors.white.withOpacity(0.1)
-                                    : const Color(0xFF6C63FF).withOpacity(0.1),
+                                    ? Colors.white.withValues(alpha: 0.1)
+                                    : const Color(0xFF6C63FF)
+                                        .withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Icon(
@@ -172,7 +173,7 @@ class HomeView extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: isDark
-                            ? Colors.white.withOpacity(0.8)
+                            ? Colors.white.withValues(alpha: 0.8)
                             : const Color(0xFF555555),
                       ),
                     );
@@ -183,7 +184,7 @@ class HomeView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 14,
                       color: isDark
-                          ? Colors.white.withOpacity(0.7)
+                          ? Colors.white.withValues(alpha: 0.7)
                           : const Color(0xFF555555),
                     ),
                   ),
@@ -234,8 +235,8 @@ class HomeView extends StatelessWidget {
 
                               // Show loading dialog
                               Get.dialog(
-                                WillPopScope(
-                                  onWillPop: () async => false,
+                                PopScope(
+                                  canPop: false,
                                   child: Material(
                                     type: MaterialType.transparency,
                                     child: Center(
@@ -251,8 +252,8 @@ class HomeView extends StatelessWidget {
                                               BorderRadius.circular(20),
                                           boxShadow: [
                                             BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.1),
+                                              color: Colors.black
+                                                  .withValues(alpha: 0.1),
                                               blurRadius: 20,
                                               offset: const Offset(0, 10),
                                             ),
@@ -265,7 +266,7 @@ class HomeView extends StatelessWidget {
                                               padding: const EdgeInsets.all(16),
                                               decoration: BoxDecoration(
                                                 color: const Color(0xFF6C63FF)
-                                                    .withOpacity(0.1),
+                                                    .withValues(alpha: 0.1),
                                                 shape: BoxShape.circle,
                                               ),
                                               child:
@@ -306,7 +307,8 @@ class HomeView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                barrierColor: Colors.black.withOpacity(0.5),
+                                barrierColor:
+                                    Colors.black.withValues(alpha: 0.5),
                               );
 
                               await resultController
@@ -350,11 +352,11 @@ class HomeView extends StatelessWidget {
   Widget _buildVideoCard(VideoController controller, bool isDark) {
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.08) : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.2 : 0.1),
+            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.1),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -371,7 +373,7 @@ class HomeView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF6C63FF).withOpacity(0.1),
+                    color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Icon(
@@ -397,7 +399,7 @@ class HomeView extends StatelessWidget {
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       color: isDark
-                          ? Colors.white.withOpacity(0.1)
+                          ? Colors.white.withValues(alpha: 0.1)
                           : const Color(0xFFEEEEF6),
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -426,11 +428,12 @@ class HomeView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.08) : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color:
-              isDark ? Colors.white.withOpacity(0.1) : const Color(0xFFEEEEF6),
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.1)
+              : const Color(0xFFEEEEF6),
           width: 1,
         ),
       ),
@@ -440,7 +443,7 @@ class HomeView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF6C63FF).withOpacity(0.1),
+              color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: const Icon(
@@ -464,7 +467,7 @@ class HomeView extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               color: isDark
-                  ? Colors.white.withOpacity(0.6)
+                  ? Colors.white.withValues(alpha: 0.6)
                   : const Color(0xFF777777),
             ),
             textAlign: TextAlign.center,
@@ -486,8 +489,8 @@ class HomeView extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: isPrimary
-                ? const Color(0xFF6C63FF).withOpacity(0.3)
-                : Colors.black.withOpacity(isDark ? 0.1 : 0.05),
+                ? const Color(0xFF6C63FF).withValues(alpha: 0.3)
+                : Colors.black.withValues(alpha: isDark ? 0.1 : 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -498,7 +501,7 @@ class HomeView extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: isPrimary
               ? const Color(0xFF6C63FF)
-              : (isDark ? Colors.white.withOpacity(0.08) : Colors.white),
+              : (isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white),
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -506,7 +509,7 @@ class HomeView extends StatelessWidget {
                 ? BorderSide.none
                 : BorderSide(
                     color: isDark
-                        ? Colors.white.withOpacity(0.1)
+                        ? Colors.white.withValues(alpha: 0.1)
                         : const Color(0xFFEEEEF6),
                     width: 1,
                   ),

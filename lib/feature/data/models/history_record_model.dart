@@ -84,9 +84,13 @@ class HistoryRecordModel {
   String get resultColor {
     if (result == null) return 'unknown';
     if (result!.toLowerCase().contains('real') ||
-        result!.toLowerCase().contains('gerçek')) return 'real';
+        result!.toLowerCase().contains('gerçek')) {
+      return 'real';
+    }
     if (result!.toLowerCase().contains('fake') ||
-        result!.toLowerCase().contains('deepfake')) return 'fake';
+        result!.toLowerCase().contains('deepfake')) {
+      return 'fake';
+    }
     return 'unknown';
   }
 

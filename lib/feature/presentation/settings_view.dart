@@ -49,8 +49,9 @@ class SettingsView extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: isDark
-                                ? Colors.white.withOpacity(0.1)
-                                : const Color(0xFF6C63FF).withOpacity(0.1),
+                                ? Colors.white.withValues(alpha: 0.1)
+                                : const Color(0xFF6C63FF)
+                                    .withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(
@@ -308,11 +309,11 @@ class SettingsView extends StatelessWidget {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.08) : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.2 : 0.05),
+            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
             blurRadius: isDark ? 15 : 10,
             offset: const Offset(0, 5),
           ),
@@ -337,8 +338,8 @@ class SettingsView extends StatelessWidget {
         height: 36,
         decoration: BoxDecoration(
           color: isDark
-              ? Colors.white.withOpacity(0.1)
-              : const Color(0xFF6C63FF).withOpacity(0.1),
+              ? Colors.white.withValues(alpha: 0.1)
+              : const Color(0xFF6C63FF).withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Icon(
@@ -359,7 +360,7 @@ class SettingsView extends StatelessWidget {
         value: value,
         onChanged: onChanged,
         activeColor: const Color(0xFF6C63FF),
-        activeTrackColor: const Color(0xFF6C63FF).withOpacity(0.3),
+        activeTrackColor: const Color(0xFF6C63FF).withValues(alpha: 0.3),
       ),
     );
   }
@@ -391,9 +392,9 @@ class SettingsView extends StatelessWidget {
             ),
             const Spacer(),
             if (isSelected)
-              Icon(
+              const Icon(
                 Icons.check_circle,
-                color: const Color(0xFF6C63FF),
+                color: Color(0xFF6C63FF),
                 size: 18,
               ),
           ],
@@ -414,8 +415,8 @@ class SettingsView extends StatelessWidget {
         height: 36,
         decoration: BoxDecoration(
           color: isDark
-              ? Colors.white.withOpacity(0.1)
-              : const Color(0xFF6C63FF).withOpacity(0.1),
+              ? Colors.white.withValues(alpha: 0.1)
+              : const Color(0xFF6C63FF).withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Icon(
@@ -456,8 +457,8 @@ class SettingsView extends StatelessWidget {
           height: 36,
           decoration: BoxDecoration(
             color: isDark
-                ? Colors.white.withOpacity(0.1)
-                : const Color(0xFF6C63FF).withOpacity(0.1),
+                ? Colors.white.withValues(alpha: 0.1)
+                : const Color(0xFF6C63FF).withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(

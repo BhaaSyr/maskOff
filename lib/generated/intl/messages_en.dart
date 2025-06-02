@@ -26,17 +26,29 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(title) =>
       "Are you sure you want to delete \"${title}\"? This action cannot be undone.";
 
-  static String m2(error) => "Failed to delete record: ${error}";
+  static String m2(error) => "Failed to add record: ${error}";
 
-  static String m3(email) =>
+  static String m3(error) => "Failed to create user profile: ${error}";
+
+  static String m4(error) => "Failed to delete record: ${error}";
+
+  static String m5(error) => "Failed to load history: ${error}";
+
+  static String m6(error) => "Failed to load profile: ${error}";
+
+  static String m7(error) => "Failed to save profile: ${error}";
+
+  static String m8(error) => "Failed to update record: ${error}";
+
+  static String m9(email) =>
       "Password reset link has been sent to ${email}.\n\nPlease check your email and click the link to reset your password.";
 
-  static String m4(score) =>
+  static String m10(score) =>
       "This video likely appears real with a probability of %${score}.";
 
-  static String m5(filename) => "Video Analysis - ${filename}";
+  static String m11(filename) => "Video Analysis - ${filename}";
 
-  static String m6(name) => "Welcome back, ${name}!";
+  static String m12(name) => "Welcome back, ${name}!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -95,7 +107,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterInfo": MessageLookupByLibrary.simpleMessage(
             "Please enter your information"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
-        "failedToDeleteRecord": m2,
+        "failedToAddRecord": m2,
+        "failedToCreateProfile": m3,
+        "failedToDeleteRecord": m4,
+        "failedToLoadHistory": m5,
+        "failedToLoadProfile": m6,
+        "failedToSaveProfile": m7,
+        "failedToUpdateRecord": m8,
         "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
         "firstNameHint":
             MessageLookupByLibrary.simpleMessage("Enter your first name"),
@@ -158,7 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordReset": MessageLookupByLibrary.simpleMessage("Password Reset"),
         "passwordResetEmailSent":
             MessageLookupByLibrary.simpleMessage("Password Reset Email Sent"),
-        "passwordResetEmailSentMessage": m3,
+        "passwordResetEmailSentMessage": m9,
         "passwordResetError": MessageLookupByLibrary.simpleMessage(
             "An error occurred during password reset"),
         "passwordResetInfo": MessageLookupByLibrary.simpleMessage(
@@ -178,7 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileUpdateSuccess": MessageLookupByLibrary.simpleMessage(
             "Profile updated successfully"),
         "realVideo": MessageLookupByLibrary.simpleMessage("Real Video"),
-        "realVideoResult": m4,
+        "realVideoResult": m10,
         "recordDeletedSuccessfully":
             MessageLookupByLibrary.simpleMessage("Record deleted successfully"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
@@ -204,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadVideo": MessageLookupByLibrary.simpleMessage("Upload Video"),
         "userDisabled":
             MessageLookupByLibrary.simpleMessage("This user has been disabled"),
+        "userNotAuthenticated":
+            MessageLookupByLibrary.simpleMessage("User not authenticated"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found with this email"),
         "verificationEmailSent":
@@ -211,13 +231,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
             "We have sent a verification link to your email. Please check your inbox."),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "videoAnalysis": m5,
+        "videoAnalysis": m11,
         "viewFullHistory":
             MessageLookupByLibrary.simpleMessage("View Full History"),
         "weakPassword":
             MessageLookupByLibrary.simpleMessage("Password is too weak"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
-        "welcomeBack": m6,
+        "welcomeBack": m12,
         "wrongPassword":
             MessageLookupByLibrary.simpleMessage("Incorrect password"),
         "yourVideo": MessageLookupByLibrary.simpleMessage("Your Video")

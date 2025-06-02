@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageController extends GetxController {
+  // ignore: constant_identifier_names
   static const String LANGUAGE_CODE_KEY = 'languageCode';
 
   final RxString _currentLanguage = "en".obs;

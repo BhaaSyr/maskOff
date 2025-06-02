@@ -8,7 +8,7 @@ import 'package:testvid/routes/app_pages.dart';
 import 'package:testvid/feature/presentation/auth/widgets/index.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -28,14 +28,12 @@ class _LoginViewState extends State<LoginView> {
 
     // Mevcut ekranın Login ekranı olduğunu bildir
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.setCurrentScreen(Routes.LOGIN);
+      controller.setCurrentScreen(Routes.login);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
     return Obx(() {
       final isDark = themeController.isDarkMode;
 
@@ -77,8 +75,9 @@ class _LoginViewState extends State<LoginView> {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: isDark
-                                  ? Colors.white.withOpacity(0.1)
-                                  : const Color(0xFF6C63FF).withOpacity(0.1),
+                                  ? Colors.white.withValues(alpha: 0.1)
+                                  : const Color(0xFF6C63FF)
+                                      .withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Icon(
@@ -99,8 +98,9 @@ class _LoginViewState extends State<LoginView> {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: isDark
-                                  ? Colors.white.withOpacity(0.1)
-                                  : const Color(0xFF6C63FF).withOpacity(0.1),
+                                  ? Colors.white.withValues(alpha: 0.1)
+                                  : const Color(0xFF6C63FF)
+                                      .withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Icon(
@@ -122,13 +122,13 @@ class _LoginViewState extends State<LoginView> {
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6C63FF).withOpacity(0.1),
+                          color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.verified_user,
                           size: 60,
-                          color: const Color(0xFF6C63FF),
+                          color: Color(0xFF6C63FF),
                         ),
                       ),
                     ),
@@ -207,8 +207,8 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         child: Text(
                           S.of(context).forgotPassword,
-                          style: TextStyle(
-                            color: const Color(0xFF6C63FF),
+                          style: const TextStyle(
+                            color: Color(0xFF6C63FF),
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -298,10 +298,10 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () => Get.toNamed(Routes.REGISTER),
+                          onPressed: () => Get.toNamed(Routes.register),
                           child: Text(
                             S.of(context).signup,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF6C63FF),
                               fontWeight: FontWeight.bold,
                             ),
@@ -350,11 +350,13 @@ class _LoginViewState extends State<LoginView> {
             const SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
-                color: isDark ? Colors.white.withOpacity(0.06) : Colors.white,
+                color: isDark
+                    ? Colors.white.withValues(alpha: 0.06)
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(isDark ? 0.05 : 0.03),
+                    color: Colors.black.withValues(alpha: isDark ? 0.05 : 0.03),
                     blurRadius: 10,
                     offset: const Offset(0, 2),
                   ),
@@ -380,8 +382,9 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   contentPadding: const EdgeInsets.symmetric(vertical: 16),
                   filled: true,
-                  fillColor:
-                      isDark ? Colors.white.withOpacity(0.04) : Colors.white,
+                  fillColor: isDark
+                      ? Colors.white.withValues(alpha: 0.04)
+                      : Colors.white,
                 ),
               ),
             ),
@@ -439,8 +442,8 @@ class _LoginViewState extends State<LoginView> {
                       )
                     : Text(
                         S.of(context).send,
-                        style: TextStyle(
-                          color: const Color(0xFF6C63FF),
+                        style: const TextStyle(
+                          color: Color(0xFF6C63FF),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -457,7 +460,7 @@ class _LoginViewState extends State<LoginView> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        contentPadding: EdgeInsets.symmetric(vertical: 8),
+        contentPadding: const EdgeInsets.symmetric(vertical: 8),
         children: [
           // English option
           InkWell(
@@ -466,12 +469,12 @@ class _LoginViewState extends State<LoginView> {
               Get.back();
             },
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('🇬🇧', style: TextStyle(fontSize: 18)),
-                  SizedBox(width: 12),
+                  const Text('🇬🇧', style: TextStyle(fontSize: 18)),
+                  const SizedBox(width: 12),
                   Text(
                     'English',
                     style: TextStyle(
@@ -482,12 +485,12 @@ class _LoginViewState extends State<LoginView> {
                           : FontWeight.normal,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   if (languageController.currentLanguage == 'en')
-                    Icon(
+                    const Icon(
                       Icons.check,
                       size: 16,
-                      color: const Color(0xFF6C63FF),
+                      color: Color(0xFF6C63FF),
                     ),
                 ],
               ),
@@ -504,12 +507,12 @@ class _LoginViewState extends State<LoginView> {
               Get.back();
             },
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('🇹🇷', style: TextStyle(fontSize: 18)),
-                  SizedBox(width: 12),
+                  const Text('🇹🇷', style: TextStyle(fontSize: 18)),
+                  const SizedBox(width: 12),
                   Text(
                     'Türkçe',
                     style: TextStyle(
@@ -520,12 +523,12 @@ class _LoginViewState extends State<LoginView> {
                           : FontWeight.normal,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   if (languageController.currentLanguage == 'tr')
-                    Icon(
+                    const Icon(
                       Icons.check,
                       size: 16,
-                      color: const Color(0xFF6C63FF),
+                      color: Color(0xFF6C63FF),
                     ),
                 ],
               ),

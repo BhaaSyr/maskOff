@@ -5,10 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testvid/feature/data/models/user_model.dart';
 import 'package:testvid/feature/data/models/history_record_model.dart';
 import 'package:testvid/generated/l10n.dart';
+import 'package:testvid/feature/controllers/theme_controller.dart';
 
 class ProfileController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final ThemeController _themeController = Get.find<ThemeController>();
 
   // Text controllers
   final firstNameController = TextEditingController();
@@ -32,8 +34,10 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadUserProfile();
-    loadHistoryRecords();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      loadUserProfile();
+      loadHistoryRecords();
+    });
     _setupErrorClearingListeners();
   }
 
@@ -71,7 +75,8 @@ class ProfileController extends GetxController {
     if (user == null) {
       final context = Get.context;
       if (context != null) {
-        _showErrorSnackbar(S.of(context).error, 'User not authenticated');
+        _showErrorSnackbar(
+            S.of(Get.context!).error, S.of(Get.context!).userNotAuthenticated);
       }
       return;
     }
@@ -83,21 +88,19 @@ class ProfileController extends GetxController {
           await _firestore.collection('users').doc(user.uid).get();
 
       if (docSnapshot.exists) {
-        // User exists in Firestore
         final data = docSnapshot.data();
         if (data != null) {
           userModel.value = UserModel.fromMap(data);
           _populateControllers();
         }
       } else {
-        // Create empty user document for first time use
         await _createEmptyUserDocument(user);
       }
     } catch (e) {
       final context = Get.context;
       if (context != null) {
-        _showErrorSnackbar(
-            S.of(context).error, 'Failed to load profile: ${e.toString()}');
+        _showErrorSnackbar(S.of(Get.context!).error,
+            S.of(Get.context!).failedToLoadProfile(e.toString()));
       }
     } finally {
       isLoading.value = false;
@@ -123,8 +126,8 @@ class ProfileController extends GetxController {
     } catch (e) {
       final context = Get.context;
       if (context != null) {
-        _showErrorSnackbar(S.of(context).error,
-            'Failed to create user profile: ${e.toString()}');
+        _showErrorSnackbar(S.of(Get.context!).error,
+            S.of(Get.context!).failedToCreateProfile(e.toString()));
       }
     }
   }
@@ -147,13 +150,13 @@ class ProfileController extends GetxController {
 
     // First name validation
     if (firstNameController.text.trim().isEmpty) {
-      firstNameError.value = S.of(context).firstNameRequired;
+      firstNameError.value = S.of(Get.context!).firstNameRequired;
       isValid = false;
     }
 
     // Last name validation
     if (lastNameController.text.trim().isEmpty) {
-      lastNameError.value = S.of(context).lastNameRequired;
+      lastNameError.value = S.of(Get.context!).lastNameRequired;
       isValid = false;
     }
 
@@ -161,7 +164,7 @@ class ProfileController extends GetxController {
     if (ageController.text.trim().isNotEmpty) {
       final age = int.tryParse(ageController.text.trim());
       if (age == null || age < 1 || age > 150) {
-        ageError.value = S.of(context).invalidAge;
+        ageError.value = S.of(Get.context!).invalidAge;
         isValid = false;
       }
     }
@@ -177,7 +180,8 @@ class ProfileController extends GetxController {
     if (user == null) {
       final context = Get.context;
       if (context != null) {
-        _showErrorSnackbar(S.of(context).error, 'User not authenticated');
+        _showErrorSnackbar(
+            S.of(Get.context!).error, S.of(Get.context!).userNotAuthenticated);
       }
       return;
     }
@@ -203,25 +207,21 @@ class ProfileController extends GetxController {
         updatedAt: now,
       );
 
-      // Update Firestore
       await _firestore
           .collection('users')
           .doc(user.uid)
           .set(updatedUser.toMap(), SetOptions(merge: true));
 
-      // Update Firebase Auth display name
       await user.updateDisplayName(updatedUser.fullName);
 
       userModel.value = updatedUser;
 
-      _showSuccessSnackbar(
-          S.of(context).success, S.of(context).profileUpdateSuccess);
-
-      // Go back to previous screen
       Get.back();
+      _showSuccessSnackbar(
+          S.of(Get.context!).success, S.of(Get.context!).profileUpdateSuccess);
     } catch (e) {
-      _showErrorSnackbar(
-          S.of(context).error, 'Failed to save profile: ${e.toString()}');
+      _showErrorSnackbar(S.of(Get.context!).error,
+          S.of(Get.context!).failedToSaveProfile(e.toString()));
     } finally {
       isSaving.value = false;
     }
@@ -229,28 +229,36 @@ class ProfileController extends GetxController {
 
   // Helper methods for showing snackbars
   void _showSuccessSnackbar(String title, String message) {
+    final isDark = _themeController.isDarkMode;
     Get.snackbar(
       title,
       message,
-      backgroundColor: Colors.green,
+      backgroundColor: isDark
+          ? Colors.green.withValues(alpha: 0.5)
+          : Colors.green.withValues(alpha: 0.8),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(10),
       borderRadius: 8,
+      icon: const Icon(Icons.check_circle, color: Colors.white),
     );
   }
 
   void _showErrorSnackbar(String title, String message) {
+    final isDark = _themeController.isDarkMode;
     Get.snackbar(
       title,
       message,
-      backgroundColor: Colors.red,
+      backgroundColor: isDark
+          ? Colors.red.withValues(alpha: 0.5)
+          : Colors.red.withValues(alpha: 0.8),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(10),
       borderRadius: 8,
+      icon: const Icon(Icons.error_outline, color: Colors.white),
     );
   }
 
@@ -264,7 +272,6 @@ class ProfileController extends GetxController {
     try {
       isLoadingHistory.value = true;
 
-      // Simplified query without orderBy to avoid index requirement
       final querySnapshot = await _firestore
           .collection('history_records')
           .where('userId', isEqualTo: user.uid)
@@ -274,14 +281,14 @@ class ProfileController extends GetxController {
           .map((doc) => HistoryRecordModel.fromMap(doc.data()))
           .toList();
 
-      // Sort on client side
       records.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
       historyRecords.value = records;
     } catch (e) {
       final context = Get.context;
       if (context != null) {
-        _showErrorSnackbar('Error', 'Failed to load history: ${e.toString()}');
+        _showErrorSnackbar(S.of(Get.context!).error,
+            S.of(Get.context!).failedToLoadHistory(e.toString()));
       }
     } finally {
       isLoadingHistory.value = false;
@@ -308,18 +315,17 @@ class ProfileController extends GetxController {
         createdAt: now,
       );
 
-      // Save to Firestore
       await _firestore
           .collection('history_records')
           .doc(recordId)
           .set(newRecord.toMap());
 
-      // Add to local list
       historyRecords.insert(0, newRecord);
     } catch (e) {
       final context = Get.context;
       if (context != null) {
-        _showErrorSnackbar('Error', 'Failed to add record: ${e.toString()}');
+        _showErrorSnackbar(S.of(Get.context!).error,
+            S.of(Get.context!).failedToAddRecord(e.toString()));
       }
     }
   }
@@ -340,18 +346,17 @@ class ProfileController extends GetxController {
         confidence: confidence,
       );
 
-      // Update Firestore
       await _firestore
           .collection('history_records')
           .doc(recordId)
           .update(updatedRecord.toMap());
 
-      // Update local list
       historyRecords[recordIndex] = updatedRecord;
     } catch (e) {
       final context = Get.context;
       if (context != null) {
-        _showErrorSnackbar('Error', 'Failed to update record: ${e.toString()}');
+        _showErrorSnackbar(S.of(Get.context!).error,
+            S.of(Get.context!).failedToUpdateRecord(e.toString()));
       }
     }
   }
@@ -367,14 +372,14 @@ class ProfileController extends GetxController {
 
       final context = Get.context;
       if (context != null) {
-        _showSuccessSnackbar(
-            S.of(context).success, S.of(context).recordDeletedSuccessfully);
+        _showSuccessSnackbar(S.of(Get.context!).success,
+            S.of(Get.context!).recordDeletedSuccessfully);
       }
     } catch (e) {
       final context = Get.context;
       if (context != null) {
-        _showErrorSnackbar(S.of(context).error,
-            S.of(context).failedToDeleteRecord(e.toString()));
+        _showErrorSnackbar(S.of(Get.context!).error,
+            S.of(Get.context!).failedToDeleteRecord(e.toString()));
       }
     }
   }

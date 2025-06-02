@@ -2,14 +2,10 @@ import '../../domain/entities/deepfake_result_entity.dart';
 
 class DeepfakeResultModel extends DeepfakeResultEntity {
   DeepfakeResultModel({
-    required double confidence,
-    required String result,
-    required DateTime analyzedAt,
-  }) : super(
-          confidence: confidence,
-          result: result,
-          analyzedAt: analyzedAt,
-        );
+    required super.confidence,
+    required super.result,
+    required super.analyzedAt,
+  });
 
   factory DeepfakeResultModel.fromJson(Map<String, dynamic> json) {
     return DeepfakeResultModel(

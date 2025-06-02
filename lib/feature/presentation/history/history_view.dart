@@ -48,8 +48,9 @@ class HistoryView extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: isDark
-                                ? Colors.white.withOpacity(0.1)
-                                : const Color(0xFF6C63FF).withOpacity(0.1),
+                                ? Colors.white.withValues(alpha: 0.1)
+                                : const Color(0xFF6C63FF)
+                                    .withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(
@@ -77,8 +78,9 @@ class HistoryView extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: isDark
-                                ? Colors.white.withOpacity(0.1)
-                                : const Color(0xFF6C63FF).withOpacity(0.1),
+                                ? Colors.white.withValues(alpha: 0.1)
+                                : const Color(0xFF6C63FF)
+                                    .withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(
@@ -146,7 +148,8 @@ class HistoryView extends StatelessWidget {
           Icon(
             Icons.history,
             size: 64,
-            color: isDark ? Colors.white.withOpacity(0.3) : Colors.grey[400],
+            color:
+                isDark ? Colors.white.withValues(alpha: 0.3) : Colors.grey[400],
           ),
           const SizedBox(height: 16),
           Text(
@@ -162,7 +165,9 @@ class HistoryView extends StatelessWidget {
             S.of(context).analyzeVideoToSeeResults,
             style: TextStyle(
               fontSize: 14,
-              color: isDark ? Colors.white.withOpacity(0.4) : Colors.grey[500],
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.4)
+                  : Colors.grey[500],
             ),
             textAlign: TextAlign.center,
           ),
@@ -188,11 +193,11 @@ class HistoryView extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.08) : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.2 : 0.05),
+            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
             blurRadius: isDark ? 15 : 10,
             offset: const Offset(0, 5),
           ),
@@ -222,7 +227,7 @@ class HistoryView extends StatelessWidget {
                     Icons.delete_outline,
                     size: 20,
                     color: isDark
-                        ? Colors.white.withOpacity(0.4)
+                        ? Colors.white.withValues(alpha: 0.4)
                         : Colors.grey[500],
                   ),
                 ),
@@ -248,8 +253,9 @@ class HistoryView extends StatelessWidget {
                 Icon(
                   Icons.access_time,
                   size: 14,
-                  color:
-                      isDark ? Colors.white.withOpacity(0.4) : Colors.grey[500],
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.4)
+                      : Colors.grey[500],
                 ),
                 const SizedBox(width: 4),
                 Text(
@@ -257,7 +263,7 @@ class HistoryView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     color: isDark
-                        ? Colors.white.withOpacity(0.4)
+                        ? Colors.white.withValues(alpha: 0.4)
                         : Colors.grey[500],
                   ),
                 ),
@@ -303,11 +309,11 @@ class HistoryView extends StatelessWidget {
   Color _getResultColor(String resultType, bool isDark) {
     switch (resultType) {
       case 'real':
-        return Colors.green.withOpacity(isDark ? 0.3 : 0.1);
+        return Colors.green.withValues(alpha: isDark ? 0.3 : 0.1);
       case 'fake':
-        return Colors.red.withOpacity(isDark ? 0.3 : 0.1);
+        return Colors.red.withValues(alpha: isDark ? 0.3 : 0.1);
       default:
-        return Colors.grey.withOpacity(isDark ? 0.3 : 0.1);
+        return Colors.grey.withValues(alpha: isDark ? 0.3 : 0.1);
     }
   }
 

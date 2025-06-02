@@ -14,45 +14,46 @@ import 'package:testvid/feature/presentation/splash/splash_screen.dart';
 import 'package:testvid/feature/presentation/history/history_view.dart';
 
 class AppPages {
-  static const INITIAL = Routes.SPLASH; // Başlangıç rotasını değiştirdik
+  // ignore: constant_identifier_names
+  static const INITIAL = Routes.splash; // Başlangıç rotasını değiştirdik
 
   static final routes = [
     GetPage(
-      name: Routes.SPLASH,
+      name: Routes.splash,
       page: () => const SplashView(),
       binding: SplashBinding(),
     ),
     GetPage(
-      name: Routes.LOGIN,
+      name: Routes.login,
       page: () => const LoginView(),
       binding: AuthBinding(),
     ),
     GetPage(
-      name: Routes.REGISTER,
+      name: Routes.register,
       page: () => const RegisterView(),
       binding: AuthBinding(),
     ),
     GetPage(
-      name: Routes.HOME,
+      name: Routes.home,
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: Routes.RESULT,
+      name: Routes.result,
       page: () => const ResultView(),
       binding: ResultBinding(),
     ),
     GetPage(
-      name: Routes.SETTINGS,
+      name: Routes.settings,
       page: () => const SettingsView(),
     ),
     GetPage(
-      name: Routes.PROFILE,
+      name: Routes.profile,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
-      name: Routes.HISTORY,
+      name: Routes.history,
       page: () => const HistoryView(),
       binding: ProfileBinding(),
     ),
@@ -61,12 +62,12 @@ class AppPages {
 
 // Routes sınıfını da güncelleyin
 abstract class Routes {
-  static const SPLASH = '/splash';
-  static const LOGIN = '/login';
-  static const REGISTER = '/register';
-  static const HOME = '/home';
-  static const RESULT = '/result';
-  static const SETTINGS = '/settings';
-  static const PROFILE = '/profile';
-  static const HISTORY = '/history';
+  static const splash = '/splash';
+  static const login = '/login';
+  static const register = '/register';
+  static const home = '/home';
+  static const result = '/result';
+  static const settings = '/settings';
+  static const profile = '/profile';
+  static const history = '/history';
 }

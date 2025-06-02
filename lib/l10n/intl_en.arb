@@ -475,5 +475,33 @@
   },
   "viewFullHistory": "View Full History",
   "analyzingVideo": "Analyzing Video",
-  "pleaseWait": "Please wait while we analyze your video..."
+  "pleaseWait": "Please wait while we analyze your video...",
+  "userNotAuthenticated": "User not authenticated",
+  "@userNotAuthenticated": {
+    "description": "profile_controller.dart"
+  },
+  "failedToLoadProfile": "Failed to load profile: {error}",
+  "@failedToLoadProfile": {
+    "description": "profile_controller.dart"
+  },
+  "failedToCreateProfile": "Failed to create user profile: {error}",
+  "@failedToCreateProfile": {
+    "description": "profile_controller.dart"
+  },
+  "failedToSaveProfile": "Failed to save profile: {error}",
+  "@failedToSaveProfile": {
+    "description": "profile_controller.dart"
+  },
+  "failedToLoadHistory": "Failed to load history: {error}",
+  "@failedToLoadHistory": {
+    "description": "profile_controller.dart"
+  },
+  "failedToAddRecord": "Failed to add record: {error}",
+  "@failedToAddRecord": {
+    "description": "profile_controller.dart"
+  },
+  "failedToUpdateRecord": "Failed to update record: {error}",
+  "@failedToUpdateRecord": {
+    "description": "profile_controller.dart"
+  }
 }

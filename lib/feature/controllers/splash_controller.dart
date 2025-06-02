@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:testvid/core/services/app_logger.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -37,10 +38,10 @@ class SplashController extends GetxController {
           // Kullanıcı oturum durumunu kontrol et
           if (_auth.currentUser != null) {
             // Kullanıcı giriş yapmış, ana sayfaya yönlendir
-            Get.offAllNamed(Routes.HOME);
+            Get.offAllNamed(Routes.home);
           } else {
             // Kullanıcı giriş yapmamış, login sayfasına yönlendir
-            Get.offAllNamed(Routes.LOGIN);
+            Get.offAllNamed(Routes.login);
           }
         });
       } else {
@@ -48,9 +49,9 @@ class SplashController extends GetxController {
         hasConnectionError = true;
       }
     } catch (e) {
+      AppLogger().error("Bağlantı hatası: $e");
       // İstek zaman aşımına uğradı veya başka bir hata oluştu
       hasConnectionError = true;
-      print("Bağlantı hatası: $e");
     }
 
     isCheckingConnection = false;

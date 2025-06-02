@@ -1159,6 +1159,76 @@ class S {
       args: [],
     );
   }
+
+  /// `User not authenticated`
+  String get userNotAuthenticated {
+    return Intl.message(
+      'User not authenticated',
+      name: 'userNotAuthenticated',
+      desc: 'profile_controller.dart',
+      args: [],
+    );
+  }
+
+  /// `Failed to load profile: {error}`
+  String failedToLoadProfile(Object error) {
+    return Intl.message(
+      'Failed to load profile: $error',
+      name: 'failedToLoadProfile',
+      desc: 'profile_controller.dart',
+      args: [error],
+    );
+  }
+
+  /// `Failed to create user profile: {error}`
+  String failedToCreateProfile(Object error) {
+    return Intl.message(
+      'Failed to create user profile: $error',
+      name: 'failedToCreateProfile',
+      desc: 'profile_controller.dart',
+      args: [error],
+    );
+  }
+
+  /// `Failed to save profile: {error}`
+  String failedToSaveProfile(Object error) {
+    return Intl.message(
+      'Failed to save profile: $error',
+      name: 'failedToSaveProfile',
+      desc: 'profile_controller.dart',
+      args: [error],
+    );
+  }
+
+  /// `Failed to load history: {error}`
+  String failedToLoadHistory(Object error) {
+    return Intl.message(
+      'Failed to load history: $error',
+      name: 'failedToLoadHistory',
+      desc: 'profile_controller.dart',
+      args: [error],
+    );
+  }
+
+  /// `Failed to add record: {error}`
+  String failedToAddRecord(Object error) {
+    return Intl.message(
+      'Failed to add record: $error',
+      name: 'failedToAddRecord',
+      desc: 'profile_controller.dart',
+      args: [error],
+    );
+  }
+
+  /// `Failed to update record: {error}`
+  String failedToUpdateRecord(Object error) {
+    return Intl.message(
+      'Failed to update record: $error',
+      name: 'failedToUpdateRecord',
+      desc: 'profile_controller.dart',
+      args: [error],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

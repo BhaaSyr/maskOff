@@ -9,13 +9,13 @@ class ResultCardWidget extends StatelessWidget {
   final bool isDarkMode;
 
   const ResultCardWidget({
-    Key? key,
+    super.key,
     required this.isDeepfake,
     required this.confidenceScore,
     required this.resultText,
     required this.resultColor,
     required this.isDarkMode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,9 @@ class ResultCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color:
-                isDarkMode ? Colors.black.withOpacity(0.3) : _getShadowColor(),
+            color: isDarkMode
+                ? Colors.black.withValues(alpha: 0.3)
+                : _getShadowColor(),
             blurRadius: isDarkMode ? 15 : 20,
             spreadRadius: isDarkMode ? 0 : 1,
             offset: const Offset(0, 8),
@@ -37,8 +38,8 @@ class ResultCardWidget extends StatelessWidget {
         ],
         border: Border.all(
           color: isDarkMode
-              ? Colors.white.withOpacity(0.05)
-              : Colors.white.withOpacity(0.8),
+              ? Colors.white.withValues(alpha: 0.05)
+              : Colors.white.withValues(alpha: 0.8),
           width: 1,
         ),
       ),
@@ -81,7 +82,7 @@ class ResultCardWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         color: isDarkMode
-                            ? Colors.white.withOpacity(0.7)
+                            ? Colors.white.withValues(alpha: 0.7)
                             : const Color(0xFF666666),
                       ),
                     ),
@@ -95,8 +96,8 @@ class ResultCardWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: isDarkMode
-                  ? Colors.black.withOpacity(0.2)
-                  : Colors.grey.withOpacity(0.05),
+                  ? Colors.black.withValues(alpha: 0.2)
+                  : Colors.grey.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
@@ -104,7 +105,7 @@ class ResultCardWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 15,
                 color: isDarkMode
-                    ? Colors.white.withOpacity(0.9)
+                    ? Colors.white.withValues(alpha: 0.9)
                     : const Color(0xFF444444),
                 height: 1.5,
               ),
@@ -131,7 +132,7 @@ class ResultCardWidget extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: isDarkMode
-                      ? Colors.white.withOpacity(0.8)
+                      ? Colors.white.withValues(alpha: 0.8)
                       : const Color(0xFF555555),
                 ),
               ),
@@ -141,7 +142,7 @@ class ResultCardWidget extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: isDarkMode
-                      ? Colors.white.withOpacity(0.8)
+                      ? Colors.white.withValues(alpha: 0.8)
                       : const Color(0xFF555555),
                 ),
               ),
@@ -156,8 +157,8 @@ class ResultCardWidget extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: isDarkMode
-                    ? Colors.white.withOpacity(0.1)
-                    : Colors.grey.withOpacity(0.1),
+                    ? Colors.white.withValues(alpha: 0.1)
+                    : Colors.grey.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
@@ -192,13 +193,13 @@ class ResultCardWidget extends StatelessWidget {
   Color _getBackgroundColorDark() {
     switch (resultColor) {
       case 'high':
-        return Colors.red.withOpacity(0.20);
+        return Colors.red.withValues(alpha: 0.20);
       case 'medium':
-        return Colors.orange.withOpacity(0.20);
+        return Colors.orange.withValues(alpha: 0.20);
       case 'low':
-        return Colors.green.withOpacity(0.15);
+        return Colors.green.withValues(alpha: 0.15);
       default:
-        return Colors.white.withOpacity(0.08);
+        return Colors.white.withValues(alpha: 0.08);
     }
   }
 
@@ -208,17 +209,17 @@ class ResultCardWidget extends StatelessWidget {
 
   Color _getShadowColor() {
     if (isDarkMode) {
-      return Colors.black.withOpacity(0.3);
+      return Colors.black.withValues(alpha: 0.3);
     } else {
       switch (resultColor) {
         case 'high':
-          return Colors.red.withOpacity(0.1);
+          return Colors.red.withValues(alpha: 0.1);
         case 'medium':
-          return Colors.orange.withOpacity(0.1);
+          return Colors.orange.withValues(alpha: 0.1);
         case 'low':
-          return Colors.green.withOpacity(0.1);
+          return Colors.green.withValues(alpha: 0.1);
         default:
-          return Colors.black.withOpacity(0.05);
+          return Colors.black.withValues(alpha: 0.05);
       }
     }
   }
@@ -227,24 +228,24 @@ class ResultCardWidget extends StatelessWidget {
     if (isDarkMode) {
       switch (resultColor) {
         case 'high':
-          return Colors.red.withOpacity(0.2);
+          return Colors.red.withValues(alpha: 0.2);
         case 'medium':
-          return Colors.orange.withOpacity(0.2);
+          return Colors.orange.withValues(alpha: 0.2);
         case 'low':
-          return Colors.green.withOpacity(0.2);
+          return Colors.green.withValues(alpha: 0.2);
         default:
-          return Colors.blueGrey.withOpacity(0.2);
+          return Colors.blueGrey.withValues(alpha: 0.2);
       }
     } else {
       switch (resultColor) {
         case 'high':
-          return Colors.red.withOpacity(0.1);
+          return Colors.red.withValues(alpha: 0.1);
         case 'medium':
-          return Colors.orange.withOpacity(0.1);
+          return Colors.orange.withValues(alpha: 0.1);
         case 'low':
-          return Colors.green.withOpacity(0.1);
+          return Colors.green.withValues(alpha: 0.1);
         default:
-          return const Color(0xFF6C63FF).withOpacity(0.1);
+          return const Color(0xFF6C63FF).withValues(alpha: 0.1);
       }
     }
   }

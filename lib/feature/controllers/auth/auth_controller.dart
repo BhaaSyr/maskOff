@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testvid/feature/controllers/theme_controller.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:testvid/generated/l10n.dart';
+import 'package:testvid/core/services/app_logger.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final ThemeController _themeController = Get.find<ThemeController>();
 
   // Observable user state
   final Rx<User?> user = Rx<User?>(null);
@@ -93,27 +96,22 @@ class AuthController extends GetxController {
 
   // Reset password functionality
   Future<String?> resetPassword(String email) async {
-    // Get localization context
-    final context = Get.context;
-    if (context == null) return 'Context not available';
-
     if (email.isEmpty) {
-      return S.of(context).emailFieldEmpty;
+      return S.of(Get.context!).emailFieldEmpty;
     }
 
     if (!GetUtils.isEmail(email)) {
-      return S.of(context).invalidEmail;
+      return S.of(Get.context!).invalidEmail;
     }
 
     try {
       isResettingPassword.value = true;
-
       await _auth.sendPasswordResetEmail(email: email.trim());
 
-      // Close the dialog first
-      Get.back();
+      if (!Get.isDialogOpen!) {
+        Get.back();
+      }
 
-      // Then show a more prominent notification
       Get.dialog(
         AlertDialog(
           backgroundColor:
@@ -122,14 +120,14 @@ class AuthController extends GetxController {
             borderRadius: BorderRadius.circular(16),
           ),
           title: Text(
-            S.of(context).passwordResetEmailSent,
+            S.of(Get.context!).passwordResetEmailSent,
             style: const TextStyle(
               color: Color(0xFF6C63FF),
               fontWeight: FontWeight.bold,
             ),
           ),
           content: Text(
-            S.of(context).passwordResetEmailSentMessage(email),
+            S.of(Get.context!).passwordResetEmailSentMessage(email),
             style: TextStyle(
               fontSize: 16,
               color: Get.isDarkMode ? Colors.white70 : const Color(0xFF666666),
@@ -139,7 +137,7 @@ class AuthController extends GetxController {
             TextButton(
               onPressed: () => Get.back(),
               child: Text(
-                S.of(context).ok,
+                S.of(Get.context!).ok,
                 style: const TextStyle(
                   color: Color(0xFF6C63FF),
                   fontWeight: FontWeight.bold,
@@ -150,25 +148,25 @@ class AuthController extends GetxController {
           ],
         ),
       );
-      return null; // No error
+      return null;
     } on FirebaseAuthException catch (e) {
-      String errorMessage = S.of(context).passwordResetError;
+      String errorMessage = S.of(Get.context!).passwordResetError;
 
       switch (e.code) {
         case 'invalid-email':
-          errorMessage = S.of(context).invalidEmail;
+          errorMessage = S.of(Get.context!).invalidEmail;
           break;
         case 'user-not-found':
-          errorMessage = S.of(context).userNotFound;
+          errorMessage = S.of(Get.context!).userNotFound;
           break;
         case 'too-many-requests':
-          errorMessage = S.of(context).tooManyRequests;
+          errorMessage = S.of(Get.context!).tooManyRequests;
           break;
       }
 
       return errorMessage;
     } catch (e) {
-      return '${S.of(context).passwordResetError}: ${e.toString()}';
+      return '${S.of(Get.context!).passwordResetError}: ${e.toString()}';
     } finally {
       isResettingPassword.value = false;
     }
@@ -260,25 +258,19 @@ class AuthController extends GetxController {
   bool _validateLoginForm() {
     bool isValid = true;
 
-    // Get localization context
-    final context = Get.context;
-    if (context == null) return false;
-
-    // Email validation
     if (emailController.text.isEmpty) {
-      emailError.value = S.of(context).emailFieldEmpty;
+      emailError.value = S.of(Get.context!).emailFieldEmpty;
       isValid = false;
     } else if (!GetUtils.isEmail(emailController.text)) {
-      emailError.value = S.of(context).invalidEmail;
+      emailError.value = S.of(Get.context!).invalidEmail;
       isValid = false;
     }
 
-    // Password validation
     if (passwordController.text.isEmpty) {
-      passwordError.value = S.of(context).passwordFieldEmpty;
+      passwordError.value = S.of(Get.context!).passwordFieldEmpty;
       isValid = false;
     } else if (passwordController.text.length < 6) {
-      passwordError.value = S.of(context).passwordMinLength;
+      passwordError.value = S.of(Get.context!).passwordMinLength;
       isValid = false;
     }
 
@@ -288,48 +280,34 @@ class AuthController extends GetxController {
   bool _validateRegisterForm() {
     bool isValid = true;
 
-    // Get localization context
-    final context = Get.context;
-    if (context == null) return false;
-
-    // Name validation
     if (nameController.text.isEmpty) {
-      nameError.value = S.of(context).nameFieldEmpty;
+      nameError.value = S.of(Get.context!).nameFieldEmpty;
       isValid = false;
     }
 
-    // Email validation
     if (emailController.text.isEmpty) {
-      emailError.value = S.of(context).emailFieldEmpty;
+      emailError.value = S.of(Get.context!).emailFieldEmpty;
       isValid = false;
     } else if (!GetUtils.isEmail(emailController.text)) {
-      emailError.value = S.of(context).invalidEmail;
+      emailError.value = S.of(Get.context!).invalidEmail;
       isValid = false;
     }
 
-    // Password validation
     if (passwordController.text.isEmpty) {
-      passwordError.value = S.of(context).passwordFieldEmpty;
+      passwordError.value = S.of(Get.context!).passwordFieldEmpty;
       isValid = false;
     } else if (passwordController.text.length < 6) {
-      passwordError.value = S.of(context).passwordMinLength;
+      passwordError.value = S.of(Get.context!).passwordMinLength;
       isValid = false;
     }
 
-    // Confirm password validation
     if (confirmPasswordController.text.isEmpty) {
-      confirmPasswordError.value = S.of(context).confirmPasswordEmpty;
+      confirmPasswordError.value = S.of(Get.context!).confirmPasswordEmpty;
       isValid = false;
     } else if (confirmPasswordController.text != passwordController.text) {
-      confirmPasswordError.value = S.of(context).passwordsDoNotMatch;
+      confirmPasswordError.value = S.of(Get.context!).passwordsDoNotMatch;
       isValid = false;
     }
-
-    // Terms validation
-    // if (!acceptedTerms.value) {
-    //   termsError.value = 'Şartlar ve koşulları kabul etmelisiniz';
-    //   isValid = false;
-    // }
 
     return isValid;
   }
@@ -340,10 +318,6 @@ class AuthController extends GetxController {
     authError.value = '';
 
     if (!_validateLoginForm()) return;
-
-    // Get localization context
-    final context = Get.context;
-    if (context == null) return;
 
     try {
       isEmailLoginLoading.value = true;
@@ -360,8 +334,8 @@ class AuthController extends GetxController {
         await _auth.signOut();
 
         // Show error message
-        _showErrorSnackbar(S.of(context).emailVerificationRequired,
-            S.of(context).pleaseVerifyEmail);
+        _showErrorSnackbar(S.of(Get.context!).emailVerificationRequired,
+            S.of(Get.context!).pleaseVerifyEmail);
 
         // Show dialog to resend verification email
         Get.dialog(
@@ -372,20 +346,20 @@ class AuthController extends GetxController {
               borderRadius: BorderRadius.circular(16),
             ),
             title: Text(
-              S.of(context).emailVerificationRequired,
+              S.of(Get.context!).emailVerificationRequired,
               style: const TextStyle(
                 color: Color(0xFF6C63FF),
                 fontWeight: FontWeight.bold,
               ),
             ),
             content: Text(
-              S.of(context).pleaseVerifyEmail,
+              S.of(Get.context!).pleaseVerifyEmail,
             ),
             actions: [
               TextButton(
                 onPressed: () => Get.back(),
                 child: Text(
-                  S.of(context).cancel,
+                  S.of(Get.context!).cancel,
                   style: const TextStyle(
                     color: Colors.grey,
                   ),
@@ -402,16 +376,17 @@ class AuthController extends GetxController {
                       password: passwordController.text.trim(),
                     );
                     await userCred.user?.sendEmailVerification();
-                    _showSuccessSnackbar(S.of(context).verificationEmailSent,
-                        S.of(context).verificationEmailSentMessage);
+                    _showSuccessSnackbar(
+                        S.of(Get.context!).verificationEmailSent,
+                        S.of(Get.context!).verificationEmailSentMessage);
                     await _auth.signOut();
                   } catch (e) {
-                    _showErrorSnackbar(S.of(context).error,
-                        '${S.of(context).emailVerificationRequired}: ${e.toString()}');
+                    _showErrorSnackbar(S.of(Get.context!).error,
+                        '${S.of(Get.context!).emailVerificationRequired}: ${e.toString()}');
                   }
                 },
                 child: Text(
-                  S.of(context).resendVerificationEmail,
+                  S.of(Get.context!).resendVerificationEmail,
                   style: const TextStyle(
                     color: Color(0xFF6C63FF),
                     fontWeight: FontWeight.bold,
@@ -429,36 +404,36 @@ class AuthController extends GetxController {
 
       // Show success message
       _showSuccessSnackbar(
-          S.of(context).success, S.of(context).loginSuccessful);
+          S.of(Get.context!).success, S.of(Get.context!).loginSuccessful);
 
       // Navigate to home screen
-      Get.offAllNamed(Routes.HOME);
+      Get.offAllNamed(Routes.home);
     } on FirebaseAuthException catch (e) {
-      String errorMessage = S.of(context).loginError;
+      String errorMessage = S.of(Get.context!).loginError;
 
       switch (e.code) {
         case 'user-not-found':
-          errorMessage = S.of(context).userNotFound;
+          errorMessage = S.of(Get.context!).userNotFound;
           break;
         case 'wrong-password':
-          errorMessage = S.of(context).wrongPassword;
+          errorMessage = S.of(Get.context!).wrongPassword;
           break;
         case 'invalid-email':
-          errorMessage = S.of(context).invalidEmail;
+          errorMessage = S.of(Get.context!).invalidEmail;
           break;
         case 'user-disabled':
-          errorMessage = S.of(context).userDisabled;
+          errorMessage = S.of(Get.context!).userDisabled;
           break;
       }
 
       authError.value = errorMessage;
 
-      _showErrorSnackbar(S.of(context).error, errorMessage);
+      _showErrorSnackbar(S.of(Get.context!).error, errorMessage);
     } catch (e) {
-      authError.value = '${S.of(context).loginError}: ${e.toString()}';
+      authError.value = '${S.of(Get.context!).loginError}: ${e.toString()}';
 
-      _showErrorSnackbar(
-          S.of(context).error, '${S.of(context).loginError}: ${e.toString()}');
+      _showErrorSnackbar(S.of(Get.context!).error,
+          '${S.of(Get.context!).loginError}: ${e.toString()}');
     } finally {
       isEmailLoginLoading.value = false;
     }
@@ -470,10 +445,6 @@ class AuthController extends GetxController {
     authError.value = '';
 
     if (!_validateRegisterForm()) return;
-
-    // Get localization context
-    final context = Get.context;
-    if (context == null) return;
 
     try {
       isRegisterLoading.value = true;
@@ -496,37 +467,38 @@ class AuthController extends GetxController {
       acceptedTerms.value = true;
 
       // Show success message with email verification info
-      _showSuccessSnackbar(S.of(context).verificationEmailSent,
-          S.of(context).verificationEmailSentMessage);
+      _showSuccessSnackbar(S.of(Get.context!).verificationEmailSent,
+          S.of(Get.context!).verificationEmailSentMessage);
 
       // Navigate to login screen instead of home
-      Get.offAllNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.login);
     } on FirebaseAuthException catch (e) {
-      String errorMessage = S.of(context).registrationError;
+      String errorMessage = S.of(Get.context!).registrationError;
 
       switch (e.code) {
         case 'email-already-in-use':
-          errorMessage = S.of(context).emailAlreadyInUse;
+          errorMessage = S.of(Get.context!).emailAlreadyInUse;
           break;
         case 'invalid-email':
-          errorMessage = S.of(context).invalidEmail;
+          errorMessage = S.of(Get.context!).invalidEmail;
           break;
         case 'weak-password':
-          errorMessage = S.of(context).weakPassword;
+          errorMessage = S.of(Get.context!).weakPassword;
           break;
         case 'operation-not-allowed':
-          errorMessage = S.of(context).operationNotAllowed;
+          errorMessage = S.of(Get.context!).operationNotAllowed;
           break;
       }
 
       authError.value = errorMessage;
 
-      _showErrorSnackbar(S.of(context).error, errorMessage);
+      _showErrorSnackbar(S.of(Get.context!).error, errorMessage);
     } catch (e) {
-      authError.value = '${S.of(context).registrationError}: ${e.toString()}';
+      authError.value =
+          '${S.of(Get.context!).registrationError}: ${e.toString()}';
 
-      _showErrorSnackbar(S.of(context).error,
-          '${S.of(context).registrationError}: ${e.toString()}');
+      _showErrorSnackbar(S.of(Get.context!).error,
+          '${S.of(Get.context!).registrationError}: ${e.toString()}');
     } finally {
       isRegisterLoading.value = false;
     }
@@ -534,10 +506,6 @@ class AuthController extends GetxController {
 
   // Google Sign In
   Future<void> signInWithGoogle() async {
-    // Get localization context
-    final context = Get.context;
-    if (context == null) return;
-
     try {
       isGoogleLoginLoading.value = true;
 
@@ -565,15 +533,16 @@ class AuthController extends GetxController {
 
       // Show success message
       _showSuccessSnackbar(
-          S.of(context).success, S.of(context).googleLoginSuccess);
+          S.of(Get.context!).success, S.of(Get.context!).googleLoginSuccess);
 
       // Navigate to home screen
-      Get.offAllNamed(Routes.HOME);
+      Get.offAllNamed(Routes.home);
     } catch (e) {
-      authError.value = '${S.of(context).googleLoginError}: ${e.toString()}';
+      authError.value =
+          '${S.of(Get.context!).googleLoginError}: ${e.toString()}';
 
-      _showErrorSnackbar(S.of(context).error,
-          '${S.of(context).googleLoginError}: ${e.toString()}');
+      _showErrorSnackbar(S.of(Get.context!).error,
+          '${S.of(Get.context!).googleLoginError}: ${e.toString()}');
     } finally {
       isGoogleLoginLoading.value = false;
     }
@@ -584,14 +553,12 @@ class AuthController extends GetxController {
     try {
       await _googleSignIn.signOut();
       await _auth.signOut();
-      Get.offAllNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.login);
     } catch (e) {
-      // Get localization context
-      final context = Get.context;
-      if (context != null) {
-        _showErrorSnackbar(S.of(context).error,
-            '${S.of(context).logoutError}: ${e.toString()}');
-      }
+      _showErrorSnackbar(
+        S.of(Get.context!).error,
+        '${S.of(Get.context!).logoutError}: ${e.toString()}',
+      );
     }
   }
 
@@ -602,7 +569,6 @@ class AuthController extends GetxController {
 
   // View terms and conditions
   void viewTermsAndConditions() {
-    // TODO: Implement terms and conditions view
     Get.dialog(
       AlertDialog(
         title: const Text('Şartlar ve Koşullar'),
@@ -623,32 +589,37 @@ class AuthController extends GetxController {
   }
 
   // Güncellenmiş hata bildirimi için genel bir metot oluşturalım
-  void _showErrorSnackbar(String title, String message) {
+  void _showSuccessSnackbar(String title, String message) {
+    final isDark = _themeController.isDarkMode;
     Get.snackbar(
       title,
       message,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.red.withOpacity(0.3),
+      backgroundColor: isDark
+          ? Colors.green.withValues(alpha: 0.5)
+          : Colors.green.withValues(alpha: 0.8),
       colorText: Colors.white,
-      borderRadius: 10,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: const Duration(seconds: 3),
       margin: const EdgeInsets.all(10),
-      duration: const Duration(seconds: 4),
-      icon: const Icon(Icons.error_outline, color: Colors.white),
+      borderRadius: 8,
+      icon: const Icon(Icons.check_circle, color: Colors.white),
     );
   }
 
-  // Başarılı işlem bildirimi için genel bir metot oluşturalım
-  void _showSuccessSnackbar(String title, String message) {
+  void _showErrorSnackbar(String title, String message) {
+    final isDark = _themeController.isDarkMode;
     Get.snackbar(
       title,
       message,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green.withOpacity(0.3),
+      backgroundColor: isDark
+          ? Colors.red.withValues(alpha: 0.5)
+          : Colors.red.withValues(alpha: 0.8),
       colorText: Colors.white,
-      borderRadius: 10,
-      margin: const EdgeInsets.all(10),
+      snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
-      icon: const Icon(Icons.check_circle, color: Colors.white),
+      margin: const EdgeInsets.all(10),
+      borderRadius: 8,
+      icon: const Icon(Icons.error_outline, color: Colors.white),
     );
   }
 
@@ -661,13 +632,13 @@ class AuthController extends GetxController {
 
   // Screen change handler - clear forms accordingly
   void _onScreenChanged(String screen) {
-    if (screen == Routes.LOGIN) {
+    if (screen == Routes.login) {
       // Login sayfasına geldiğimizde
-      print("Login sayfasına geçildi, register form temizleniyor");
+      AppLogger().info("Login sayfasına geçildi, register form temizleniyor");
       clearRegisterForm();
-    } else if (screen == Routes.REGISTER) {
+    } else if (screen == Routes.register) {
       // Register sayfasına geldiğimizde
-      print("Register sayfasına geçildi, login form temizleniyor");
+      AppLogger().info("Register sayfasına geçildi, login form temizleniyor");
       clearLoginForm();
     }
   }
