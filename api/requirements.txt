@@ -1,7 +1,0 @@
-flask
-tensorflow==2.18.0 
-keras==3.8.0 
-facenet-pytorch 
-opencv-python
-pillow
-numpy<2
