@@ -1,0 +1,26 @@
+*.dart linguist-language=Dart
+/lib/* linguist-language=Dart
+/lib//* linguist-language=Dart
+
+# Android/iOS native kodlarını vendor olarak işaretle
+android/* linguist-vendored
+ios/* linguist-vendored
+*.cpp linguist-vendored
+*.cc linguist-vendored
+*.h linguist-vendored
+*.c linguist-vendored
+*.gradle linguist-vendored
+*.swift linguist-vendored
+*.m linguist-vendored
+*.mm linguist-vendored
+
+# CMake dosyalarını vendor olarak işaretle
+CMakeLists.txt linguist-vendored
+*.cmake linguist-vendored
+*/cmake/ linguist-vendored
+windows/CMakeLists.txt linguist-vendored
+linux/CMakeLists.txt linguist-vendored
+
+# Flutter/Dart dosyalarını özellikle belirt
+*.dart linguist-detectable=true
+pubspec.* linguist-language=YAML
