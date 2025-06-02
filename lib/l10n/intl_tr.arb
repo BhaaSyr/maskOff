@@ -503,5 +503,9 @@
   "failedToUpdateRecord": "Kayıt güncellenirken hata oluştu: {error}",
   "@failedToUpdateRecord": {
     "description": "profile_controller.dart"
+  },
+  "invalidCredential": "Geçersiz giriş bilgileri. Lütfen e-posta ve şifrenizi kontrol edip tekrar deneyin.",
+  "@invalidCredential": {
+    "description": "Invalid credential error message"
   }
 }

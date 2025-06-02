@@ -503,5 +503,9 @@
   "failedToUpdateRecord": "Failed to update record: {error}",
   "@failedToUpdateRecord": {
     "description": "profile_controller.dart"
+  },
+  "invalidCredential": "Invalid login credentials. Please check your email and password and try again.",
+  "@invalidCredential": {
+    "description": "Invalid credential error message"
   }
 }

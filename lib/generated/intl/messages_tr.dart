@@ -127,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Zaten bir hesabınız var mı?"),
         "invalidAge": MessageLookupByLibrary.simpleMessage(
             "Geçerli bir yaş girin (1-150)"),
+        "invalidCredential": MessageLookupByLibrary.simpleMessage(
+            "Geçersiz giriş bilgileri. Lütfen e-posta ve şifrenizi kontrol edip tekrar deneyin."),
         "invalidEmail": MessageLookupByLibrary.simpleMessage(
             "Geçerli bir e-posta adresi girin"),
         "language": MessageLookupByLibrary.simpleMessage("Dil"),

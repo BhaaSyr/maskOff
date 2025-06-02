@@ -132,6 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "invalidAge": MessageLookupByLibrary.simpleMessage(
             "Please enter a valid age (1-150)"),
+        "invalidCredential": MessageLookupByLibrary.simpleMessage(
+            "Invalid login credentials. Please check your email and password and try again."),
         "invalidEmail": MessageLookupByLibrary.simpleMessage(
             "Please enter a valid email address"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),

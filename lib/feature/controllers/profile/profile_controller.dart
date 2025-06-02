@@ -234,7 +234,7 @@ class ProfileController extends GetxController {
       title,
       message,
       backgroundColor: isDark
-          ? Colors.green.withValues(alpha: 0.5)
+          ? Colors.green.withValues(alpha: 0.4)
           : Colors.green.withValues(alpha: 0.8),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
@@ -251,7 +251,7 @@ class ProfileController extends GetxController {
       title,
       message,
       backgroundColor: isDark
-          ? Colors.red.withValues(alpha: 0.5)
+          ? Colors.red.withValues(alpha: 0.4)
           : Colors.red.withValues(alpha: 0.8),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,

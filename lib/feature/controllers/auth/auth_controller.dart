@@ -409,7 +409,8 @@ class AuthController extends GetxController {
       // Navigate to home screen
       Get.offAllNamed(Routes.home);
     } on FirebaseAuthException catch (e) {
-      String errorMessage = S.of(Get.context!).loginError;
+      String errorMessage = e.toString();
+      AppLogger().error(errorMessage);
 
       switch (e.code) {
         case 'user-not-found':
@@ -423,6 +424,9 @@ class AuthController extends GetxController {
           break;
         case 'user-disabled':
           errorMessage = S.of(Get.context!).userDisabled;
+          break;
+        case 'invalid-credential':
+          errorMessage = S.of(Get.context!).invalidCredential;
           break;
       }
 
@@ -595,7 +599,7 @@ class AuthController extends GetxController {
       title,
       message,
       backgroundColor: isDark
-          ? Colors.green.withValues(alpha: 0.5)
+          ? Colors.green.withValues(alpha: 0.4)
           : Colors.green.withValues(alpha: 0.8),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
@@ -612,7 +616,7 @@ class AuthController extends GetxController {
       title,
       message,
       backgroundColor: isDark
-          ? Colors.red.withValues(alpha: 0.5)
+          ? Colors.red.withValues(alpha: 0.4)
           : Colors.red.withValues(alpha: 0.8),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,

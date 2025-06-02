@@ -1229,6 +1229,16 @@ class S {
       args: [error],
     );
   }
+
+  /// `Invalid login credentials. Please check your email and password and try again.`
+  String get invalidCredential {
+    return Intl.message(
+      'Invalid login credentials. Please check your email and password and try again.',
+      name: 'invalidCredential',
+      desc: 'Invalid credential error message',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
