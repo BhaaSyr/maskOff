@@ -480,6 +480,16 @@ class S {
     );
   }
 
+  /// `Deepfake Video`
+  String get deepfakeVideo {
+    return Intl.message(
+      'Deepfake Video',
+      name: 'deepfakeVideo',
+      desc: 'Title for detected deepfake video',
+      args: [],
+    );
+  }
+
   /// `Authentic Video`
   String get authenticVideo {
     return Intl.message(

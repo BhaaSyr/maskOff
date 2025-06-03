@@ -183,6 +183,10 @@
   "@deepfakeDetected": {
     "description": "Title for detected deepfake video"
   },
+  "deepfakeVideo": "Deepfake Video",
+  "@deepfakeVideo": {
+    "description": "Title for detected deepfake video"
+  },
   "authenticVideo": "Authentic Video",
   "@authenticVideo": {
     "description": "Title for authentic video"

@@ -137,7 +137,7 @@ class ResultCardWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                S.of(context).deepfakeDetected,
+                S.of(context).deepfakeVideo,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -152,6 +152,10 @@ class ResultCardWidget extends StatelessWidget {
         const SizedBox(height: 8),
         LayoutBuilder(
           builder: (context, constraints) {
+            final percent =
+                isDeepfake ? confidenceScore : (100 - confidenceScore);
+            final barWidth = constraints.maxWidth * percent / 100;
+
             return Container(
               height: 10,
               width: double.infinity,
@@ -161,27 +165,27 @@ class ResultCardWidget extends StatelessWidget {
                     : Colors.grey.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Row(
-                children: [
-                  Container(
-                    width: constraints.maxWidth *
-                        (isDeepfake
-                            ? confidenceScore
-                            : (100 - confidenceScore)) /
-                        100,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: barWidth,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
                           Colors.green.shade400,
-                          Colors.red.shade400,
+                          if (percent > 40) Colors.orange.shade400,
+                          if (percent > 70) Colors.red.shade400,
                         ],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
+                        stops: percent > 70
+                            ? [0.0, 0.5, 1.0]
+                            : (percent > 40 ? [0.0, 1.0] : [0.0]),
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                ],
+                ),
               ),
             );
           },
@@ -204,7 +208,16 @@ class ResultCardWidget extends StatelessWidget {
   }
 
   Color _getBackgroundColorLight() {
-    return Colors.white;
+    switch (resultColor) {
+      case 'high':
+        return Colors.red.withValues(alpha: 0.2);
+      case 'medium':
+        return Colors.orange.withValues(alpha: 0.2);
+      case 'low':
+        return Colors.green.withValues(alpha: 0.2);
+      default:
+        return Colors.white;
+    }
   }
 
   Color _getShadowColor() {

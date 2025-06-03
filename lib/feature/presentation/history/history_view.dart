@@ -16,100 +16,104 @@ class HistoryView extends StatelessWidget {
     return Obx(() {
       final isDark = themeController.isDarkMode;
 
-      return Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: isDark
-                  ? [
-                      const Color(0xFF1E1E2E),
-                      const Color(0xFF2D2D44),
-                    ]
-                  : [
-                      const Color(0xFFF5F5FA),
-                      const Color(0xFFE8E8F0),
-                    ],
+      return MediaQuery(
+        data: MediaQuery.of(context)
+            .copyWith(textScaler: const TextScaler.linear(1.0)),
+        child: Scaffold(
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: isDark
+                    ? [
+                        const Color(0xFF1E1E2E),
+                        const Color(0xFF2D2D44),
+                      ]
+                    : [
+                        const Color(0xFFF5F5FA),
+                        const Color(0xFFE8E8F0),
+                      ],
+              ),
             ),
-          ),
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header with back button and title
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => Get.back(),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: isDark
-                                ? Colors.white.withValues(alpha: 0.1)
-                                : const Color(0xFF6C63FF)
-                                    .withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: isDark
-                                ? Colors.white70
-                                : const Color(0xFF6C63FF),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Text(
-                        S.of(context).analysisHistory,
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color:
-                              isDark ? Colors.white : const Color(0xFF333333),
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () => controller.refreshHistoryRecords(),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: isDark
-                                ? Colors.white.withValues(alpha: 0.1)
-                                : const Color(0xFF6C63FF)
-                                    .withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Icon(
-                            Icons.refresh,
-                            color: isDark
-                                ? Colors.white70
-                                : const Color(0xFF6C63FF),
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Header with back button and title
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => Get.back(),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? Colors.white.withValues(alpha: 0.1)
+                                  : const Color(0xFF6C63FF)
+                                      .withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: isDark
+                                  ? Colors.white70
+                                  : const Color(0xFF6C63FF),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 20),
+                        Text(
+                          S.of(context).analysisHistory,
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                isDark ? Colors.white : const Color(0xFF333333),
+                          ),
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () => controller.refreshHistoryRecords(),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? Colors.white.withValues(alpha: 0.1)
+                                  : const Color(0xFF6C63FF)
+                                      .withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Icon(
+                              Icons.refresh,
+                              color: isDark
+                                  ? Colors.white70
+                                  : const Color(0xFF6C63FF),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
 
-                // History List
-                Expanded(
-                  child: Obx(() {
-                    if (controller.isLoadingHistory.value) {
-                      return _buildLoadingState(context, isDark);
-                    }
+                  // History List
+                  Expanded(
+                    child: Obx(() {
+                      if (controller.isLoadingHistory.value) {
+                        return _buildLoadingState(context, isDark);
+                      }
 
-                    if (controller.historyRecords.isEmpty) {
-                      return _buildEmptyState(context, isDark);
-                    }
+                      if (controller.historyRecords.isEmpty) {
+                        return _buildEmptyState(context, isDark);
+                      }
 
-                    return _buildHistoryList(context, controller, isDark);
-                  }),
-                ),
-              ],
+                      return _buildHistoryList(context, controller, isDark);
+                    }),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

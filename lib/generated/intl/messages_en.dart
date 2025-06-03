@@ -90,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deepfakeDetectionCompleted": MessageLookupByLibrary.simpleMessage(
             "Deepfake detection analysis completed"),
         "deepfakeResult": m0,
+        "deepfakeVideo": MessageLookupByLibrary.simpleMessage("Deepfake Video"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteRecord": MessageLookupByLibrary.simpleMessage("Delete Record"),
         "deleteRecordConfirmation": m1,
