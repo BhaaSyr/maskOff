@@ -4,6 +4,7 @@ import 'package:testvid/feature/controllers/home_controller.dart';
 import 'package:testvid/feature/controllers/theme_controller.dart';
 import 'package:video_player/video_player.dart';
 import 'package:testvid/core/services/app_logger.dart';
+import 'dart:io';
 
 class VideoPlayerWidget extends StatelessWidget {
   final VideoPlayerController controller;
@@ -206,6 +207,20 @@ class VideoPlayerWidget extends StatelessWidget {
               onPressed: () {
                 controller.setVolume(controller.value.volume > 0 ? 0 : 1);
                 videoController.update(); // Update UI
+              },
+              color: iconColor,
+            ),
+            IconButton(
+              icon: const Icon(Icons.cut),
+              onPressed: () async {
+                final videoController = Get.find<VideoController>();
+                final result = await Get.toNamed(
+                  '/video-trim',
+                  arguments: videoController.videoFile.value,
+                );
+                if (result != null && result is File) {
+                  videoController.updateVideo(result);
+                }
               },
               color: iconColor,
             ),

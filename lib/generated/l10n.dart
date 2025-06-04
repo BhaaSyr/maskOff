@@ -1249,6 +1249,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Edit Video`
+  String get editVideo {
+    return Intl.message(
+      'Edit Video',
+      name: 'editVideo',
+      desc: 'Title for video editing page',
+      args: [],
+    );
+  }
+
+  /// `Play`
+  String get play {
+    return Intl.message(
+      'Play',
+      name: 'play',
+      desc: 'Play button text',
+      args: [],
+    );
+  }
+
+  /// `Pause`
+  String get pause {
+    return Intl.message(
+      'Pause',
+      name: 'pause',
+      desc: 'Pause button text',
+      args: [],
+    );
+  }
+
+  /// `Saving...`
+  String get saving {
+    return Intl.message(
+      'Saving...',
+      name: 'saving',
+      desc: 'Saving in progress text',
+      args: [],
+    );
+  }
+
+  /// `Video Trimming`
+  String get videoTrimming {
+    return Intl.message(
+      'Video Trimming',
+      name: 'videoTrimming',
+      desc: 'Video trimming section title',
+      args: [],
+    );
+  }
+
+  /// `Processing video, please wait...`
+  String get processingVideo {
+    return Intl.message(
+      'Processing video, please wait...',
+      name: 'processingVideo',
+      desc: 'Video processing message',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

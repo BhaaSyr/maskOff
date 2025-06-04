@@ -92,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteRecordConfirmation": m1,
         "detectDeepfake": MessageLookupByLibrary.simpleMessage(
             "Gelişmiş yapay zeka teknolojisiyle deepfake videolarını tespit edin"),
+        "editVideo": MessageLookupByLibrary.simpleMessage("Video Düzenle"),
         "email": MessageLookupByLibrary.simpleMessage("E-posta"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "Bu e-posta adresi zaten kullanımda"),
@@ -180,8 +181,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Şifre sıfırlama bağlantısı için e-posta adresinizi girin"),
         "passwordsDoNotMatch":
             MessageLookupByLibrary.simpleMessage("Şifreler eşleşmiyor"),
+        "pause": MessageLookupByLibrary.simpleMessage("Duraklat"),
         "personalInformation":
             MessageLookupByLibrary.simpleMessage("Kişisel Bilgiler"),
+        "play": MessageLookupByLibrary.simpleMessage("Oynat"),
         "pleaseUploadFirst": MessageLookupByLibrary.simpleMessage(
             "Lütfen önce bir video yükleyin"),
         "pleaseVerifyEmail": MessageLookupByLibrary.simpleMessage(
@@ -190,6 +193,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lütfen videonuz analiz edilirken bekleyin..."),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Gizlilik Politikası"),
+        "processingVideo": MessageLookupByLibrary.simpleMessage(
+            "Video işleniyor, lütfen bekleyin..."),
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
         "profileUpdateSuccess": MessageLookupByLibrary.simpleMessage(
             "Profil başarıyla güncellendi"),
@@ -203,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resendVerificationEmail": MessageLookupByLibrary.simpleMessage(
             "Doğrulama E-postasını Tekrar Gönder"),
         "save": MessageLookupByLibrary.simpleMessage("Kaydet"),
+        "saving": MessageLookupByLibrary.simpleMessage("Kaydediliyor..."),
         "send": MessageLookupByLibrary.simpleMessage("Gönder"),
         "settings": MessageLookupByLibrary.simpleMessage("Ayarlar"),
         "signup": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
@@ -229,6 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "E-posta adresinize doğrulama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin."),
         "version": MessageLookupByLibrary.simpleMessage("Sürüm"),
         "videoAnalysis": m11,
+        "videoTrimming": MessageLookupByLibrary.simpleMessage("Video Kesme"),
         "viewFullHistory": MessageLookupByLibrary.simpleMessage(
             "Tüm Analiz Geçmişini Görüntüle"),
         "weakPassword": MessageLookupByLibrary.simpleMessage("Şifre çok zayıf"),

@@ -511,5 +511,29 @@
   "invalidCredential": "Invalid login credentials. Please check your email and password and try again.",
   "@invalidCredential": {
     "description": "Invalid credential error message"
+  },
+  "editVideo": "Edit Video",
+  "@editVideo": {
+    "description": "Title for video editing page"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Play button text"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Pause button text"
+  },
+  "saving": "Saving...",
+  "@saving": {
+    "description": "Saving in progress text"
+  },
+  "videoTrimming": "Video Trimming",
+  "@videoTrimming": {
+    "description": "Video trimming section title"
+  },
+  "processingVideo": "Processing video, please wait...",
+  "@processingVideo": {
+    "description": "Video processing message"
   }
 }

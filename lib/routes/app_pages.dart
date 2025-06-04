@@ -1,4 +1,4 @@
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get.dart';
 import 'package:testvid/feature/presentation/auth/login_view.dart';
 import 'package:testvid/feature/presentation/auth/register_view.dart';
 import 'package:testvid/feature/presentation/bindings/auth_binding.dart';
@@ -12,10 +12,24 @@ import 'package:testvid/feature/presentation/result/result_view.dart';
 import 'package:testvid/feature/presentation/settings_view.dart';
 import 'package:testvid/feature/presentation/splash/splash_screen.dart';
 import 'package:testvid/feature/presentation/history/history_view.dart';
+import 'package:testvid/feature/presentation/video_trim/video_trim_view.dart';
+
+// Routes sınıfını da güncelleyin
+abstract class Routes {
+  static const splash = '/splash';
+  static const login = '/login';
+  static const register = '/register';
+  static const home = '/home';
+  static const result = '/result';
+  static const settings = '/settings';
+  static const profile = '/profile';
+  static const history = '/history';
+  static const videoTrim = '/video-trim';
+}
 
 class AppPages {
   // ignore: constant_identifier_names
-  static const INITIAL = Routes.splash; // Başlangıç rotasını değiştirdik
+  static const INITIAL = Routes.splash;
 
   static final routes = [
     GetPage(
@@ -57,17 +71,11 @@ class AppPages {
       page: () => const HistoryView(),
       binding: ProfileBinding(),
     ),
+    GetPage(
+      name: Routes.videoTrim,
+      page: () => VideoTrimView(
+        videoFile: Get.arguments,
+      ),
+    ),
   ];
-}
-
-// Routes sınıfını da güncelleyin
-abstract class Routes {
-  static const splash = '/splash';
-  static const login = '/login';
-  static const register = '/register';
-  static const home = '/home';
-  static const result = '/result';
-  static const settings = '/settings';
-  static const profile = '/profile';
-  static const history = '/history';
 }

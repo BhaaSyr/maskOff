@@ -511,5 +511,29 @@
   "invalidCredential": "Geçersiz giriş bilgileri. Lütfen e-posta ve şifrenizi kontrol edip tekrar deneyin.",
   "@invalidCredential": {
     "description": "Invalid credential error message"
+  },
+  "editVideo": "Video Düzenle",
+  "@editVideo": {
+    "description": "Title for video editing page"
+  },
+  "play": "Oynat",
+  "@play": {
+    "description": "Play button text"
+  },
+  "pause": "Duraklat",
+  "@pause": {
+    "description": "Pause button text"
+  },
+  "saving": "Kaydediliyor...",
+  "@saving": {
+    "description": "Saving in progress text"
+  },
+  "videoTrimming": "Video Kesme",
+  "@videoTrimming": {
+    "description": "Video trimming section title"
+  },
+  "processingVideo": "Video işleniyor, lütfen bekleyin...",
+  "@processingVideo": {
+    "description": "Video processing message"
   }
 }

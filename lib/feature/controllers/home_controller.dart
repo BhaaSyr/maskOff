@@ -45,6 +45,18 @@ class VideoController extends GetxController {
     update(); // Ekranı yenile
   }
 
+  void showTrimmer() async {
+    if (videoFile.value != null) {
+      final result = await Get.toNamed(
+        '/video-trim',
+        arguments: videoFile.value,
+      );
+      if (result != null && result is File) {
+        updateVideo(result);
+      }
+    }
+  }
+
   void runDeepfakeCheck() {
     // Placeholder for API call to check deepfake
     Get.snackbar(
@@ -64,6 +76,12 @@ class VideoController extends GetxController {
 
     videoFile.value = null;
     isInitialized.value = false;
+    update();
+  }
+
+  void updateVideo(File newVideo) {
+    videoFile.value = newVideo;
+    initializeController(newVideo);
     update();
   }
 }

@@ -34,7 +34,7 @@ class SplashController extends GetxController {
       // Eğer başarılı bir yanıt alırsak (200 OK)
       if (response.statusCode == 200) {
         // İnternet bağlantısı var, 3 saniye bekle ve kullanıcı durumuna göre yönlendir
-        Timer(const Duration(seconds: 3), () {
+        Timer(const Duration(seconds: 2), () {
           // Kullanıcı oturum durumunu kontrol et
           if (_auth.currentUser != null) {
             // Kullanıcı giriş yapmış, ana sayfaya yönlendir

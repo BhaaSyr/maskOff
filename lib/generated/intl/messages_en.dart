@@ -96,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteRecordConfirmation": m1,
         "detectDeepfake": MessageLookupByLibrary.simpleMessage(
             "Detect deepfake videos with advanced AI technology"),
+        "editVideo": MessageLookupByLibrary.simpleMessage("Edit Video"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "This email address is already in use"),
@@ -186,8 +187,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter your email for a password reset link"),
         "passwordsDoNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
+        "pause": MessageLookupByLibrary.simpleMessage("Pause"),
         "personalInformation":
             MessageLookupByLibrary.simpleMessage("Personal Information"),
+        "play": MessageLookupByLibrary.simpleMessage("Play"),
         "pleaseUploadFirst":
             MessageLookupByLibrary.simpleMessage("Please upload a video first"),
         "pleaseVerifyEmail": MessageLookupByLibrary.simpleMessage(
@@ -195,6 +198,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleaseWait": MessageLookupByLibrary.simpleMessage(
             "Please wait while we analyze your video..."),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "processingVideo": MessageLookupByLibrary.simpleMessage(
+            "Processing video, please wait..."),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "profileUpdateSuccess": MessageLookupByLibrary.simpleMessage(
             "Profile updated successfully"),
@@ -208,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resendVerificationEmail":
             MessageLookupByLibrary.simpleMessage("Resend Verification Email"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "saving": MessageLookupByLibrary.simpleMessage("Saving..."),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signup": MessageLookupByLibrary.simpleMessage("Sign Up"),
@@ -235,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We have sent a verification link to your email. Please check your inbox."),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
         "videoAnalysis": m11,
+        "videoTrimming": MessageLookupByLibrary.simpleMessage("Video Trimming"),
         "viewFullHistory":
             MessageLookupByLibrary.simpleMessage("View Full History"),
         "weakPassword":
