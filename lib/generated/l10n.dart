@@ -18,8 +18,10 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(_current != null,
-        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(
+      _current != null,
+      'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.',
+    );
     return _current!;
   }
 
@@ -41,8 +43,10 @@ class S {
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(instance != null,
-        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -812,12 +816,7 @@ class S {
 
   /// `OK`
   String get ok {
-    return Intl.message(
-      'OK',
-      name: 'ok',
-      desc: 'OK button text',
-      args: [],
-    );
+    return Intl.message('OK', name: 'ok', desc: 'OK button text', args: []);
   }
 
   /// `An error occurred during password reset`
@@ -902,12 +901,7 @@ class S {
 
   /// `Age`
   String get age {
-    return Intl.message(
-      'Age',
-      name: 'age',
-      desc: 'Age field label',
-      args: [],
-    );
+    return Intl.message('Age', name: 'age', desc: 'Age field label', args: []);
   }
 
   /// `Save`
@@ -1306,6 +1300,16 @@ class S {
       'Processing video, please wait...',
       name: 'processingVideo',
       desc: 'Video processing message',
+      args: [],
+    );
+  }
+
+  /// `Failed to save video. Please try again.`
+  String get failedToSaveVideo {
+    return Intl.message(
+      'Failed to save video. Please try again.',
+      name: 'failedToSaveVideo',
+      desc: 'Error message shown when video saving fails',
       args: [],
     );
   }

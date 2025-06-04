@@ -535,5 +535,9 @@
   "processingVideo": "Processing video, please wait...",
   "@processingVideo": {
     "description": "Video processing message"
+  },
+  "failedToSaveVideo": "Failed to save video. Please try again.",
+  "@failedToSaveVideo": {
+    "description": "Error message shown when video saving fails"
   }
 }

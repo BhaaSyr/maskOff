@@ -19,7 +19,7 @@ class VideoTrimView extends StatefulWidget {
 }
 
 class _VideoTrimViewState extends State<VideoTrimView> {
-  final Trimmer _trimmer = Trimmer();
+  late Trimmer _trimmer;
   double _startValue = 0.0;
   double _endValue = 0.0;
   bool _isPlaying = false;
@@ -29,11 +29,18 @@ class _VideoTrimViewState extends State<VideoTrimView> {
   @override
   void initState() {
     super.initState();
+    _trimmer = Trimmer();
     _loadVideo();
   }
 
   void _loadVideo() async {
+    // Reset values
+    _startValue = 0.0;
+    _endValue = 0.0;
+    _isPlaying = false;
+
     await _trimmer.loadVideo(videoFile: widget.videoFile);
+    setState(() {});
   }
 
   @override
@@ -344,18 +351,7 @@ class _VideoTrimViewState extends State<VideoTrimView> {
                                         : () async {
                                             setState(() =>
                                                 _progressVisibility = true);
-                                            await _trimmer.saveTrimmedVideo(
-                                              startValue: _startValue,
-                                              endValue: _endValue,
-                                              onSave: (String? path) {
-                                                setState(() =>
-                                                    _progressVisibility =
-                                                        false);
-                                                if (path != null) {
-                                                  Get.back(result: File(path));
-                                                }
-                                              },
-                                            );
+                                            await _saveVideo();
                                           },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFF6C63FF),
@@ -426,5 +422,47 @@ class _VideoTrimViewState extends State<VideoTrimView> {
         ),
       ),
     );
+  }
+
+  Future<void> _saveVideo() async {
+    setState(() => _progressVisibility = true);
+
+    try {
+      // Store current values
+      final double start = _startValue;
+      final double end = _endValue;
+
+      // Stop video if playing
+      if (_isPlaying) {
+        _isPlaying = false;
+        if (_trimmer.videoPlayerController != null) {
+          await _trimmer.videoPlayerController!.pause();
+        }
+      }
+
+      await _trimmer.saveTrimmedVideo(
+        startValue: start,
+        endValue: end,
+        onSave: (String? path) {
+          setState(() => _progressVisibility = false);
+          if (path != null) {
+            Get.back(result: File(path));
+          }
+        },
+        storageDir: null, // Will use temporary directory
+        videoFileName:
+            "trimmed_video_${DateTime.now().millisecondsSinceEpoch}.mp4",
+      );
+    } catch (e) {
+      setState(() => _progressVisibility = false);
+      AppLogger().error('Error saving video: $e');
+      Get.snackbar(
+        S.of(Get.context!).error,
+        S.of(Get.context!).failedToSaveVideo,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
   }
 }

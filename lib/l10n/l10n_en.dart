@@ -420,4 +420,7 @@ class SEn extends S {
 
   @override
   String get processingVideo => 'Processing video, please wait...';
+
+  @override
+  String get failedToSaveVideo => 'Failed to save video. Please try again.';
 }

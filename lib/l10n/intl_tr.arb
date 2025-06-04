@@ -535,5 +535,9 @@
   "processingVideo": "Video işleniyor, lütfen bekleyin...",
   "@processingVideo": {
     "description": "Video processing message"
+  },
+  "failedToSaveVideo": "Video kaydedilemedi. Lütfen tekrar deneyin.",
+  "@failedToSaveVideo": {
+    "description": "Error message shown when video saving fails"
   }
 }

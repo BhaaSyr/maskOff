@@ -422,4 +422,7 @@ class STr extends S {
 
   @override
   String get processingVideo => 'Video işleniyor, lütfen bekleyin...';
+
+  @override
+  String get failedToSaveVideo => 'Video kaydedilemedi. Lütfen tekrar deneyin.';
 }

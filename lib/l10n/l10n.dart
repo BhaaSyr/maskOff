@@ -852,6 +852,12 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Processing video, please wait...'**
   String get processingVideo;
+
+  /// Error message shown when video saving fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save video. Please try again.'**
+  String get failedToSaveVideo;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {
