@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:testvid/feature/controllers/home_controller.dart';
-import 'package:testvid/feature/controllers/profile/profile_controller.dart';
+import 'package:testvid/feature/controllers/profile&history/profile_and_history_controller.dart';
 import 'package:testvid/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 import '../domain/entities/deepfake_result_entity.dart';
@@ -23,22 +23,11 @@ class ResultController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    AppLogger().info('ResultController: onInit called');
     if (Get.arguments != null) {
-      AppLogger()
-          .info('ResultController: Arguments received: ${Get.arguments}');
       if (Get.arguments is DeepfakeResultEntity) {
-        AppLogger().info('ResultController: Arguments is DeepfakeResultEntity');
         result.value = Get.arguments as DeepfakeResultEntity;
-        AppLogger().info(
-            'ResultController: Result set from arguments: ${result.value?.result}, confidence: ${result.value?.confidence}');
         _initializeVideoPlayerFromFile(File(Get.arguments.toString()));
-      } else {
-        AppLogger().warning(
-            'ResultController: Arguments is not DeepfakeResultEntity: ${Get.arguments.runtimeType}');
       }
-    } else {
-      AppLogger().warning('ResultController: No arguments received');
     }
   }
 
@@ -50,26 +39,16 @@ class ResultController extends GetxController {
 
   Future<void> analyzeVideo(File videoFile) async {
     try {
-      AppLogger().info(
-          'ResultController: Starting video analysis for file: ${videoFile.path}');
       isAnalyzing.value = true;
 
-      AppLogger().info('ResultController: Calling analyzeVideoUseCase.execute');
       final resultEntity = await analyzeVideoUseCase.execute(videoFile);
-      AppLogger().info(
-          'ResultController: Analysis complete. Result: ${resultEntity.result}, Confidence: ${resultEntity.confidence}');
 
       result.value = resultEntity;
-      AppLogger().info(
-          'ResultController: Result updated in controller: ${result.value?.result}, confidence: ${result.value?.confidence}');
 
       await _initializeVideoPlayerFromFile(videoFile);
-      AppLogger().info('ResultController: Video player initialized');
 
       await _saveAnalysisToHistory();
-      AppLogger().info('ResultController: Analysis saved to history');
     } catch (e) {
-      AppLogger().error('ResultController: Error during analysis: $e');
       Get.snackbar(
         'Error',
         'Failed to analyze video: ${e.toString()}',
@@ -80,8 +59,6 @@ class ResultController extends GetxController {
       );
     } finally {
       isAnalyzing.value = false;
-      AppLogger().info(
-          'ResultController: Analysis process completed. isAnalyzing: ${isAnalyzing.value}');
     }
   }
 
@@ -161,28 +138,21 @@ class ResultController extends GetxController {
 
   Future<void> _saveAnalysisToHistory() async {
     try {
-      AppLogger().info('ResultController: Saving analysis to history');
-
       final context = Get.context;
       if (context == null || result.value == null) {
-        AppLogger().warning(
-            'ResultController: Cannot save to history - context or result is null');
         return;
       }
 
-      AppLogger().info('ResultController: Saving analysis to history');
       ProfileController profileController;
       try {
         profileController = Get.find<ProfileController>();
       } catch (e) {
-        AppLogger().info(
-            'ResultController: ProfileController not found, creating new instance');
         profileController = Get.put(ProfileController());
       }
 
       final videoController = Get.find<VideoController>();
-      final videoName = videoController.videoFile.value?.path.split('/').last ??
-          'Unknown Video';
+      final videoName = videoController.getDisplayName();
+      AppLogger().error('ResultController: Video name: $videoName');
       final title = S.of(context).videoAnalysis(videoName);
       final description = result.value!.isDeepfake
           ? S.of(context).deepfakeDetectionCompleted

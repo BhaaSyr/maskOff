@@ -15,10 +15,10 @@ class VideoTrimView extends StatefulWidget {
   });
 
   @override
-  _VideoTrimViewState createState() => _VideoTrimViewState();
+  VideoTrimViewState createState() => VideoTrimViewState();
 }
 
-class _VideoTrimViewState extends State<VideoTrimView> {
+class VideoTrimViewState extends State<VideoTrimView> {
   late Trimmer _trimmer;
   double _startValue = 0.0;
   double _endValue = 0.0;
@@ -450,8 +450,7 @@ class _VideoTrimViewState extends State<VideoTrimView> {
           }
         },
         storageDir: null, // Will use temporary directory
-        videoFileName:
-            "trimmed_video_${DateTime.now().millisecondsSinceEpoch}.mp4",
+        videoFileName: _generateTrimmedFileName(widget.videoFile.path),
       );
     } catch (e) {
       setState(() => _progressVisibility = false);
@@ -464,5 +463,11 @@ class _VideoTrimViewState extends State<VideoTrimView> {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+  }
+
+  String _generateTrimmedFileName(String originalPath) {
+    final originalName = originalPath.split('/').last;
+    final nameWithoutExt = originalName.replaceAll(RegExp(r'\.mp4$'), '');
+    return "${nameWithoutExt}_trimmed";
   }
 }

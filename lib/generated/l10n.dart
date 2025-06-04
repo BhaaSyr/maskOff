@@ -18,10 +18,8 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(
-      _current != null,
-      'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.',
-    );
+    assert(_current != null,
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
     return _current!;
   }
 
@@ -43,10 +41,8 @@ class S {
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(
-      instance != null,
-      'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
-    );
+    assert(instance != null,
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
     return instance!;
   }
 
@@ -816,7 +812,12 @@ class S {
 
   /// `OK`
   String get ok {
-    return Intl.message('OK', name: 'ok', desc: 'OK button text', args: []);
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: 'OK button text',
+      args: [],
+    );
   }
 
   /// `An error occurred during password reset`
@@ -901,7 +902,12 @@ class S {
 
   /// `Age`
   String get age {
-    return Intl.message('Age', name: 'age', desc: 'Age field label', args: []);
+    return Intl.message(
+      'Age',
+      name: 'age',
+      desc: 'Age field label',
+      args: [],
+    );
   }
 
   /// `Save`
@@ -1310,6 +1316,36 @@ class S {
       'Failed to save video. Please try again.',
       name: 'failedToSaveVideo',
       desc: 'Error message shown when video saving fails',
+      args: [],
+    );
+  }
+
+  /// `Video Name`
+  String get videoName {
+    return Intl.message(
+      'Video Name',
+      name: 'videoName',
+      desc: 'Title for video name dialog',
+      args: [],
+    );
+  }
+
+  /// `Enter video name`
+  String get enterVideoName {
+    return Intl.message(
+      'Enter video name',
+      name: 'enterVideoName',
+      desc: 'Hint text for video name input',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: 'Confirm button text',
       args: [],
     );
   }

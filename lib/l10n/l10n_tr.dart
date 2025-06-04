@@ -425,4 +425,13 @@ class STr extends S {
 
   @override
   String get failedToSaveVideo => 'Video kaydedilemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get videoName => 'Video İsmi';
+
+  @override
+  String get enterVideoName => 'Video ismini giriniz';
+
+  @override
+  String get confirm => 'Onayla';
 }

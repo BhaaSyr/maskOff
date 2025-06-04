@@ -539,5 +539,17 @@
   "failedToSaveVideo": "Failed to save video. Please try again.",
   "@failedToSaveVideo": {
     "description": "Error message shown when video saving fails"
+  },
+  "videoName": "Video Name",
+  "@videoName": {
+    "description": "Title for video name dialog"
+  },
+  "enterVideoName": "Enter video name",
+  "@enterVideoName": {
+    "description": "Hint text for video name input"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button text"
   }
 }

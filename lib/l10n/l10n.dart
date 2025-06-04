@@ -858,6 +858,24 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Failed to save video. Please try again.'**
   String get failedToSaveVideo;
+
+  /// Title for video name dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Video Name'**
+  String get videoName;
+
+  /// Hint text for video name input
+  ///
+  /// In en, this message translates to:
+  /// **'Enter video name'**
+  String get enterVideoName;
+
+  /// Confirm button text
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

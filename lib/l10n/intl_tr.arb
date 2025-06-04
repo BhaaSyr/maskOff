@@ -539,5 +539,17 @@
   "failedToSaveVideo": "Video kaydedilemedi. Lütfen tekrar deneyin.",
   "@failedToSaveVideo": {
     "description": "Error message shown when video saving fails"
+  },
+  "videoName": "Video İsmi",
+  "@videoName": {
+    "description": "Title for video name dialog"
+  },
+  "enterVideoName": "Video ismini giriniz",
+  "@enterVideoName": {
+    "description": "Hint text for video name input"
+  },
+  "confirm": "Onayla",
+  "@confirm": {
+    "description": "Confirm button text"
   }
 }

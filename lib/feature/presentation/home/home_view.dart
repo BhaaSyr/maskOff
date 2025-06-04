@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testvid/feature/controllers/home_controller.dart';
 import 'package:testvid/feature/controllers/theme_controller.dart';
-import 'package:testvid/feature/controllers/profile/profile_controller.dart';
+import 'package:testvid/feature/controllers/profile&history/profile_and_history_controller.dart';
 import 'package:testvid/feature/presentation/home/widgets/video_player_widget.dart';
 import 'package:testvid/feature/controllers/auth/auth_controller.dart';
 import 'package:testvid/feature/controllers/result_controller.dart';
@@ -25,6 +25,7 @@ class HomeView extends StatelessWidget {
       final isDark = themeController.isDarkMode;
 
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

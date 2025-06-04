@@ -423,4 +423,13 @@ class SEn extends S {
 
   @override
   String get failedToSaveVideo => 'Failed to save video. Please try again.';
+
+  @override
+  String get videoName => 'Video Name';
+
+  @override
+  String get enterVideoName => 'Enter video name';
+
+  @override
+  String get confirm => 'Confirm';
 }

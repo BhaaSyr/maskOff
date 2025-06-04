@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testvid/feature/controllers/profile/profile_controller.dart';
+import 'package:testvid/feature/controllers/profile&history/profile_and_history_controller.dart';
 import 'package:testvid/feature/controllers/theme_controller.dart';
 import 'package:testvid/feature/data/models/history_record_model.dart';
 import 'package:testvid/generated/l10n.dart';
