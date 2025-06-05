@@ -360,7 +360,7 @@ class STr extends S {
   String get realVideo => 'Gerçek Video';
 
   @override
-  String get viewFullHistory => 'Tüm Analiz Geçmişini Görüntüle';
+  String get viewFullHistory => 'Analiz Geçmişini Görüntüle';
 
   @override
   String get analyzingVideo => 'Video Analiz Ediliyor';

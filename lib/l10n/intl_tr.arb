@@ -477,7 +477,7 @@
   "@realVideo": {
     "description": "Real video result"
   },
-  "viewFullHistory": "Tüm Analiz Geçmişini Görüntüle",
+  "viewFullHistory": "Analiz Geçmişini Görüntüle",
   "analyzingVideo": "Video Analiz Ediliyor",
   "pleaseWait": "Lütfen videonuz analiz edilirken bekleyin...",
   "userNotAuthenticated": "Kullanıcı girişi yapılmamış",

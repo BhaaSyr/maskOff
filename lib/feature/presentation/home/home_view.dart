@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:testvid/feature/controllers/home_controller.dart';
 import 'package:testvid/feature/controllers/theme_controller.dart';
 import 'package:testvid/feature/controllers/profile&history/profile_and_history_controller.dart';
-import 'package:testvid/feature/presentation/home/widgets/video_player_widget.dart';
+import 'package:testvid/feature/presentation/home/widgets/home_button.dart';
+import 'package:testvid/feature/presentation/home/widgets/home_empty_state.dart';
+import 'package:testvid/feature/presentation/home/widgets/home_.dart';
 import 'package:testvid/feature/controllers/auth/auth_controller.dart';
 import 'package:testvid/feature/controllers/result_controller.dart';
-import 'package:testvid/feature/presentation/bindings/result_binding.dart';
+import 'package:testvid/feature/bindings/result_binding.dart';
 import 'package:testvid/routes/app_pages.dart';
 import 'package:testvid/generated/l10n.dart';
 import 'package:testvid/core/services/app_logger.dart';
@@ -139,7 +141,6 @@ class HomeView extends StatelessWidget {
                       ),
                     ],
                   ),
-// Welcome Message
                   const SizedBox(height: 10),
                   Obx(() {
                     final user = authController.user.value;
@@ -198,9 +199,10 @@ class HomeView extends StatelessWidget {
                       child: Obx(() {
                         if (controller.playerController.value != null &&
                             controller.isInitialized.value) {
-                          return _buildVideoCard(controller, isDark);
+                          return BuildVideoCard(
+                              controller: controller, isDark: isDark);
                         } else {
-                          return _buildEmptyState(isDark);
+                          return BuildEmptyState(isDark: isDark);
                         }
                       }),
                     ),
@@ -212,130 +214,130 @@ class HomeView extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: _buildButton(
-                          icon: Icons.file_upload_outlined,
-                          label: S.of(context).uploadVideo,
-                          onPressed: controller.pickVideo,
-                          isPrimary: true,
-                          isDark: isDark,
-                        ),
+                        child: BuildButton(
+                            icon: Icons.file_upload_outlined,
+                            label: S.of(context).uploadVideo,
+                            onPressed: controller.pickVideo,
+                            isPrimary: true,
+                            isDark: isDark),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: _buildButton(
-                          icon: Icons.search,
-                          label: S.of(context).analyze,
-                          onPressed: () async {
-                            if (controller.isInitialized.value &&
-                                controller.videoFile.value != null) {
-                              // Initialize ResultBinding
-                              ResultBinding().dependencies();
+                        child: BuildButton(
+                            icon: Icons.search,
+                            label: S.of(context).analyze,
+                            onPressed: () async {
+                              if (controller.isInitialized.value &&
+                                  controller.videoFile.value != null) {
+                                // Initialize ResultBinding
+                                ResultBinding().dependencies();
 
-                              final resultController =
-                                  Get.find<ResultController>();
+                                final resultController =
+                                    Get.find<ResultController>();
 
-                              // Show loading dialog
-                              Get.dialog(
-                                PopScope(
-                                  canPop: false,
-                                  child: Material(
-                                    type: MaterialType.transparency,
-                                    child: Center(
-                                      child: Container(
-                                        padding: const EdgeInsets.all(24),
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 32),
-                                        decoration: BoxDecoration(
-                                          color: isDark
-                                              ? const Color(0xFF2D2D44)
-                                              : Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black
-                                                  .withValues(alpha: 0.1),
-                                              blurRadius: 20,
-                                              offset: const Offset(0, 10),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets.all(16),
-                                              decoration: BoxDecoration(
-                                                color: const Color(0xFF6C63FF)
+                                // Show loading dialog
+                                Get.dialog(
+                                  PopScope(
+                                    canPop: false,
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: Center(
+                                        child: Container(
+                                          padding: const EdgeInsets.all(24),
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 32),
+                                          decoration: BoxDecoration(
+                                            color: isDark
+                                                ? const Color(0xFF2D2D44)
+                                                : Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black
                                                     .withValues(alpha: 0.1),
-                                                shape: BoxShape.circle,
+                                                blurRadius: 20,
+                                                offset: const Offset(0, 10),
                                               ),
-                                              child:
-                                                  const CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                            Color>(
-                                                        Color(0xFF6C63FF)),
-                                                strokeWidth: 3,
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(16),
+                                                decoration: BoxDecoration(
+                                                  color: const Color(0xFF6C63FF)
+                                                      .withValues(alpha: 0.1),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child:
+                                                    const CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                              Color>(
+                                                          Color(0xFF6C63FF)),
+                                                  strokeWidth: 3,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(height: 24),
-                                            Text(
-                                              S.of(context).analyzingVideo,
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                                color: isDark
-                                                    ? Colors.white
-                                                    : const Color(0xFF333333),
+                                              const SizedBox(height: 24),
+                                              Text(
+                                                S.of(context).analyzingVideo,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: isDark
+                                                      ? Colors.white
+                                                      : const Color(0xFF333333),
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(height: 8),
-                                            Text(
-                                              S.of(context).pleaseWait,
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: isDark
-                                                    ? Colors.white70
-                                                    : Colors.grey[600],
-                                                height: 1.5,
+                                              const SizedBox(height: 8),
+                                              Text(
+                                                S.of(context).pleaseWait,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: isDark
+                                                      ? Colors.white70
+                                                      : Colors.grey[600],
+                                                  height: 1.5,
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                barrierColor:
-                                    Colors.black.withValues(alpha: 0.5),
-                              );
+                                  barrierColor:
+                                      Colors.black.withValues(alpha: 0.5),
+                                );
 
-                              await resultController
-                                  .analyzeVideo(controller.videoFile.value!);
+                                await resultController
+                                    .analyzeVideo(controller.videoFile.value!);
 
-                              // Close loading dialog
-                              Get.back();
+                                // Close loading dialog
+                                Get.back();
 
-                              Get.toNamed("/result");
-                            } else {
-                              Get.snackbar(
-                                S.of(context).uploadRequired,
-                                S.of(context).pleaseUploadFirst,
-                                backgroundColor: isDark
-                                    ? Colors.white
-                                    : const Color(0xFF333333),
-                                colorText: isDark ? Colors.black : Colors.white,
-                                snackPosition: SnackPosition.BOTTOM,
-                                margin: const EdgeInsets.all(20),
-                                borderRadius: 10,
-                              );
-                            }
-                          },
-                          isPrimary: false,
-                          isDark: isDark,
-                        ),
+                                Get.toNamed("/result");
+                              } else {
+                                Get.snackbar(
+                                  S.of(context).uploadRequired,
+                                  S.of(context).pleaseUploadFirst,
+                                  backgroundColor: isDark
+                                      ? Colors.white
+                                      : const Color(0xFF333333),
+                                  colorText:
+                                      isDark ? Colors.black : Colors.white,
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  margin: const EdgeInsets.all(20),
+                                  borderRadius: 10,
+                                );
+                              }
+                            },
+                            isPrimary: false,
+                            isDark: isDark),
                       ),
                     ],
                   ),
@@ -348,196 +350,5 @@ class HomeView extends StatelessWidget {
         ),
       );
     });
-  }
-
-  Widget _buildVideoCard(VideoController controller, bool isDark) {
-    return Container(
-      decoration: BoxDecoration(
-        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.1),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Icon(
-                    Icons.videocam,
-                    color: Color(0xFF6C63FF),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  S.current.yourVideo,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: isDark ? Colors.white : const Color(0xFF333333),
-                  ),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    controller.clearVideo();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: isDark
-                          ? Colors.white.withValues(alpha: 0.1)
-                          : const Color(0xFFEEEEF6),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.close,
-                      color: isDark ? Colors.white70 : const Color(0xFF6C63FF),
-                      size: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: VideoPlayerWidget(
-              controller: controller.playerController.value!,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEmptyState(bool isDark) {
-    return Container(
-      padding: const EdgeInsets.all(30),
-      decoration: BoxDecoration(
-        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.1)
-              : const Color(0xFFEEEEF6),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(
-              Icons.add_photo_alternate_outlined,
-              size: 40,
-              color: Color(0xFF6C63FF),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            S.current.uploadToBegin,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: isDark ? Colors.white : const Color(0xFF333333),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            S.current.tapUploadButton,
-            style: TextStyle(
-              fontSize: 14,
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.6)
-                  : const Color(0xFF777777),
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onPressed,
-    required bool isPrimary,
-    required bool isDark,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: isPrimary
-                ? const Color(0xFF6C63FF).withValues(alpha: 0.3)
-                : Colors.black.withValues(alpha: isDark ? 0.1 : 0.05),
-            blurRadius: 15,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isPrimary
-              ? const Color(0xFF6C63FF)
-              : (isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-            side: isPrimary
-                ? BorderSide.none
-                : BorderSide(
-                    color: isDark
-                        ? Colors.white.withValues(alpha: 0.1)
-                        : const Color(0xFFEEEEF6),
-                    width: 1,
-                  ),
-          ),
-          elevation: 0,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: isPrimary ? Colors.white : const Color(0xFF6C63FF),
-              size: 20,
-            ),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: TextStyle(
-                color: isPrimary ? Colors.white : const Color(0xFF6C63FF),
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.5,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

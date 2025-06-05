@@ -242,8 +242,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "videoAnalysis": m11,
         "videoName": MessageLookupByLibrary.simpleMessage("Video İsmi"),
         "videoTrimming": MessageLookupByLibrary.simpleMessage("Video Kesme"),
-        "viewFullHistory": MessageLookupByLibrary.simpleMessage(
-            "Tüm Analiz Geçmişini Görüntüle"),
+        "viewFullHistory":
+            MessageLookupByLibrary.simpleMessage("Analiz Geçmişini Görüntüle"),
         "weakPassword": MessageLookupByLibrary.simpleMessage("Şifre çok zayıf"),
         "welcome": MessageLookupByLibrary.simpleMessage("Hoş Geldiniz"),
         "welcomeBack": m12,
