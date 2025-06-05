@@ -30,8 +30,7 @@ class SEn extends S {
   String get language => 'Language';
 
   @override
-  String get detectDeepfake =>
-      'Detect deepfake videos with advanced AI technology';
+  String get detectDeepfake => 'Detect deepfake videos with advanced AI technology';
 
   @override
   String get uploadVideo => 'Upload Video';
@@ -170,8 +169,7 @@ class SEn extends S {
   String get emailVerificationRequired => 'Email Verification Required';
 
   @override
-  String get pleaseVerifyEmail =>
-      'Please verify your email to access your account';
+  String get pleaseVerifyEmail => 'Please verify your email to access your account';
 
   @override
   String get resendVerificationEmail => 'Resend Verification Email';
@@ -180,8 +178,7 @@ class SEn extends S {
   String get verificationEmailSent => 'Email Verification Sent';
 
   @override
-  String get verificationEmailSentMessage =>
-      'We have sent a verification link to your email. Please check your inbox.';
+  String get verificationEmailSentMessage => 'We have sent a verification link to your email. Please check your inbox.';
 
   @override
   String get emailFieldEmpty => 'Email field cannot be empty';
@@ -226,8 +223,7 @@ class SEn extends S {
   String get weakPassword => 'Password is too weak';
 
   @override
-  String get operationNotAllowed =>
-      'Email/password registration is not enabled';
+  String get operationNotAllowed => 'Email/password registration is not enabled';
 
   @override
   String get userNotFound => 'No user found with this email';
@@ -259,8 +255,7 @@ class SEn extends S {
   String get googleLoginSuccess => 'Successfully signed in with Google account';
 
   @override
-  String get googleLoginError =>
-      'An error occurred while signing in with Google';
+  String get googleLoginError => 'An error occurred while signing in with Google';
 
   @override
   String get logoutError => 'An error occurred during logout';
@@ -319,8 +314,7 @@ class SEn extends S {
   String get noAnalysisHistoryYet => 'No analysis history yet';
 
   @override
-  String get analyzeVideoToSeeResults =>
-      'Analyze a video to see your results here';
+  String get analyzeVideoToSeeResults => 'Analyze a video to see your results here';
 
   @override
   String get deleteRecord => 'Delete Record';
@@ -347,12 +341,10 @@ class SEn extends S {
   }
 
   @override
-  String get deepfakeDetectionCompleted =>
-      'Deepfake detection analysis completed';
+  String get deepfakeDetectionCompleted => 'Deepfake detection analysis completed';
 
   @override
-  String get authenticVideoVerificationCompleted =>
-      'Authentic video verification completed';
+  String get authenticVideoVerificationCompleted => 'Authentic video verification completed';
 
   @override
   String get realVideo => 'Real Video';
@@ -400,8 +392,7 @@ class SEn extends S {
   }
 
   @override
-  String get invalidCredential =>
-      'Invalid login credentials. Please check your email and password and try again.';
+  String get invalidCredential => 'Invalid login credentials. Please check your email and password and try again.';
 
   @override
   String get editVideo => 'Edit Video';
