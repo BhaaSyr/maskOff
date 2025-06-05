@@ -63,7 +63,7 @@
   "@analysisResults": {
     "description": "Title for the results page"
   },
-  "backToHomepage": "Ana Sayfaya Dön",
+  "backToHomepage": "Ana Sayfaya",
   "@backToHomepage": {
     "description": "Button to return to homepage"
   },
@@ -551,5 +551,21 @@
   "confirm": "Onayla",
   "@confirm": {
     "description": "Confirm button text"
+  },
+  "analysisDetails": "Analiz Detayları",
+  "@analysisDetails": {
+    "description": "Title for analysis details section"
+  },
+  "resultType": "Sonuç Tipi",
+  "@resultType": {
+    "description": "Label for result type"
+  },
+  "analysisDate": "Analiz Tarihi",
+  "@analysisDate": {
+    "description": "Label for analysis date"
+  },
+  "viewHistory": "Geçmiş",
+  "@viewHistory": {
+    "description": "Button text for viewing history"
   }
 }

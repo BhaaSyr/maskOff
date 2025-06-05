@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testvid/generated/l10n.dart';
 
 class ResultLoadingWidget extends StatelessWidget {
   final bool isDark;
@@ -20,7 +21,7 @@ class ResultLoadingWidget extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'Analyzing video...',
+          S.of(context).analyzingVideo,
           style: TextStyle(
             fontSize: 16,
             color: isDark ? Colors.white70 : const Color(0xFF666666),

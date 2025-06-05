@@ -59,7 +59,7 @@ class STr extends S {
   String get analysisResults => 'Analiz Sonuçları';
 
   @override
-  String get backToHomepage => 'Ana Sayfaya Dön';
+  String get backToHomepage => 'Ana Sayfaya';
 
   @override
   String get logout => 'Çıkış Yap';
@@ -434,4 +434,16 @@ class STr extends S {
 
   @override
   String get confirm => 'Onayla';
+
+  @override
+  String get analysisDetails => 'Analiz Detayları';
+
+  @override
+  String get resultType => 'Sonuç Tipi';
+
+  @override
+  String get analysisDate => 'Analiz Tarihi';
+
+  @override
+  String get viewHistory => 'Geçmiş';
 }

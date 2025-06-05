@@ -14,6 +14,7 @@ class ResultController extends GetxController {
 
   Rx<DeepfakeResultEntity?> result = Rx<DeepfakeResultEntity?>(null);
   Rx<VideoPlayerController?> videoController = Rx<VideoPlayerController?>(null);
+  Rx<File?> videoFile = Rx<File?>(null);
   RxBool isVideoLoading = true.obs;
   RxBool isVideoPlaying = false.obs;
   RxBool isAnalyzing = false.obs;
@@ -40,6 +41,7 @@ class ResultController extends GetxController {
   Future<void> analyzeVideo(File videoFile) async {
     try {
       isAnalyzing.value = true;
+      this.videoFile.value = videoFile;
 
       final resultEntity = await analyzeVideoUseCase.execute(videoFile);
 

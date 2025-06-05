@@ -210,10 +210,10 @@ class S {
     );
   }
 
-  /// `Back to Homepage`
+  /// `Homepage`
   String get backToHomepage {
     return Intl.message(
-      'Back to Homepage',
+      'Homepage',
       name: 'backToHomepage',
       desc: 'Button to return to homepage',
       args: [],
@@ -1346,6 +1346,46 @@ class S {
       'Confirm',
       name: 'confirm',
       desc: 'Confirm button text',
+      args: [],
+    );
+  }
+
+  /// `Analysis Details`
+  String get analysisDetails {
+    return Intl.message(
+      'Analysis Details',
+      name: 'analysisDetails',
+      desc: 'Title for analysis details section',
+      args: [],
+    );
+  }
+
+  /// `Result Type`
+  String get resultType {
+    return Intl.message(
+      'Result Type',
+      name: 'resultType',
+      desc: 'Label for result type',
+      args: [],
+    );
+  }
+
+  /// `Analysis Date`
+  String get analysisDate {
+    return Intl.message(
+      'Analysis Date',
+      name: 'analysisDate',
+      desc: 'Label for analysis date',
+      args: [],
+    );
+  }
+
+  /// `View History`
+  String get viewHistory {
+    return Intl.message(
+      'View History',
+      name: 'viewHistory',
+      desc: 'Button text for viewing history',
       args: [],
     );
   }

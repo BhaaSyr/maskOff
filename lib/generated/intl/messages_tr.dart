@@ -55,6 +55,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "age": MessageLookupByLibrary.simpleMessage("Yaş"),
         "ageHint": MessageLookupByLibrary.simpleMessage(
             "Yaşınızı girin (isteğe bağlı)"),
+        "analysisDate": MessageLookupByLibrary.simpleMessage("Analiz Tarihi"),
+        "analysisDetails":
+            MessageLookupByLibrary.simpleMessage("Analiz Detayları"),
         "analysisHistory":
             MessageLookupByLibrary.simpleMessage("Analiz Geçmişi"),
         "analysisResults":
@@ -70,8 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticVideoVerificationCompleted":
             MessageLookupByLibrary.simpleMessage(
                 "Gerçek video doğrulaması tamamlandı"),
-        "backToHomepage":
-            MessageLookupByLibrary.simpleMessage("Ana Sayfaya Dön"),
+        "backToHomepage": MessageLookupByLibrary.simpleMessage("Ana Sayfaya"),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
         "confidenceScore": MessageLookupByLibrary.simpleMessage("Güven Puanı"),
         "confirm": MessageLookupByLibrary.simpleMessage("Onayla"),
@@ -212,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kayıt olurken bir hata oluştu"),
         "resendVerificationEmail": MessageLookupByLibrary.simpleMessage(
             "Doğrulama E-postasını Tekrar Gönder"),
+        "resultType": MessageLookupByLibrary.simpleMessage("Sonuç Tipi"),
         "save": MessageLookupByLibrary.simpleMessage("Kaydet"),
         "saving": MessageLookupByLibrary.simpleMessage("Kaydediliyor..."),
         "send": MessageLookupByLibrary.simpleMessage("Gönder"),
@@ -244,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "videoTrimming": MessageLookupByLibrary.simpleMessage("Video Kesme"),
         "viewFullHistory":
             MessageLookupByLibrary.simpleMessage("Analiz Geçmişini Görüntüle"),
+        "viewHistory": MessageLookupByLibrary.simpleMessage("Geçmiş"),
         "weakPassword": MessageLookupByLibrary.simpleMessage("Şifre çok zayıf"),
         "welcome": MessageLookupByLibrary.simpleMessage("Hoş Geldiniz"),
         "welcomeBack": m12,

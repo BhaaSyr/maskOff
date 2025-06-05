@@ -196,7 +196,7 @@ abstract class S {
   /// Button to return to homepage
   ///
   /// In en, this message translates to:
-  /// **'Back to Homepage'**
+  /// **'Homepage'**
   String get backToHomepage;
 
   /// Logout button text
@@ -876,6 +876,30 @@ abstract class S {
   /// In en, this message translates to:
   /// **'Confirm'**
   String get confirm;
+
+  /// Title for analysis details section
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis Details'**
+  String get analysisDetails;
+
+  /// Label for result type
+  ///
+  /// In en, this message translates to:
+  /// **'Result Type'**
+  String get resultType;
+
+  /// Label for analysis date
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis Date'**
+  String get analysisDate;
+
+  /// Button text for viewing history
+  ///
+  /// In en, this message translates to:
+  /// **'View History'**
+  String get viewHistory;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

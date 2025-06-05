@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:lottie/lottie.dart';
 import 'package:testvid/feature/controllers/home_controller.dart';
 import 'package:testvid/feature/controllers/theme_controller.dart';
 import 'package:testvid/feature/controllers/profile&history/profile_and_history_controller.dart';
@@ -264,22 +266,10 @@ class HomeView extends StatelessWidget {
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(16),
-                                                decoration: BoxDecoration(
-                                                  color: const Color(0xFF6C63FF)
-                                                      .withValues(alpha: 0.1),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child:
-                                                    const CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                              Color>(
-                                                          Color(0xFF6C63FF)),
-                                                  strokeWidth: 3,
-                                                ),
+                                              Lottie.asset(
+                                                'assets/Animation - 1749130545815.json',
+                                                width: 100,
+                                                height: 100,
                                               ),
                                               const SizedBox(height: 24),
                                               Text(

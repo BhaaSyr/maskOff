@@ -179,7 +179,7 @@ class AuthForm extends StatelessWidget {
         SocialButton(
           label: S.of(context).loginWithGoogle,
           onPressed: controller.signInWithGoogle,
-          icon: "assets/images/google_icon.png",
+          icon: "assets/google_icon.png",
           isDark: isDark,
           isLoading: controller.isGoogleLoginLoading.value,
         ),

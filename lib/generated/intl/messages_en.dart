@@ -56,6 +56,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "age": MessageLookupByLibrary.simpleMessage("Age"),
         "ageHint":
             MessageLookupByLibrary.simpleMessage("Enter your age (optional)"),
+        "analysisDate": MessageLookupByLibrary.simpleMessage("Analysis Date"),
+        "analysisDetails":
+            MessageLookupByLibrary.simpleMessage("Analysis Details"),
         "analysisHistory":
             MessageLookupByLibrary.simpleMessage("Analysis History"),
         "analysisResults":
@@ -72,8 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticVideoVerificationCompleted":
             MessageLookupByLibrary.simpleMessage(
                 "Authentic video verification completed"),
-        "backToHomepage":
-            MessageLookupByLibrary.simpleMessage("Back to Homepage"),
+        "backToHomepage": MessageLookupByLibrary.simpleMessage("Homepage"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "confidenceScore":
             MessageLookupByLibrary.simpleMessage("Confidence Score"),
@@ -217,6 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "An error occurred during registration"),
         "resendVerificationEmail":
             MessageLookupByLibrary.simpleMessage("Resend Verification Email"),
+        "resultType": MessageLookupByLibrary.simpleMessage("Result Type"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saving": MessageLookupByLibrary.simpleMessage("Saving..."),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
@@ -250,6 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "videoTrimming": MessageLookupByLibrary.simpleMessage("Video Trimming"),
         "viewFullHistory":
             MessageLookupByLibrary.simpleMessage("View Full History"),
+        "viewHistory": MessageLookupByLibrary.simpleMessage("View History"),
         "weakPassword":
             MessageLookupByLibrary.simpleMessage("Password is too weak"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),

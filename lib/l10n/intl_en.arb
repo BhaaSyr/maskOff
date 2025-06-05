@@ -63,7 +63,7 @@
   "@analysisResults": {
     "description": "Title for the results page"
   },
-  "backToHomepage": "Back to Homepage",
+  "backToHomepage": "Homepage",
   "@backToHomepage": {
     "description": "Button to return to homepage"
   },
@@ -551,5 +551,21 @@
   "confirm": "Confirm",
   "@confirm": {
     "description": "Confirm button text"
+  },
+  "analysisDetails": "Analysis Details",
+  "@analysisDetails": {
+    "description": "Title for analysis details section"
+  },
+  "resultType": "Result Type",
+  "@resultType": {
+    "description": "Label for result type"
+  },
+  "analysisDate": "Analysis Date",
+  "@analysisDate": {
+    "description": "Label for analysis date"
+  },
+  "viewHistory": "View History",
+  "@viewHistory": {
+    "description": "Button text for viewing history"
   }
 }
