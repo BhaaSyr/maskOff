@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:testvid/feature/controllers/result_controller.dart';
 import 'package:testvid/generated/l10n.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
@@ -20,11 +19,11 @@ class ResultDetailsCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.05) : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -49,7 +48,7 @@ class ResultDetailsCard extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: isDark
-                        ? Colors.white.withOpacity(0.1)
+                        ? Colors.white.withValues(alpha: 0.1)
                         : Colors.grey[200],
                     borderRadius: BorderRadius.circular(12),
                   ),

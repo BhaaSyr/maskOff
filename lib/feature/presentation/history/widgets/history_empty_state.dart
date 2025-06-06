@@ -18,7 +18,8 @@ class HistoryEmptyState extends StatelessWidget {
           Icon(
             Icons.history,
             size: 64,
-            color: isDark ? Colors.white.withOpacity(0.3) : Colors.grey[400],
+            color:
+                isDark ? Colors.white.withValues(alpha: 0.3) : Colors.grey[400],
           ),
           const SizedBox(height: 16),
           Text(
@@ -34,7 +35,9 @@ class HistoryEmptyState extends StatelessWidget {
             S.of(context).analyzeVideoToSeeResults,
             style: TextStyle(
               fontSize: 14,
-              color: isDark ? Colors.white.withOpacity(0.4) : Colors.grey[500],
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.4)
+                  : Colors.grey[500],
             ),
             textAlign: TextAlign.center,
           ),

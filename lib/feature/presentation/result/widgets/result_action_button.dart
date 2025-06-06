@@ -23,8 +23,8 @@ class ResultActionButton extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: isPrimary
-                ? const Color(0xFF6C63FF).withOpacity(0.3)
-                : Colors.black.withOpacity(isDark ? 0.1 : 0.05),
+                ? const Color(0xFF6C63FF).withValues(alpha: 0.3)
+                : Colors.black.withValues(alpha: isDark ? 0.1 : 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -35,7 +35,7 @@ class ResultActionButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: isPrimary
               ? const Color(0xFF6C63FF)
-              : (isDark ? Colors.white.withOpacity(0.08) : Colors.white),
+              : (isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white),
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -43,7 +43,7 @@ class ResultActionButton extends StatelessWidget {
                 ? BorderSide.none
                 : BorderSide(
                     color: isDark
-                        ? Colors.white.withOpacity(0.1)
+                        ? Colors.white.withValues(alpha: 0.1)
                         : const Color(0xFFEEEEF6),
                     width: 1,
                   ),

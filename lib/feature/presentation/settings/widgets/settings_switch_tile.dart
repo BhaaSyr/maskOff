@@ -24,8 +24,8 @@ class SettingsSwitchTile extends StatelessWidget {
         height: 36,
         decoration: BoxDecoration(
           color: isDark
-              ? Colors.white.withOpacity(0.1)
-              : const Color(0xFF6C63FF).withOpacity(0.1),
+              ? Colors.white.withValues(alpha: 0.1)
+              : const Color(0xFF6C63FF).withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Icon(
@@ -46,7 +46,7 @@ class SettingsSwitchTile extends StatelessWidget {
         value: value,
         onChanged: onChanged,
         activeColor: const Color(0xFF6C63FF),
-        activeTrackColor: const Color(0xFF6C63FF).withOpacity(0.3),
+        activeTrackColor: const Color(0xFF6C63FF).withValues(alpha: 0.3),
       ),
     );
   }

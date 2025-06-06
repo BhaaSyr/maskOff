@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SettingsLanguageTile extends StatelessWidget {
   final String currentLanguage;
@@ -21,8 +20,8 @@ class SettingsLanguageTile extends StatelessWidget {
         height: 36,
         decoration: BoxDecoration(
           color: isDark
-              ? Colors.white.withOpacity(0.1)
-              : const Color(0xFF6C63FF).withOpacity(0.1),
+              ? Colors.white.withValues(alpha: 0.1)
+              : const Color(0xFF6C63FF).withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Icon(

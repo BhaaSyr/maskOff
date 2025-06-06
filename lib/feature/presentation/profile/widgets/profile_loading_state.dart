@@ -21,8 +21,8 @@ class ProfileLoadingState extends StatelessWidget {
               shape: BoxShape.circle,
               gradient: LinearGradient(
                 colors: [
-                  const Color(0xFF6C63FF).withOpacity(0.3),
-                  const Color(0xFF9C93FF).withOpacity(0.3),
+                  const Color(0xFF6C63FF).withValues(alpha: 0.3),
+                  const Color(0xFF9C93FF).withValues(alpha: 0.3),
                 ],
               ),
             ),

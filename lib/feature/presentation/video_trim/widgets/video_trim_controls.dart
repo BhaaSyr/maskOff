@@ -34,11 +34,11 @@ class VideoTrimControls extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.08) : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.2 : 0.1),
+            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.1),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -78,7 +78,7 @@ class VideoTrimControls extends StatelessWidget {
                   width: 45,
                   decoration: BoxDecoration(
                     color: isDark
-                        ? Colors.white.withOpacity(0.1)
+                        ? Colors.white.withValues(alpha: 0.1)
                         : Colors.grey.shade200,
                     shape: BoxShape.circle,
                   ),
@@ -99,8 +99,9 @@ class VideoTrimControls extends StatelessWidget {
             ),
           ),
           Divider(
-            color:
-                isDark ? Colors.white.withOpacity(0.2) : Colors.grey.shade300,
+            color: isDark
+                ? Colors.white.withValues(alpha: 0.2)
+                : Colors.grey.shade300,
             height: 10,
             thickness: 1,
             indent: 10,

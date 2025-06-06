@@ -19,7 +19,7 @@ class VideoTrimHeader extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFF6C63FF).withOpacity(0.1),
+              color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Icon(
@@ -45,7 +45,7 @@ class VideoTrimHeader extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: isDark
-                    ? Colors.white.withOpacity(0.1)
+                    ? Colors.white.withValues(alpha: 0.1)
                     : const Color(0xFFEEEEF6),
                 borderRadius: BorderRadius.circular(12),
               ),

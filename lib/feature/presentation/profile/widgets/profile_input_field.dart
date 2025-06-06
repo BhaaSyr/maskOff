@@ -66,13 +66,15 @@ class ProfileInputField extends StatelessWidget {
           // Input Field
           Container(
             decoration: BoxDecoration(
-              color: isDark ? Colors.white.withOpacity(0.05) : Colors.grey[50],
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.05)
+                  : Colors.grey[50],
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: hasError
                     ? Colors.red
                     : isDark
-                        ? Colors.white.withOpacity(0.1)
+                        ? Colors.white.withValues(alpha: 0.1)
                         : Colors.grey[300]!,
               ),
             ),

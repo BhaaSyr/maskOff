@@ -22,8 +22,8 @@ class ProfileHeader extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: isDark
-                    ? Colors.white.withOpacity(0.1)
-                    : const Color(0xFF6C63FF).withOpacity(0.1),
+                    ? Colors.white.withValues(alpha: 0.1)
+                    : const Color(0xFF6C63FF).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(

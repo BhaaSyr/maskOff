@@ -18,11 +18,11 @@ class VideoPreviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.08) : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.20 : 0.1),
+            color: Colors.black.withValues(alpha: isDark ? 0.20 : 0.1),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -39,7 +39,7 @@ class VideoPreviewCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF6C63FF).withOpacity(0.1),
+                    color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Icon(
@@ -67,7 +67,7 @@ class VideoPreviewCard extends StatelessWidget {
               color: Colors.black,
               border: Border.all(
                 color: isDark
-                    ? Colors.white.withOpacity(0.1)
+                    ? Colors.white.withValues(alpha: 0.1)
                     : Colors.grey.shade200,
                 width: 1,
               ),
@@ -75,8 +75,8 @@ class VideoPreviewCard extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: isDark
-                      ? Colors.black.withOpacity(0.3)
-                      : Colors.black.withOpacity(0.2),
+                      ? Colors.black.withValues(alpha: 0.3)
+                      : Colors.black.withValues(alpha: 0.2),
                   spreadRadius: 1,
                   blurRadius: 15,
                   offset: const Offset(0, 4),
