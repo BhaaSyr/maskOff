@@ -4,6 +4,14 @@ import 'package:testvid/feature/controllers/language_controller.dart';
 import 'package:testvid/feature/controllers/theme_controller.dart';
 import 'package:testvid/feature/controllers/auth/auth_controller.dart';
 import 'package:testvid/generated/l10n.dart';
+import 'widgets/settings_header.dart';
+import 'widgets/settings_section_title.dart';
+import 'widgets/settings_card.dart';
+import 'widgets/settings_switch_tile.dart';
+import 'widgets/settings_action_tile.dart';
+import 'widgets/settings_info_tile.dart';
+import 'widgets/settings_logout_dialog.dart';
+import 'widgets/language_selector.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -39,42 +47,7 @@ class SettingsView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Header with back button and title
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => Get.back(),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: isDark
-                                ? Colors.white.withValues(alpha: 0.1)
-                                : const Color(0xFF6C63FF)
-                                    .withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: isDark
-                                ? Colors.white70
-                                : const Color(0xFF6C63FF),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Text(
-                        S.of(context).settings,
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color:
-                              isDark ? Colors.white : const Color(0xFF333333),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                SettingsHeader(isDark: isDark),
 
                 Expanded(
                   child: SingleChildScrollView(
@@ -84,13 +57,16 @@ class SettingsView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Appearance section
-                        _buildSectionTitle(context, S.of(context).appearance,
-                            Icons.color_lens_outlined, isDark),
+                        SettingsSectionTitle(
+                          title: S.of(context).appearance,
+                          icon: Icons.color_lens_outlined,
+                          isDark: isDark,
+                        ),
                         const SizedBox(height: 12),
-                        _buildSettingsCard(
-                          context,
+                        SettingsCard(
+                          isDark: isDark,
                           children: [
-                            _buildSwitchTile(
+                            SettingsSwitchTile(
                               icon: Icons.dark_mode_outlined,
                               title: S.of(context).darkMode,
                               value: themeController.isDarkMode,
@@ -98,20 +74,21 @@ class SettingsView extends StatelessWidget {
                               isDark: isDark,
                             ),
                           ],
-                          isDark: isDark,
                         ),
 
                         const SizedBox(height: 24),
 
                         // Profile section
-                        _buildSectionTitle(context, S.of(context).profile,
-                            Icons.person_outline, isDark),
+                        SettingsSectionTitle(
+                          title: S.of(context).profile,
+                          icon: Icons.person_outline,
+                          isDark: isDark,
+                        ),
                         const SizedBox(height: 12),
-                        _buildSettingsCard(
-                          context,
+                        SettingsCard(
                           isDark: isDark,
                           children: [
-                            _buildActionTile(
+                            SettingsActionTile(
                               icon: Icons.edit_outlined,
                               title: 'Manage Profile',
                               onTap: () => Get.toNamed('/profile'),
@@ -123,124 +100,44 @@ class SettingsView extends StatelessWidget {
                         const SizedBox(height: 24),
 
                         // Language section
-                        _buildSectionTitle(context, S.of(context).language,
-                            Icons.language, isDark),
+                        SettingsSectionTitle(
+                          title: S.of(context).language,
+                          icon: Icons.language,
+                          isDark: isDark,
+                        ),
                         const SizedBox(height: 12),
-                        _buildSettingsCard(
-                          context,
+                        SettingsCard(
                           isDark: isDark,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  _buildLanguageTile(
-                                    languageCode: 'en',
-                                    languageName: 'English',
-                                    flag: '🇬🇧',
-                                    isSelected:
-                                        languageController.currentLanguage ==
-                                            'en',
-                                    onTap: () =>
-                                        languageController.changeLanguage('en'),
-                                    isDark: isDark,
-                                  ),
-                                  Divider(
-                                    color: isDark
-                                        ? Colors.white24
-                                        : Colors.black12,
-                                    height: 1,
-                                  ),
-                                  _buildLanguageTile(
-                                    languageCode: 'tr',
-                                    languageName: 'Türkçe',
-                                    flag: '🇹🇷',
-                                    isSelected:
-                                        languageController.currentLanguage ==
-                                            'tr',
-                                    onTap: () =>
-                                        languageController.changeLanguage('tr'),
-                                    isDark: isDark,
-                                  ),
-                                ],
-                              ),
+                            LanguageSelector(
+                              currentLanguage:
+                                  languageController.currentLanguage,
+                              onLanguageChanged: (language) =>
+                                  languageController.changeLanguage(language),
+                              isDark: isDark,
                             ),
                           ],
                         ),
 
-                        // About section
-                        const SizedBox(height: 24),
-
                         // Logout section
-                        _buildSectionTitle(context, S.of(context).logout,
-                            Icons.logout, isDark),
+                        const SizedBox(height: 24),
+                        SettingsSectionTitle(
+                          title: S.of(context).logout,
+                          icon: Icons.logout,
+                          isDark: isDark,
+                        ),
                         const SizedBox(height: 12),
-                        _buildSettingsCard(
-                          context,
+                        SettingsCard(
                           isDark: isDark,
                           children: [
-                            _buildActionTile(
+                            SettingsActionTile(
                               icon: Icons.logout,
                               title: S.of(context).logout,
                               onTap: () {
                                 Get.dialog(
-                                  AlertDialog(
-                                    title: Text(
-                                      S.of(context).logout,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: isDark
-                                            ? Colors.white
-                                            : Colors.black87,
-                                      ),
-                                    ),
-                                    content: Text(
-                                      S.of(context).logoutConfirmation,
-                                      style: TextStyle(
-                                        color: isDark
-                                            ? Colors.white70
-                                            : Colors.black54,
-                                      ),
-                                    ),
-                                    backgroundColor: isDark
-                                        ? const Color(0xFF2D2D44)
-                                        : Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Get.back(),
-                                        child: Text(
-                                          S.of(context).cancel,
-                                          style: TextStyle(
-                                            color: isDark
-                                                ? Colors.white70
-                                                : Colors.black54,
-                                          ),
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Get.back();
-                                          authController.signOut();
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color(0xFF6C63FF),
-                                          foregroundColor: Colors.white,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 16,
-                                            vertical: 8,
-                                          ),
-                                        ),
-                                        child: Text(S.of(context).logout),
-                                      ),
-                                    ],
+                                  SettingsLogoutDialog(
+                                    onConfirm: () => authController.signOut(),
+                                    isDark: isDark,
                                   ),
                                 );
                               },
@@ -250,14 +147,16 @@ class SettingsView extends StatelessWidget {
                         ),
                         const SizedBox(height: 24),
 
-                        _buildSectionTitle(context, S.of(context).about,
-                            Icons.info_outline, isDark),
+                        SettingsSectionTitle(
+                          title: S.of(context).about,
+                          icon: Icons.info_outline,
+                          isDark: isDark,
+                        ),
                         const SizedBox(height: 12),
-                        _buildSettingsCard(
-                          context,
+                        SettingsCard(
                           isDark: isDark,
                           children: [
-                            _buildInfoTile(
+                            SettingsInfoTile(
                               icon: Icons.verified_outlined,
                               title: 'Mask Off',
                               subtitle: '${S.of(context).version} 1.0.0',
@@ -275,212 +174,5 @@ class SettingsView extends StatelessWidget {
         ),
       );
     });
-  }
-
-  Widget _buildSectionTitle(
-      BuildContext context, String title, IconData icon, bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            size: 18,
-            color: isDark ? Colors.white70 : const Color(0xFF6C63FF),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: isDark ? Colors.white70 : const Color(0xFF6C63FF),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSettingsCard(
-    BuildContext context, {
-    required List<Widget> children,
-    required bool isDark,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
-            blurRadius: isDark ? 15 : 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        children: children,
-      ),
-    );
-  }
-
-  Widget _buildSwitchTile({
-    required IconData icon,
-    required String title,
-    required bool value,
-    required Function(bool) onChanged,
-    required bool isDark,
-  }) {
-    return ListTile(
-      leading: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.1)
-              : const Color(0xFF6C63FF).withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Icon(
-          icon,
-          color: isDark ? Colors.white70 : const Color(0xFF6C63FF),
-          size: 18,
-        ),
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-          color: isDark ? Colors.white : const Color(0xFF333333),
-        ),
-      ),
-      trailing: Switch(
-        value: value,
-        onChanged: onChanged,
-        activeColor: const Color(0xFF6C63FF),
-        activeTrackColor: const Color(0xFF6C63FF).withValues(alpha: 0.3),
-      ),
-    );
-  }
-
-  Widget _buildLanguageTile({
-    required String languageCode,
-    required String languageName,
-    required String flag,
-    required bool isSelected,
-    required VoidCallback onTap,
-    required bool isDark,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        child: Row(
-          children: [
-            Text(flag, style: const TextStyle(fontSize: 22)),
-            const SizedBox(width: 16),
-            Text(
-              languageName,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                color: isDark ? Colors.white : const Color(0xFF333333),
-              ),
-            ),
-            const Spacer(),
-            if (isSelected)
-              const Icon(
-                Icons.check_circle,
-                color: Color(0xFF6C63FF),
-                size: 18,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildInfoTile({
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    required bool isDark,
-  }) {
-    return ListTile(
-      leading: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.1)
-              : const Color(0xFF6C63FF).withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Icon(
-          icon,
-          color: isDark ? Colors.white70 : const Color(0xFF6C63FF),
-          size: 18,
-        ),
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-          color: isDark ? Colors.white : const Color(0xFF333333),
-        ),
-      ),
-      subtitle: Text(
-        subtitle,
-        style: TextStyle(
-          fontSize: 13,
-          color: isDark ? Colors.white60 : Colors.grey[600],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildActionTile({
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-    required bool isDark,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: ListTile(
-        leading: Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: isDark
-                ? Colors.white.withValues(alpha: 0.1)
-                : const Color(0xFF6C63FF).withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Icon(
-            icon,
-            color: isDark ? Colors.white70 : const Color(0xFF6C63FF),
-            size: 18,
-          ),
-        ),
-        title: Text(
-          title,
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-            color: isDark ? Colors.white : const Color(0xFF333333),
-          ),
-        ),
-        trailing: Icon(
-          Icons.arrow_forward_ios,
-          size: 14,
-          color: isDark ? Colors.white38 : Colors.grey,
-        ),
-      ),
-    );
   }
 }
