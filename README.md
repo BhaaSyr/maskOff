@@ -34,11 +34,11 @@ A key part of this project is implementing a **Deepfake Filter** that can be int
 
 ## 🧩 Tech Stack
 
-- **Python**, **TensorFlow**, **Keras** — Model training and prediction
-- **OpenCV** — Video processing & face extraction
-- **Flask** — REST API for serving the detection model
-- **Flutter** — Cross-platform mobile app implementing the Deepfake Filter
-- **FaceForensics++** — Base dataset for training and evaluation
+- **Python**, **TensorFlow**, **Keras** > Model training and prediction
+- **OpenCV** > Video processing & face extraction
+- **Flask** > REST API for serving the detection model
+- **Flutter** > Cross-platform mobile app implementing the Deepfake Filter
+- **FaceForensics++** > Base dataset for training and evaluation
 
 ---
 
@@ -61,15 +61,15 @@ A key part of this project is implementing a **Deepfake Filter** that can be int
 - **Bahaa aldin Alzhouri**
 - **Mahmut Basmaci**
 
-Graduation Project — Firat Universitesy — 2025
+[Graduation Project , Firat Universitesy-2025]
 
 ---
 
 ## 🔗 References
 
-- FaceForensics++ Dataset — [GitHub](https://github.com/ondyari/FaceForensics)
-- Xception Model — [Paper](https://arxiv.org/abs/1610.02357)
-- Flutter — [flutter.dev](https://flutter.dev/)
+- FaceForensics++ Dataset : [GitHub](https://github.com/ondyari/FaceForensics)
+- Xception Model : [Paper](https://arxiv.org/abs/1610.02357)
+- Flutter : [flutter.dev](https://flutter.dev/)
 
 ---
 
